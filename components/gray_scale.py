@@ -10,7 +10,6 @@ class GrayScale(Component):
     def __init__(self, logServer):
         super(GrayScale, self).__init__(logServer)
         self.input_observer = GrayScale.InputObserver(self)
-        self.output_notifier = GrayScale.OutputNotifier(self)
     class InputObserver(Component.InputObserver):
         """
         Class for observers

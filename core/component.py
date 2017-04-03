@@ -10,6 +10,8 @@ class Component:
     def __init__(self, logServer):
         self.log_notifier = Component.LogNotifier(self)
         self.log_notifier.add_observer(logServer.log_observer)
+        self.output_notifier = Component.OutputNotifier(self)
+        self.input_observer = Component.InputObserver(self)
 
     class OutputNotifier(Observable):
         """

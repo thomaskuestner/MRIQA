@@ -8,9 +8,6 @@ class JpegInput(Component):
     """
     Class for Jpeg Input
     """
-    def __init__(self, logServer):
-        super(JpegInput, self).__init__(logServer)
-        self.output_notifier = JpegInput.OutputNotifier(self)
     def open(self, file_path):
         """
         open a file and sends notifier
