@@ -2,6 +2,7 @@
 Component
 """
 from core.observer import Observable, Observer
+from components.log_server import LogLevel
 
 class Component:
     """
@@ -34,11 +35,17 @@ class Component:
         def __init__(self, outer):
             self.outer = outer
 
-    def log_line(self, line):
+    def log_line(self, *args):
         """
-        notify log_server with log message
+        notify log_server with log message and log level
         """
-        self.log_notifier.notify_observers([line, self.__class__.__name__])
+        line = args[0]
+        if len(args) == 1:
+            log_level = LogLevel.INFO
+        elif len(args) == 2:
+            log_level = args[1]
+
+        self.log_notifier.notify_observers([line, self.__class__.__name__, log_level])
 
     class LogNotifier(Observable):
         """

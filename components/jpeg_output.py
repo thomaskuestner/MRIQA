@@ -2,6 +2,7 @@
 Jpeg Output
 """
 from core.component import Component
+from components.log_server import LogLevel
 
 class JpegOutput(Component):
     """
@@ -17,3 +18,4 @@ class JpegOutput(Component):
         def update(self, observable, arg):
             self.outer.log_line('save file')
             arg.save('test.png')
+            self.outer.log_line('saved file', LogLevel.SUCCESS)

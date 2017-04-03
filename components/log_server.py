@@ -1,8 +1,19 @@
 """
 Log Server
 """
+from enum import Enum
 from time import gmtime, strftime
 from core.observer import Observer
+
+class LogLevel(Enum):
+    """"
+    Enumeration for setting a log level
+    """
+    INFO = '\033[0m'
+    DEBUG = '\033[0;37m'
+    SUCCESS = '\033[92m'
+    WARNING = '\033[93m'
+    ERROR = '\033[91m'
 
 class LogServer:
     """
@@ -17,5 +28,7 @@ class LogServer:
         """
         def __init__(self, outer):
             self.outer = outer
-        def update(self, observable, arg):
-            print(strftime("%Y-%m-%d %H:%M:%S", gmtime()), arg[1], ":", arg[0])
+        def update(self, observable, args):
+            print(args[2].value,
+                  strftime("%Y-%m-%d %H:%M:%S", gmtime()),
+                  args[1], ":", args[0], '\033[0m')
