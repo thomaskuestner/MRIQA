@@ -1,35 +1,20 @@
 """
 Gray scale
 """
-from core.observer import Observer, Observable
+from core.component import Component
 
-class GrayScale:
+class GrayScale(Component):
     """
     Class for graysacale an image
     """
-    def __init__(self):
-        self.open_observer = GrayScale.OpenObserver(self)
-        self.open_notifier = GrayScale.OpenNotifier(self)
-    # An inner class for observing openings:
-    class OpenObserver(Observer):
+    def __init__(self, logServer):
+        super(GrayScale, self).__init__(logServer)
+        self.input_observer = GrayScale.InputObserver(self)
+        self.output_notifier = GrayScale.OutputNotifier(self)
+    class InputObserver(Component.InputObserver):
         """
         Class for observers
         """
-        def __init__(self, outer):
-            self.outer = outer
         def update(self, observable, arg):
-            self.outer.open_notifier.notify_observers(arg.convert('LA'))
-
-    class OpenNotifier(Observable):
-        """
-        Class for notifier
-        """
-        def __init__(self, outer):
-            Observable.__init__(self)
-            self.outer = outer
-        def notify_observers(self, arg=None):
-            """
-            notifiy observers
-            """
-            self.set_changed()
-            Observable.notify_observers(self, arg)
+            self.outer.log_line('grayscale image')
+            self.outer.output_notifier.notify_observers(arg.convert('LA'))

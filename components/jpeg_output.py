@@ -1,20 +1,19 @@
 """
 Jpeg Output
 """
-from core.observer import Observer
+from core.component import Component
 
-class JpegOutput:
+class JpegOutput(Component):
     """
     Class for JpegOutput
     """
-    def __init__(self):
-        self.open_observer = JpegOutput.OpenObserver(self)
-    # An inner class for observing openings:
-    class OpenObserver(Observer):
+    def __init__(self, logServer):
+        super(JpegOutput, self).__init__(logServer)
+        self.input_observer = JpegOutput.InputObserver(self)
+    class InputObserver(Component.InputObserver):
         """
         Class for observers
         """
-        def __init__(self, outer):
-            self.outer = outer
         def update(self, observable, arg):
+            self.outer.log_line('save file')
             arg.save('test.png')
