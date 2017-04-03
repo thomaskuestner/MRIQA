@@ -12,7 +12,7 @@ LOGSERVER = LogServer()
 JPEGINPUT = JpegInput(LOGSERVER)
 GRAYSCALE = GrayScale(LOGSERVER)
 ROTATE = Rotate(LOGSERVER)
-JPEGOUTPUT = JpegOutput(LOGSERVER)
+JPEGOUTPUT = JpegOutput('tmp/test.png', LOGSERVER)
 
 # glue components together
 JPEGINPUT.output_notifier.add_observer(GRAYSCALE.input_observer)
@@ -20,4 +20,4 @@ GRAYSCALE.output_notifier.add_observer(ROTATE.input_observer)
 ROTATE.output_notifier.add_observer(JPEGOUTPUT.input_observer)
 
 # start pipeline
-JPEGINPUT.open('IMG_5946_b.JPG')
+JPEGINPUT.open('tmp/IMG_5946_b.JPG')

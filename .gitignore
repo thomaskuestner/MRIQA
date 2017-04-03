@@ -1,7 +1,6 @@
 # files
 *.pyc
-*.png
-*.JPG
 
 # folder
+tmp/
 __pycache__
