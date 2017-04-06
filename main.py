@@ -20,4 +20,4 @@ GRAYSCALE.output_notifier.add_observer(ROTATE.input_observer)
 ROTATE.output_notifier.add_observer(JPEGOUTPUT.input_observer)
 
 # start pipeline
-JPEGINPUT.open('tmp/IMG_5946_b.JPG')
+JPEGINPUT.open('tmp/ISS_herbst_s.jpg')

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<pipeline>
+    <component>
+        <name>jpeg_input</name>
+        <property>
+            <name>file_path</name>
+            <value>'tmp/ISS_herbst_s.jpg'</value>
+        </property>
+    </component>
+    <component>
+        <name>gray_scale</name>
+    </component>
+    <component>
+        <name>rotate</name>
+    </component>
+    <component>
+        <name>jpeg_output</name>
+        <property>
+            <name>file_path</name>
+            <value>'tmp/test.png'</value>
+        </property>
+    </component>
+</pipeline>

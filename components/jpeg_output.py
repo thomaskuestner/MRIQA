@@ -8,10 +8,10 @@ class JpegOutput(Component):
     """
     Class for JpegOutput
     """
-    def __init__(self, filePath, logServer):
+    def __init__(self, file_path, logServer):
         super(JpegOutput, self).__init__(logServer)
         self.input_observer = JpegOutput.InputObserver(self)
-        self.file_path = filePath
+        self.file_path = file_path
     class InputObserver(Component.InputObserver):
         """
         Class for observers

@@ -4,13 +4,13 @@ Component
 from core.observer import Observable, Observer
 from components.log_server import LogLevel
 
-class Component:
+class Component(object):
     """
     Class for components
     """
-    def __init__(self, logServer):
+    def __init__(self, log_server):
         self.log_notifier = Component.LogNotifier(self)
-        self.log_notifier.add_observer(logServer.log_observer)
+        self.log_notifier.add_observer(log_server.log_observer)
         self.output_notifier = Component.OutputNotifier(self)
         self.input_observer = Component.InputObserver(self)
 
