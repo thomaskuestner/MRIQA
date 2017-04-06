@@ -1,8 +1,8 @@
 """
 Log Server
 """
-from enum import Enum
 from time import gmtime, strftime
+from enum import Enum
 from core.observer import Observer
 
 class LogLevel(Enum):
@@ -15,7 +15,7 @@ class LogLevel(Enum):
     WARNING = '\033[93m'
     ERROR = '\033[91m'
 
-class LogServer:
+class LogServer(object):
     """
     Class for LogServer
     """

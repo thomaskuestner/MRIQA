@@ -3,7 +3,7 @@ Base for all Observers
 """
 from core.synchronization import Synchronization, synchronize
 
-class Observer:
+class Observer(object):
     """
     Base Class for all Observers
     """
@@ -44,7 +44,8 @@ class Observable(Synchronization):
         observable object and the generic 'arg'.'''
         self.mutex.acquire()
         try:
-            if not self.changed: return
+            if not self.changed:
+                return
             # Make a local copy in case of synchronous
             # additions of observers:
             local_array = self.obs[:]

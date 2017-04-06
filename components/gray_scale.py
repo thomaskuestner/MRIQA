@@ -7,8 +7,8 @@ class GrayScale(Component):
     """
     Class for graysacale an image
     """
-    def __init__(self, logServer):
-        super(GrayScale, self).__init__(logServer)
+    def __init__(self, log_server):
+        super(GrayScale, self).__init__(log_server)
         self.input_observer = GrayScale.InputObserver(self)
     class InputObserver(Component.InputObserver):
         """
