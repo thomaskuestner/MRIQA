@@ -8,10 +8,14 @@ class JpegInput(Component):
     """
     Class for Jpeg Input
     """
-    def open(self, file_path):
+    def __init__(self, file_path, log_server):
+        self.file_path = file_path
+        super(JpegInput, self).__init__(log_server)
+
+    def open(self):
         """
         open a file and sends notifier
         """
-        image = Image.open(file_path)
+        image = Image.open(self.file_path)
         self.log_line('open file')
         self.output_notifier.notify_observers(image)
