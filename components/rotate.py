@@ -7,8 +7,8 @@ class Rotate(Component):
     """
     Class for rotating an image
     """
-    def __init__(self, logServer):
-        super(Rotate, self).__init__(logServer)
+    def __init__(self, log_server):
+        super(Rotate, self).__init__(log_server)
         self.input_observer = Rotate.InputObserver(self)
     class InputObserver(Component.InputObserver):
         """
