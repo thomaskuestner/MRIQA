@@ -8,11 +8,18 @@ class Component(object):
     """
     Class for components
     """
-    def __init__(self, log_server):
+    def __init__(self, log_server, properties):
+        self.properties = properties
         self.log_notifier = Component.LogNotifier(self)
         self.log_notifier.add_observer(log_server.log_observer)
         self.output_notifier = Component.OutputNotifier(self)
         self.input_observer = Component.InputObserver(self)
+
+    def start(self):
+        """
+        has to be implemented in components which can be at the beginning of a pipeline
+        """
+        pass
 
     class OutputNotifier(Observable):
         """

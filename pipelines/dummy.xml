@@ -2,22 +2,30 @@
 <pipeline>
     <component>
         <name>jpeg_input</name>
+        <class>JpegInput</class>
         <property>
             <name>file_path</name>
-            <value>'tmp/ISS_herbst_s.jpg'</value>
+            <value>tmp/IMG_5946_b.JPG</value>
         </property>
     </component>
     <component>
         <name>gray_scale</name>
+        <class>GrayScale</class>
     </component>
     <component>
         <name>rotate</name>
+        <class>Rotate</class>
+        <property>
+            <name>angle</name>
+            <value type="float">90</value>
+        </property>
     </component>
     <component>
         <name>jpeg_output</name>
+        <class>JpegOutput</class>
         <property>
             <name>file_path</name>
-            <value>'tmp/test.png'</value>
+            <value>tmp/test.png</value>
         </property>
     </component>
 </pipeline>

@@ -1,23 +1,47 @@
 """
 main.py
 """
+from importlib import import_module
+from pydoc import locate
+from lxml import etree
 from components.log_server import LogServer
-from components.jpeg_input import JpegInput
-from components.gray_scale import GrayScale
-from components.rotate import Rotate
-from components.jpeg_output import JpegOutput
 
-# initalize components
+# initalize base components
 LOGSERVER = LogServer()
-JPEGINPUT = JpegInput('tmp/ISS_herbst_s.jpg', LOGSERVER)
-GRAYSCALE = GrayScale(LOGSERVER)
-ROTATE = Rotate(180, LOGSERVER)
-JPEGOUTPUT = JpegOutput('tmp/test.png', LOGSERVER)
+
+# read xml file
+PIPELINE = etree.parse('pipelines/dummy.xml')
+XML_COMPONENTS = PIPELINE.xpath('component')
+COMPONENTS = []
+
+# dynamically load components
+for component in XML_COMPONENTS:
+    className = component.xpath('class')[0]
+    fileName = component.xpath('name')[0]
+    # read properties
+    xml_properties = component.xpath('property')
+    properties = dict()
+    for component_property in xml_properties:
+        property_name = component_property.xpath('name')[0]
+        property_value = component_property.xpath('value')[0]
+        property_value_type = component_property.xpath('value/@type')
+        # typecast components
+        if len(property_value_type) > 0:
+            property_type = locate(property_value_type[0])
+            property_value = property_type(property_value.text)
+        else:
+            property_value = property_value.text
+        properties[property_name.text] = property_value
+    # get component class
+    ComponentClass = getattr(import_module('components.' + fileName.text), className.text)
+    # instantiate class
+    instance = ComponentClass(LOGSERVER, properties)
+    COMPONENTS.append(instance)
 
 # glue components together
-JPEGINPUT.output_notifier.add_observer(GRAYSCALE.input_observer)
-GRAYSCALE.output_notifier.add_observer(ROTATE.input_observer)
-ROTATE.output_notifier.add_observer(JPEGOUTPUT.input_observer)
+for index, component in enumerate(COMPONENTS):
+    if index + 1 < len(COMPONENTS):
+        component.output_notifier.add_observer(COMPONENTS[index + 1].input_observer)
 
-# start pipeline
-JPEGINPUT.open()
+# start at component
+COMPONENTS[0].start()
