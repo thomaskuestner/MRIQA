@@ -22,7 +22,7 @@ class LogServer(object):
     """
     def __init__(self):
         self.log_observer = LogServer.LogObserver(self)
-    # An inner class for observing openings:
+
     class LogObserver(Observer):
         """
         Class for log observers
@@ -34,6 +34,6 @@ class LogServer(object):
                        args[1] + ": " + \
                        args[0] + '\033[0m'
             if args[2] == LogLevel.ERROR:
-                print(log_line, file=sys.stderr)
+                sys.stderr.write(log_line + '\n')
             else:
                 print(log_line)

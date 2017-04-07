@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <pipeline>
     <component>
+        <name>jpeg_input</name>
+        <class>JpegInput</class>
+        <property>
+            <name>file_path</name>
+            <value>tmp/IMG_5946_b.JPG</value>
+        </property>
+    </component>
+    <component>
         <name>gray_scale</name>
         <class>GrayScale</class>
     </component>
