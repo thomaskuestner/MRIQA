@@ -10,7 +10,10 @@ from components.log_server import LogServer
 LOGSERVER = LogServer()
 
 # read xml file
-PIPELINE = etree.parse('pipelines/dummy.xml')
+XSD_FILE = etree.XML(open('core/pipeline.xsd', 'r').read())
+SCHEMA = etree.XMLSchema(XSD_FILE)
+PARSER = etree.XMLParser(schema=SCHEMA)
+PIPELINE = etree.parse('pipelines/dummy.xml', PARSER)
 XML_COMPONENTS = PIPELINE.xpath('component')
 COMPONENTS = []
 
