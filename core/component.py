@@ -19,7 +19,7 @@ class Component(object):
         """
         has to be implemented in components which can be at the beginning of a pipeline
         """
-        pass
+        self.log_line('No start-Method is defined!', LogLevel.ERROR)
 
     class OutputNotifier(Observable):
         """
