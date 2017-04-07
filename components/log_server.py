@@ -34,12 +34,6 @@ class LogServer(object):
                        args[1] + ": " + \
                        args[0] + '\033[0m'
             if args[2] == LogLevel.ERROR:
-                eprint(log_line)
+                print(log_line, file=sys.stderr)
             else:
                 print(log_line)
-
-def eprint(*args, **kwargs):
-    """
-    define print function with print out to stderr
-    """
-    print(*args, file=sys.stderr, **kwargs)
