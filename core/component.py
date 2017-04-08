@@ -2,7 +2,7 @@
 Component
 """
 from core.observer import Observable, Observer
-from components.log_server import LogLevel
+from core.log_server import LogLevel
 
 class Component(object):
     """

@@ -2,7 +2,7 @@
 Jpeg Output
 """
 from core.component import Component
-from components.log_server import LogLevel
+from core.log_server import LogLevel
 
 class JpegOutput(Component):
     """
