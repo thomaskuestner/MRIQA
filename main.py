@@ -39,7 +39,6 @@ for component in XML_COMPONENTS:
     ComponentClass = getattr(import_module('components.' + fileName.text), className.text)
     # instantiate class
     instance = ComponentClass(LOGSERVER, properties)
-    print(instance.get_description())
     COMPONENTS.append(instance)
 
 # glue components together

@@ -21,11 +21,16 @@ class Component(object):
         """
         self.log_line('Missing description!', LogLevel.WARNING)
 
-    def get_parameters(self):
+    @staticmethod
+    def get_parameters():
         """
+        copy this to every component with parameters and
+        change Component to the inherit class name
         return all parameters of the component
         """
-        self.log_line('No parameters!', LogLevel.INFO)
+        for key, value in Component.__dict__.items():
+            if isinstance(value, property):
+                print(key)
 
     def start(self):
         """
