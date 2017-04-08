@@ -4,7 +4,7 @@ main.py
 from importlib import import_module
 from pydoc import locate
 from lxml import etree
-from components.log_server import LogServer
+from core.log_server import LogServer
 
 # initalize base components
 LOGSERVER = LogServer()
@@ -39,6 +39,7 @@ for component in XML_COMPONENTS:
     ComponentClass = getattr(import_module('components.' + fileName.text), className.text)
     # instantiate class
     instance = ComponentClass(LOGSERVER, properties)
+    print(instance.get_description())
     COMPONENTS.append(instance)
 
 # glue components together
