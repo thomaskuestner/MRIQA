@@ -11,6 +11,12 @@ class Rotate(Component):
         super(Rotate, self).__init__(log_server, properties)
         self.input_observer = Rotate.InputObserver(self)
 
+    def get_description(self):
+        """
+        return an description of the component
+        """
+        return "Rotate an image"
+
     class InputObserver(Component.InputObserver):
         """
         Class for observers

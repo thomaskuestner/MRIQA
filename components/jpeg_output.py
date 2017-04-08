@@ -11,6 +11,13 @@ class JpegOutput(Component):
     def __init__(self, log_server, properties):
         super(JpegOutput, self).__init__(log_server, properties)
         self.input_observer = JpegOutput.InputObserver(self)
+
+    def get_description(self):
+        """
+        return an description of the component
+        """
+        return "Save image to a specified file path"
+
     class InputObserver(Component.InputObserver):
         """
         Class for observers

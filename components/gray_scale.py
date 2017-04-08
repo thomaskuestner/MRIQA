@@ -11,6 +11,12 @@ class GrayScale(Component):
         super(GrayScale, self).__init__(log_server, properties)
         self.input_observer = GrayScale.InputObserver(self)
 
+    def get_description(self):
+        """
+        return an description of the component
+        """
+        return "Grayscale an image"
+
     class InputObserver(Component.InputObserver):
         """
         Class for observers

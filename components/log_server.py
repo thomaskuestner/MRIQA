@@ -23,6 +23,13 @@ class LogServer(object):
     def __init__(self):
         self.log_observer = LogServer.LogObserver(self)
 
+    def get_description(self):
+        """
+        return an description of the component
+        """
+        return "The LogServer-component gives us the possibility to write log-messages. " + \
+        "Every log-message gets a timestamp, source and loglevel."
+
     class LogObserver(Observer):
         """
         Class for log observers

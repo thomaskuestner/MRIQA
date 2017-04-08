@@ -15,11 +15,23 @@ class Component(object):
         self.output_notifier = Component.OutputNotifier(self)
         self.input_observer = Component.InputObserver(self)
 
+    def get_description(self):
+        """
+        return an description of the component
+        """
+        self.log_line('Missing description!', LogLevel.WARNING)
+
+    def get_parameters(self):
+        """
+        return all parameters of the component
+        """
+        self.log_line('No parameters!', LogLevel.INFO)
+
     def start(self):
         """
         has to be implemented in components which can be at the beginning of a pipeline
         """
-        self.log_line('No start-Method is defined!', LogLevel.ERROR)
+        self.log_line('start-Method is not defined!', LogLevel.ERROR)
 
     class OutputNotifier(Observable):
         """
