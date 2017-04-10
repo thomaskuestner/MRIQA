@@ -5,7 +5,7 @@ from core.component import Component
 
 class GrayScale(Component):
     """
-    Class for graysacale an image
+    Class for grayscale an image
     """
     def __init__(self, log_server, properties):
         super(GrayScale, self).__init__(log_server, properties)

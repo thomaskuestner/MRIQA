@@ -4,7 +4,7 @@ main.py
 from importlib import import_module
 from pydoc import locate
 from lxml import etree
-from core.log_server import LogServer
+from components.log_server import LogServer
 
 # initalize base components
 LOGSERVER = LogServer()

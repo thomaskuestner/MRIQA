@@ -1,10 +1,11 @@
 """
 Component
 """
+from core.base_component import BaseComponent
 from core.observer import Observable, Observer
-from core.log_server import LogLevel
+from components.log_server import LogLevel
 
-class Component(object):
+class Component(BaseComponent):
     """
     Class for components
     """
@@ -47,7 +48,7 @@ class Component(object):
             self.outer = outer
         def notify_observers(self, arg=None):
             """
-            notifiy observers
+            notify observers
             """
             self.set_changed()
             Observable.notify_observers(self, arg)
@@ -80,7 +81,7 @@ class Component(object):
             self.outer = outer
         def notify_observers(self, arg=None):
             """
-            notifiy observers
+            notify observers
             """
             self.set_changed()
             Observable.notify_observers(self, arg)

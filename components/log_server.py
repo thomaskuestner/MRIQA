@@ -5,6 +5,7 @@ import sys
 from time import gmtime, strftime
 from enum import Enum
 from core.observer import Observer
+from core.base_component import BaseComponent
 
 class LogLevel(Enum):
     """"
@@ -16,7 +17,7 @@ class LogLevel(Enum):
     WARNING = '\033[93m'
     ERROR = '\033[91m'
 
-class LogServer(object):
+class LogServer(BaseComponent):
     """
     Class for LogServer
     """
