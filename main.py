@@ -9,32 +9,19 @@ from PyQt5.QtCore import QObject, QTimer, QThread
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from components.log_server import LogServer
-from gui.components.log_gui import LogGui
 
 class Pipeline(QThread):
     """
     pipeline class
     """
-    def __init__(self):
+    def __init__(self, log_server):
         super(Pipeline, self).__init__()
-
-    def log_message(self, arg):
-        """
-        log message
-        """
-        log_text_area = WINDOW.findChild(QObject, "log_text_area")
-        log_text_area.append(arg)
+        self.log_server = log_server
 
     def run(self):
         """
         startup method
         """
-        # initialize base components
-        log_server = LogServer()
-        log_gui = LogGui(log_server, dict())
-        log_gui.logged_message.connect(self.log_message)
-        log_server.output_notifier.add_observer(log_gui.input_observer)
-
         # read xml file
         pipeline = etree.parse('pipelines/dummy.xml', \
             etree.XMLParser \
@@ -62,7 +49,7 @@ class Pipeline(QThread):
                 component.xpath('name')[0].text), \
                 component.xpath('class')[0].text)
             # instantiate class
-            components.append(component_class(log_server, properties))
+            components.append(component_class(self.log_server, properties))
 
         # glue components together
         for index, component in enumerate(components):
@@ -72,22 +59,33 @@ class Pipeline(QThread):
         # start at component
         components[0].start()
 
+def log_message(arg):
+    """
+    log message
+    """
+    log_text_area = WINDOW.findChild(QObject, "log_text_area")
+    log_text_area.append(arg)
+
 # start GUI
 if __name__ == '__main__':
+    # initialize base components
+    LOGSERVER = LogServer()
+    LOGSERVER.logged_message.connect(log_message)
+
     APP = QApplication(sys.argv)
 
     ENGINE = QQmlApplicationEngine()
     CONTEXT = ENGINE.rootContext()
     CONTEXT.setContextProperty("main", ENGINE)
 
-    ENGINE.load('gui/components/log_gui.qml')
+    ENGINE.load('gui/basic.qml')
 
     WINDOW = ENGINE.rootObjects()[0]
     WINDOW.show()
 
     TIMER = QTimer()
 
-    PIPELINE = Pipeline()
+    PIPELINE = Pipeline(LOGSERVER)
     PIPELINE.start()
 
     sys.exit(APP.exec_())
