@@ -1,5 +1,6 @@
 # files
 *.pyc
+*.qmlc
 
 # folder
 tmp/

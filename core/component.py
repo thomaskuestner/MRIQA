@@ -10,10 +10,10 @@ class Component(BaseComponent):
     Class for components
     """
     def __init__(self, log_server, properties):
+        super(Component, self).__init__()
         self.properties = properties
         self.log_notifier = Component.LogNotifier(self)
         self.log_notifier.add_observer(log_server.log_observer)
-        self.output_notifier = Component.OutputNotifier(self)
         self.input_observer = Component.InputObserver(self)
 
     def get_description(self):
@@ -38,20 +38,6 @@ class Component(BaseComponent):
         has to be implemented in components which can be at the beginning of a pipeline
         """
         self.log_line('start-Method is not defined!', LogLevel.ERROR)
-
-    class OutputNotifier(Observable):
-        """
-        Class for Notifier
-        """
-        def __init__(self, outer):
-            Observable.__init__(self)
-            self.outer = outer
-        def notify_observers(self, arg=None):
-            """
-            notify observers
-            """
-            self.set_changed()
-            Observable.notify_observers(self, arg)
 
     class InputObserver(Observer):
         """

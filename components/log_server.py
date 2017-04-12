@@ -22,6 +22,7 @@ class LogServer(BaseComponent):
     Class for LogServer
     """
     def __init__(self):
+        super(LogServer, self).__init__()
         self.log_observer = LogServer.LogObserver(self)
 
     class LogObserver(Observer):
@@ -31,10 +32,12 @@ class LogServer(BaseComponent):
         def __init__(self, outer):
             self.outer = outer
         def update(self, observable, args):
-            log_line = args[2].value + strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " " + \
+            log_message = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " " + \
                        args[1] + ": " + \
-                       args[0] + '\033[0m'
+                       args[0]
+            log_line = args[2].value + log_message + '\033[0m'
             if args[2] == LogLevel.ERROR:
                 print(log_line, file=sys.stderr)
             else:
                 print(log_line)
+            self.outer.output_notifier.notify_observers(log_message)
