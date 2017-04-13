@@ -5,8 +5,8 @@ import sys
 from importlib import import_module
 from pydoc import locate
 from lxml import etree
-from PyQt5.QtCore import QObject, QTimer, QThread
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QObject, QThread
+from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtQml import QQmlApplicationEngine
 from components.log_server import LogServer
 
@@ -14,16 +14,17 @@ class Pipeline(QThread):
     """
     pipeline class
     """
-    def __init__(self, log_server):
+    def __init__(self, log_server, file_name):
         super(Pipeline, self).__init__()
         self.log_server = log_server
+        self.file_name = file_name
 
     def run(self):
         """
         startup method
         """
         # read xml file
-        pipeline = etree.parse('pipelines/dummy.xml', \
+        pipeline = etree.parse(self.file_name, \
             etree.XMLParser \
             (schema=etree.XMLSchema(etree.XML(open('core/pipeline.xsd', 'r').read()))))
         xml_components = pipeline.xpath('component')
@@ -59,33 +60,44 @@ class Pipeline(QThread):
         # start at component
         components[0].start()
 
-def log_message(arg):
+class MainWindow(QWidget):
     """
-    log message
+    MainWindow class
     """
-    log_text_area = WINDOW.findChild(QObject, "log_text_area")
-    log_text_area.append(arg)
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.pipeline = None
+        self.log_server = LogServer()
+        self.log_server.logged_message.connect(self.log_message)
+
+        self.engine = QQmlApplicationEngine()
+        self.context = self.engine.rootContext()
+        self.context.setContextProperty("main", self.engine)
+
+        self.engine.load('gui/basic.qml')
+
+        self.window = self.engine.rootObjects()[0]
+        self.window.show()
+
+        self.filedialog = self.window.findChild(QObject, "mriqa_file_dialog")
+        self.filedialog.file_selected.connect(self.start_pipeline)
+
+    def log_message(self, arg):
+        """
+        log message
+        """
+        log_text_area = self.window.findChild(QObject, "log_text_area")
+        log_text_area.append(arg)
+
+    def start_pipeline(self, file_name):
+        """
+        start pipeline after file selection
+        """
+        self.pipeline = Pipeline(self.log_server, file_name)
+        self.pipeline.start()
 
 # start GUI
 if __name__ == '__main__':
-    # initialize base components
-    LOGSERVER = LogServer()
-    LOGSERVER.logged_message.connect(log_message)
-
     APP = QApplication(sys.argv)
-
-    ENGINE = QQmlApplicationEngine()
-    CONTEXT = ENGINE.rootContext()
-    CONTEXT.setContextProperty("main", ENGINE)
-
-    ENGINE.load('gui/basic.qml')
-
-    WINDOW = ENGINE.rootObjects()[0]
-    WINDOW.show()
-
-    TIMER = QTimer()
-
-    PIPELINE = Pipeline(LOGSERVER)
-    PIPELINE.start()
-
+    MAINWINDOW = MainWindow()
     sys.exit(APP.exec_())
