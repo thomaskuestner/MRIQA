@@ -103,6 +103,6 @@ if __name__ == '__main__':
         MAINWINDOW = MainWindow()
         sys.exit(APP.exec_())
     else:
-        log_server = LogServer()
-        pipeline = Pipeline(log_server, sys.argv[1])
-        pipeline.run()
+        LOGSERVER = LogServer()
+        PIPELINE = Pipeline(LOGSERVER, sys.argv[1])
+        PIPELINE.run()
