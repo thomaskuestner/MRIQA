@@ -98,6 +98,11 @@ class MainWindow(QWidget):
 
 # start GUI
 if __name__ == '__main__':
-    APP = QApplication(sys.argv)
-    MAINWINDOW = MainWindow()
-    sys.exit(APP.exec_())
+    if len(sys.argv) == 1:
+        APP = QApplication(sys.argv)
+        MAINWINDOW = MainWindow()
+        sys.exit(APP.exec_())
+    else:
+        log_server = LogServer()
+        pipeline = Pipeline(log_server, sys.argv[1])
+        pipeline.run()

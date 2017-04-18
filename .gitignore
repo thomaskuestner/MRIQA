@@ -1,6 +1,7 @@
 # files
 *.pyc
 *.qmlc
+*.log
 
 # folder
 tmp/
