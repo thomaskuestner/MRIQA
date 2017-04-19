@@ -7,8 +7,8 @@ class Rotate(Component):
     """
     Class for rotating an image
     """
-    def __init__(self, log_server, properties):
-        super(Rotate, self).__init__(log_server, properties)
+    def __init__(self, log_server, component_id, auto_glue, properties, additional_components):
+        super(Rotate, self).__init__(log_server, component_id, auto_glue, properties, additional_components)
         self.input_observer = Rotate.InputObserver(self)
         self.__angle = 0
         self.angle = self.properties['angle']

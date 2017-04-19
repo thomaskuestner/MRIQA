@@ -19,6 +19,18 @@
             <name>angle</name>
             <value type="float">90</value>
         </property>
+        <additional_component>
+            <id>counter_condition</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>counter_condition</id>
+        <name>condition</name>
+        <class>Condition</class>
+        <property>
+            <name>counter</name>
+            <value type="int">5</value>
+        </property>
     </component>
     <component>
         <name>jpeg_output</name>

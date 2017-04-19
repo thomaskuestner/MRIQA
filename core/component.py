@@ -9,9 +9,12 @@ class Component(BaseComponent):
     """
     Class for components
     """
-    def __init__(self, log_server, properties):
+    def __init__(self, log_server, component_id, auto_glue, properties, additional_components):
         super(Component, self).__init__()
+        self.id = component_id
+        self.auto_glue = auto_glue
         self.properties = properties
+        self.additional_components = additional_components
         self.log_notifier = Component.LogNotifier(self)
         self.log_notifier.add_observer(log_server.log_observer)
         self.input_observer = Component.InputObserver(self)

@@ -32,6 +32,24 @@ class Pipeline(QThread):
 
         # dynamically load components
         for component in xml_components:
+            # read id value
+            component_id = component.xpath('id')
+            if len(component_id) > 0:
+                component_id = component.xpath('id')[0].text
+            else:
+                component_id = None
+
+            # read autoglue value
+            auto_glue = component.xpath('autoglue')
+            if len(auto_glue) > 0:
+                auto_glue = component.xpath('autoglue')[0].text
+                if auto_glue == 'true':
+                    auto_glue = True
+                elif auto_glue == 'false':
+                    auto_glue = False
+            else:
+                auto_glue = True
+
             # read properties
             xml_properties = component.xpath('property')
             properties = dict()
@@ -45,17 +63,37 @@ class Pipeline(QThread):
                 else:
                     property_value = property_value.text
                 properties[component_property.xpath('name')[0].text] = property_value
+
+            # read additional_component
+            xml_additional_component = component.xpath('additional_component')
+            additional_components = []
+            for additional_component in xml_additional_component:
+                additional_components.append(additional_component.xpath('id')[0].text)
+
             # get component class
             component_class = getattr(import_module('components.' + \
                 component.xpath('name')[0].text), \
                 component.xpath('class')[0].text)
             # instantiate class
-            components.append(component_class(self.log_server, properties))
+            components.append(component_class(self.log_server, \
+                                              component_id, \
+                                              auto_glue, \
+                                              properties, \
+                                              additional_components))
 
-        # glue components together
+        # glue components together which aren't disabled with autoglue
         for index, component in enumerate(components):
-            if index + 1 < len(components):
+            if index + 1 < len(components) and components[index + 1].auto_glue:
                 component.output_notifier.add_observer(components[index + 1].input_observer)
+
+        # add additional components to component
+        for component in components:
+            if len(component.additional_components) > 0:
+                for additional_component_id in component.additional_components:
+                    for additional_component in components:
+                        if additional_component.id == additional_component_id:
+                            additional_component.condition_notifier \
+                            .add_observer(component.input_observer)
 
         # start at component
         components[0].start()

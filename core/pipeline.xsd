@@ -1,4 +1,5 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="id" type="xsd:string"/>
   <xsd:element name="name" type="xsd:string"/>
   <xsd:element name="value">
     <xsd:complexType>
@@ -10,6 +11,14 @@
     </xsd:complexType>
   </xsd:element>
   <xsd:element name="class" type="xsd:string"/>
+  <xsd:element name="autoglue" type="xsd:boolean"/>
+  <xsd:element name="additional_component">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="id"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
   <xsd:element name="property">
     <xsd:complexType>
       <xsd:sequence>
@@ -21,9 +30,12 @@
   <xsd:element name="component">
     <xsd:complexType>
       <xsd:sequence>
+        <xsd:element ref="id" maxOccurs="1" minOccurs="0"/>
         <xsd:element ref="name"/>
         <xsd:element ref="class"/>
+        <xsd:element ref="autoglue" maxOccurs="1" minOccurs="0"/>
         <xsd:element ref="property" maxOccurs="unbounded" minOccurs="0"/>
+        <xsd:element ref="additional_component" maxOccurs="unbounded" minOccurs="0"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
