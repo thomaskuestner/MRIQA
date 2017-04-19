@@ -27,59 +27,16 @@ class Pipeline(QThread):
         pipeline = etree.parse(self.file_name, \
             etree.XMLParser \
             (schema=etree.XMLSchema(etree.XML(open('core/pipeline.xsd', 'r').read()))))
-        xml_components = pipeline.xpath('component')
         components = []
 
         # dynamically load components
-        for component in xml_components:
-            # read id value
-            component_id = component.xpath('id')
-            if len(component_id) > 0:
-                component_id = component.xpath('id')[0].text
-            else:
-                component_id = None
-
-            # read autoglue value
-            auto_glue = component.xpath('autoglue')
-            if len(auto_glue) > 0:
-                auto_glue = component.xpath('autoglue')[0].text
-                if auto_glue == 'true':
-                    auto_glue = True
-                elif auto_glue == 'false':
-                    auto_glue = False
-            else:
-                auto_glue = True
-
-            # read properties
-            xml_properties = component.xpath('property')
-            properties = dict()
-            for component_property in xml_properties:
-                property_value = component_property.xpath('value')[0]
-                property_value_type = component_property.xpath('value/@type')
-                # typecast components
-                if len(property_value_type) > 0:
-                    property_type = locate(property_value_type[0])
-                    property_value = property_type(property_value.text)
-                else:
-                    property_value = property_value.text
-                properties[component_property.xpath('name')[0].text] = property_value
-
-            # read additional_component
-            xml_additional_component = component.xpath('additional_component')
-            additional_components = []
-            for additional_component in xml_additional_component:
-                additional_components.append(additional_component.xpath('id')[0].text)
-
+        for component in pipeline.xpath('component'):
             # get component class
             component_class = getattr(import_module('components.' + \
                 component.xpath('name')[0].text), \
                 component.xpath('class')[0].text)
             # instantiate class
-            components.append(component_class(self.log_server, \
-                                              component_id, \
-                                              auto_glue, \
-                                              properties, \
-                                              additional_components))
+            components.append(component_class(self.read_options(component)))
 
         # glue components together which aren't disabled with autoglue
         for index, component in enumerate(components):
@@ -91,12 +48,56 @@ class Pipeline(QThread):
             if len(component.additional_components) > 0:
                 for additional_component_id in component.additional_components:
                     for additional_component in components:
-                        if additional_component.id == additional_component_id:
+                        if additional_component.component_id == additional_component_id:
                             additional_component.condition_notifier \
                             .add_observer(component.input_observer)
 
         # start at component
         components[0].start()
+
+    def read_options(self, component):
+        """
+        read options from xml
+        """
+        options = dict()
+        options['log_server'] = self.log_server
+        # read id value
+        component_id = component.xpath('id')
+        if len(component_id) > 0:
+            options['component_id'] = component.xpath('id')[0].text
+        else:
+            options['component_id'] = None
+
+        # read autoglue value
+        options['auto_glue'] = component.xpath('autoglue')
+        if len(options['auto_glue']) > 0:
+            options['auto_glue'] = component.xpath('autoglue')[0].text
+            if options['auto_glue'] == 'true':
+                options['auto_glue'] = True
+            elif options['auto_glue'] == 'false':
+                options['auto_glue'] = False
+        else:
+            options['auto_glue'] = True
+
+        # read properties
+        options['properties'] = dict()
+        for component_property in component.xpath('property'):
+            property_value = component_property.xpath('value')[0]
+            property_value_type = component_property.xpath('value/@type')
+            # typecast components
+            if len(property_value_type) > 0:
+                property_type = locate(property_value_type[0])
+                property_value = property_type(property_value.text)
+            else:
+                property_value = property_value.text
+            options['properties'][component_property.xpath('name')[0].text] = property_value
+
+        # read additional_component
+        options['additional_components'] = []
+        for additional_component in component.xpath('additional_component'):
+            options['additional_components'].append(additional_component.xpath('id')[0].text)
+
+        return options
 
 class MainWindow(QWidget):
     """

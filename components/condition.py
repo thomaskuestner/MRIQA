@@ -7,8 +7,8 @@ class Condition(Component):
     """
     Class for condition
     """
-    def __init__(self, log_server, component_id, auto_glue, properties, additional_components):
-        super(Condition, self).__init__(log_server, component_id, auto_glue, properties, additional_components)
+    def __init__(self, options):
+        super(Condition, self).__init__(options)
         self.condition_notifier = Component.OutputNotifier(self)
         self.input_observer = Condition.InputObserver(self)
         self.round = 0

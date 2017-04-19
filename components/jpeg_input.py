@@ -8,8 +8,8 @@ class JpegInput(Component):
     """
     Class for Jpeg Input
     """
-    def __init__(self, log_server, component_id, auto_glue, properties, additional_components):
-        super(JpegInput, self).__init__(log_server, component_id, auto_glue, properties, additional_components)
+    def __init__(self, options):
+        super(JpegInput, self).__init__(options)
         self.__file_path = ""
         self.file_path = self.properties['file_path']
 

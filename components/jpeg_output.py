@@ -8,8 +8,8 @@ class JpegOutput(Component):
     """
     Class for JpegOutput
     """
-    def __init__(self, log_server, component_id, auto_glue, properties, additional_components):
-        super(JpegOutput, self).__init__(log_server, component_id, auto_glue, properties, additional_components)
+    def __init__(self, options):
+        super(JpegOutput, self).__init__(options)
         self.input_observer = JpegOutput.InputObserver(self)
         self.__file_path = ""
         self.file_path = self.properties['file_path']
