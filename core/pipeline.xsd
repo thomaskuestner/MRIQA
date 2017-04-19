@@ -15,7 +15,7 @@
   <xsd:element name="additional_component">
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element ref="id"/>
+        <xsd:element ref="id" maxOccurs="unbounded" minOccurs="0"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
@@ -35,7 +35,7 @@
         <xsd:element ref="class"/>
         <xsd:element ref="autoglue" maxOccurs="1" minOccurs="0"/>
         <xsd:element ref="property" maxOccurs="unbounded" minOccurs="0"/>
-        <xsd:element ref="additional_component" maxOccurs="unbounded" minOccurs="0"/>
+        <xsd:element ref="additional_component" maxOccurs="1" minOccurs="0"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

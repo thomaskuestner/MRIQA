@@ -47,8 +47,10 @@ class Pipeline(QThread):
         for component in components:
             if len(component.additional_components) > 0:
                 for additional_component_id in component.additional_components:
+                    print(additional_component_id)
                     for additional_component in components:
                         if additional_component.component_id == additional_component_id:
+                            print(additional_component)
                             additional_component.condition_notifier \
                             .add_observer(component.input_observer)
 
@@ -94,8 +96,9 @@ class Pipeline(QThread):
 
         # read additional_component
         options['additional_components'] = []
-        for additional_component in component.xpath('additional_component'):
-            options['additional_components'].append(additional_component.xpath('id')[0].text)
+        for additional_components in component.xpath('additional_component'):
+            for additional_component in additional_components.xpath('id'):
+                options['additional_components'].append(additional_component.text)
 
         return options
 

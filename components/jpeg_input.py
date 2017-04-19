@@ -43,6 +43,6 @@ class JpegInput(Component):
         """
         open a file and sends notifier
         """
-        image = Image.open(self.file_path)
+        self.package['data'] = Image.open(self.file_path)
         self.log_line('open file')
-        self.output_notifier.notify_observers(image)
+        self.output_notifier.notify_observers(self.package)

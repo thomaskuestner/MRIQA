@@ -21,6 +21,7 @@ class GrayScale(Component):
         """
         Class for observers
         """
-        def update(self, observable, arg):
+        def update(self, observable, package):
             self.outer.log_line('grayscale image')
-            self.outer.output_notifier.notify_observers(arg.convert('LA'))
+            package['data'] = package['data'].convert('LA')
+            self.outer.output_notifier.notify_observers(package)

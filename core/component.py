@@ -11,6 +11,7 @@ class Component(BaseComponent):
     """
     def __init__(self, options):
         super(Component, self).__init__()
+        self.package = dict()
         self.component_id = options['component_id']
         self.auto_glue = options['auto_glue']
         self.properties = options['properties']

@@ -43,6 +43,10 @@ class Rotate(Component):
         """
         Class for observers
         """
-        def update(self, observable, arg):
+        def update(self, observable, package):
             self.outer.log_line('rotate image')
-            self.outer.output_notifier.notify_observers(arg.rotate(self.outer.angle))
+            if ('angle' in package) is False:
+                package['angle'] = 0
+            package['angle'] = package['angle'] + self.outer.angle
+            package['data'] = package['data'].rotate(self.outer.angle)
+            self.outer.output_notifier.notify_observers(package)
