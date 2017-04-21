@@ -9,6 +9,7 @@
         </property>
     </component>
     <component>
+        <id>gray_scale</id>
         <name>gray_scale</name>
         <class>GrayScale</class>
     </component>
@@ -20,22 +21,9 @@
             <value type="float">45</value>
         </property>
         <additional_component>
-            <id>counter_condition</id>
             <id>parameter_condition</id>
+            <notifier>condition</notifier>
         </additional_component>
-    </component>
-    <component>
-        <id>counter_condition</id>
-        <name>condition</name>
-        <class>Condition</class>
-        <property>
-            <name>type</name>
-            <value>counter</value>
-        </property>
-        <property>
-            <name>value</name>
-            <value type="int">2</value>
-        </property>
     </component>
     <component>
         <id>parameter_condition</id>
@@ -65,5 +53,17 @@
             <name>file_path</name>
             <value>tmp/test.png</value>
         </property>
+    </component>
+    <component>
+        <name>jpeg_output</name>
+        <class>JpegOutput</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>file_path</name>
+            <value>tmp/test1.png</value>
+        </property>
+        <additional_component>
+            <id>gray_scale</id>
+        </additional_component>
     </component>
 </pipeline>

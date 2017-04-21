@@ -1,6 +1,7 @@
 """
 Condition
 """
+from core.observer import Observable
 from core.component import Component
 
 class Condition(Component):
@@ -9,7 +10,7 @@ class Condition(Component):
     """
     def __init__(self, options):
         super(Condition, self).__init__(options)
-        self.condition_notifier = Component.OutputNotifier(self)
+        self.condition_notifier = Condition.ConditionNotifier(self)
         self.input_observer = Condition.InputObserver(self)
         self.round = 0
         self.type = self.properties['type']
@@ -36,6 +37,20 @@ class Condition(Component):
                 self.outer.output_notifier.notify_observers(package)
             else:
                 self.outer.condition_notifier.notify_observers(package)
+
+    class ConditionNotifier(Observable):
+        """
+        Class for Notifier
+        """
+        def __init__(self, outer):
+            Observable.__init__(self)
+            self.outer = outer
+        def notify_observers(self, arg=None):
+            """
+            notify observers
+            """
+            self.set_changed()
+            Observable.notify_observers(self, arg)
 
     def counter_condition(self, state):
         """

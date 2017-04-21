@@ -2,105 +2,11 @@
 main.py
 """
 import sys
-from importlib import import_module
-from pydoc import locate
-from lxml import etree
-from PyQt5.QtCore import QObject, QThread
+from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtQml import QQmlApplicationEngine
 from components.log_server import LogServer
-
-class Pipeline(QThread):
-    """
-    pipeline class
-    """
-    def __init__(self, log_server, file_name):
-        super(Pipeline, self).__init__()
-        self.log_server = log_server
-        self.file_name = file_name
-
-    def run(self):
-        """
-        startup method
-        """
-        # read xml file
-        pipeline = etree.parse(self.file_name, \
-            etree.XMLParser \
-            (schema=etree.XMLSchema(etree.XML(open('core/pipeline.xsd', 'r').read()))))
-        components = []
-
-        # dynamically load components
-        for component in pipeline.xpath('component'):
-            # get component class
-            component_class = getattr(import_module('components.' + \
-                component.xpath('name')[0].text), \
-                component.xpath('class')[0].text)
-            # instantiate class
-            components.append(component_class(self.read_options(component)))
-
-        # glue components together which aren't disabled with autoglue
-        for index, component in enumerate(components):
-            if index + 1 < len(components) and components[index + 1].auto_glue:
-                component.output_notifier.add_observer(components[index + 1].input_observer)
-
-        # add additional components to component
-        for component in components:
-            if len(component.additional_components) > 0:
-                for additional_component_id in component.additional_components:
-                    print(additional_component_id)
-                    for additional_component in components:
-                        if additional_component.component_id == additional_component_id:
-                            print(additional_component)
-                            additional_component.condition_notifier \
-                            .add_observer(component.input_observer)
-
-        # start at component
-        components[0].start()
-
-    def read_options(self, component):
-        """
-        read options from xml
-        """
-        options = dict()
-        options['log_server'] = self.log_server
-        # read id value
-        component_id = component.xpath('id')
-        if len(component_id) > 0:
-            options['component_id'] = component.xpath('id')[0].text
-        else:
-            options['component_id'] = None
-
-        # read autoglue value
-        options['auto_glue'] = component.xpath('autoglue')
-        if len(options['auto_glue']) > 0:
-            options['auto_glue'] = component.xpath('autoglue')[0].text
-            if options['auto_glue'] == 'true':
-                options['auto_glue'] = True
-            elif options['auto_glue'] == 'false':
-                options['auto_glue'] = False
-        else:
-            options['auto_glue'] = True
-
-        # read properties
-        options['properties'] = dict()
-        for component_property in component.xpath('property'):
-            property_value = component_property.xpath('value')[0]
-            property_value_type = component_property.xpath('value/@type')
-            # typecast components
-            if len(property_value_type) > 0:
-                property_type = locate(property_value_type[0])
-                property_value = property_type(property_value.text)
-            else:
-                property_value = property_value.text
-            options['properties'][component_property.xpath('name')[0].text] = property_value
-
-        # read additional_component
-        options['additional_components'] = []
-        for additional_components in component.xpath('additional_component'):
-            for additional_component in additional_components.xpath('id'):
-                options['additional_components'].append(additional_component.text)
-
-        return options
+from core.pipeline import Pipeline
 
 class MainWindow(QWidget):
     """

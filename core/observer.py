@@ -29,8 +29,6 @@ class Observable(Synchronization):
         """
         if observer not in self.obs:
             self.obs.append(observer)
-        else:
-            print(observer)
 
     def delete_observer(self, observer):
         """
