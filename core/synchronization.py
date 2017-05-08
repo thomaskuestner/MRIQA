@@ -1,6 +1,6 @@
-# Util/Synchronization.py
-'''Simple emulation of Java's 'synchronized'
-keyword, from Peter Norvig.'''
+"""
+synchronization.py
+"""
 import threading
 
 def synchronized(method):

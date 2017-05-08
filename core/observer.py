@@ -1,6 +1,7 @@
 """
 Base for all Observers
 """
+from multiprocessing import Process
 from core.synchronization import Synchronization, synchronize
 
 class Observer(object):
@@ -8,10 +9,12 @@ class Observer(object):
     Base Class for all Observers
     """
     def update(self, observable, arg):
-        '''Called when the observed object is
+        """
+        Called when the observed object is
         modified. You call an Observable object's
         notifyObservers method to notify all the
-        object's observers of the change.'''
+        object's observers of the change.
+        """
         pass
 
 class Observable(Synchronization):
@@ -37,11 +40,13 @@ class Observable(Synchronization):
         self.obs.remove(observer)
 
     def notify_observers(self, arg=None):
-        '''If 'changed' indicates that this object
+        """
+        If 'changed' indicates that this object
         has changed, notify all its observers, then
         call clearChanged(). Each observer has its
         update() called with two arguments: this
-        observable object and the generic 'arg'.'''
+        observable object and the generic 'arg'.
+        """
         self.mutex.acquire()
         try:
             if not self.changed:
@@ -54,7 +59,8 @@ class Observable(Synchronization):
             self.mutex.release()
         # Updating is not required to be synchronized:
         for observer in local_array:
-            observer.update(self, arg)
+            process = Process(target=observer.update, args=(self, arg))
+            process.start()
 
     def delete_observers(self):
         """

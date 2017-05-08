@@ -2,6 +2,7 @@
 pipeline.py
 """
 from importlib import import_module
+from multiprocessing import Process
 from pydoc import locate
 from lxml import etree
 from PyQt5.QtCore import QThread
@@ -49,7 +50,8 @@ class Pipeline(QThread):
                             notifier.add_observer(component.input_observer)
 
         # start at component
-        components[0].start()
+        process = Process(target=components[0].start)
+        process.start()
 
     def read_options(self, component):
         """
