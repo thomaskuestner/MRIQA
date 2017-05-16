@@ -54,10 +54,13 @@ ApplicationWindow {
                 id: "components"
                 title: "Components"
                 Layout.fillHeight: true
+                TextInput {
+                    text:"search components"
+                }
             }
             GroupBox {
-                anchors.left: components.right;
-                anchors.right: settings.left;
+                anchors.left: components.right
+                anchors.right: settings.left
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
