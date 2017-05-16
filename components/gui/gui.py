@@ -3,6 +3,7 @@ Gui Component
 """
 import sys
 from core.base_component import BaseComponent
+from core.pipeline import Pipeline
 from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtQml import QQmlApplicationEngine
@@ -43,7 +44,7 @@ class MainWindow(QWidget):
         self.pipeline = Pipeline(self.log_server, file_name)
         self.pipeline.start()
 
-class Gui(BaseComponent, QWidget):
+class Gui(BaseComponent):
     """
     Class for LogServer
     """
@@ -51,6 +52,7 @@ class Gui(BaseComponent, QWidget):
         BaseComponent.__init__(self)
         self.app = QApplication(argv)
         self.log_server = log_server
+        self.main_window = None
 
     def get_description(self):
         """
@@ -62,5 +64,5 @@ class Gui(BaseComponent, QWidget):
         """
         open the gui
         """
-        main_window = MainWindow(self.log_server)
+        self.main_window = MainWindow(self.log_server)
         sys.exit(self.app.exec_())
