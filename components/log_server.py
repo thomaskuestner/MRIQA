@@ -27,8 +27,6 @@ class LogServer(BaseComponent, QObject):
         QObject.__init__(self)
         self.log_observer = LogServer.LogObserver(self)
 
-    logged_message = pyqtSignal(str, name="loggedMessage")
-
     class LogObserver(Observer):
         """
         Class for log observers
@@ -44,4 +42,3 @@ class LogServer(BaseComponent, QObject):
                 print(log_line, file=sys.stderr)
             else:
                 print(log_line)
-            self.outer.logged_message.emit(log_message)

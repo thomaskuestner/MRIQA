@@ -11,10 +11,11 @@ class Pipeline(QThread):
     """
     pipeline class
     """
-    def __init__(self, log_server, file_name):
+    def __init__(self, log_server, file_name, *args, **kwargs):
         super(Pipeline, self).__init__()
         self.log_server = log_server
         self.file_name = file_name
+        self.gui = kwargs.get('gui')
 
     def run(self):
         """
@@ -59,6 +60,9 @@ class Pipeline(QThread):
         """
         options = dict()
         options['log_server'] = self.log_server
+        if self.gui != None:
+            options['gui'] = self.gui
+
         # read id value
         component_id = component.xpath('id')
         if len(component_id) > 0:

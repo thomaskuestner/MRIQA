@@ -19,6 +19,8 @@ class Component(BaseComponent):
         self.log_notifier = Component.LogNotifier(self)
         self.log_notifier.add_observer(options['log_server'].log_observer)
         self.input_observer = Component.InputObserver(self)
+        if 'gui' in options:
+            self.log_notifier.add_observer(options['gui'].log_observer)
 
     def get_description(self):
         """
