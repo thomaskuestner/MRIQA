@@ -1,6 +1,8 @@
 """
 pipeline.py
 """
+from os import walk
+from re import search
 from importlib import import_module
 from multiprocessing import Process
 from pydoc import locate
@@ -28,9 +30,12 @@ class Pipeline(object):
         # dynamically load components
         for component in pipeline.xpath('component'):
             # get component class
-            component_class = getattr(import_module('components.' + \
-                component.xpath('name')[0].text), \
-                component.xpath('class')[0].text)
+            for root, _, files in walk('components'):
+                for file in files:
+                    if search('.py$', file) and component.xpath('name')[0].text in file:
+                        class_path = root.replace('/', '.') + '.' + file.replace('.py', '')
+
+            component_class = getattr(import_module(class_path), component.xpath('class')[0].text)
             # instantiate class
             components.append(component_class(self.read_options(component)))
 
