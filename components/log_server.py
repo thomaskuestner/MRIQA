@@ -4,7 +4,6 @@ Log Server
 import sys
 from time import gmtime, strftime
 from enum import Enum
-from PyQt5.QtCore import QObject, pyqtSignal
 from core.observer import Observer
 from core.base_component import BaseComponent
 
@@ -18,13 +17,12 @@ class LogLevel(Enum):
     WARNING = '\033[93m'
     ERROR = '\033[91m'
 
-class LogServer(BaseComponent, QObject):
+class LogServer(BaseComponent):
     """
     Class for LogServer
     """
     def __init__(self):
         BaseComponent.__init__(self)
-        QObject.__init__(self)
         self.log_observer = LogServer.LogObserver(self)
 
     class LogObserver(Observer):

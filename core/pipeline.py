@@ -5,17 +5,15 @@ from importlib import import_module
 from multiprocessing import Process
 from pydoc import locate
 from lxml import etree
-from PyQt5.QtCore import QThread
 
-class Pipeline(QThread):
+class Pipeline(object):
     """
     pipeline class
     """
-    def __init__(self, log_server, file_name, *args, **kwargs):
+    def __init__(self, log_server, file_name):
         super(Pipeline, self).__init__()
         self.log_server = log_server
         self.file_name = file_name
-        self.gui = kwargs.get('gui')
 
     def run(self):
         """
@@ -60,8 +58,6 @@ class Pipeline(QThread):
         """
         options = dict()
         options['log_server'] = self.log_server
-        if self.gui != None:
-            options['gui'] = self.gui
 
         # read id value
         component_id = component.xpath('id')
