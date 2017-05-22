@@ -40,3 +40,4 @@ class LogServer(BaseComponent):
                 print(log_line, file=sys.stderr)
             else:
                 print(log_line)
+            self.outer.send(log_line)

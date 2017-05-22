@@ -2,7 +2,9 @@
 *.pyc
 *.qmlc
 *.log
+bundle.js
 
 # folder
+gui/node_modules/
 tmp/
 __pycache__

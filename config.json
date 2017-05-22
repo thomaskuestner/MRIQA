@@ -1,0 +1,4 @@
+{
+    "web_interface_port": 3000,
+    "web_socket_port": 8080
+}
