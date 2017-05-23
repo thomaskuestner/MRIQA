@@ -1,0 +1,19 @@
+p.INFO {
+    color: black;
+}
+
+p.SUCCESS {
+    color: #5cb85c;
+}
+
+p.DEBUG {
+    color: gray;
+}
+
+p.WARNING {
+    color: #f0ad4e
+}
+
+p.ERROR {
+    color: #d9534f;
+}

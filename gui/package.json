@@ -14,6 +14,7 @@
   "author": "Christian Decker",
   "license": "Apache-2.0",
   "dependencies": {
+    "backbone": "^1.3.3",
     "bootstrap": "^3.3.7",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
