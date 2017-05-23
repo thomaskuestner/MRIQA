@@ -2,7 +2,6 @@
 Gray scale
 """
 from core.component import Component
-from components.log_server import LogLevel
 
 class GrayScale(Component):
     """
