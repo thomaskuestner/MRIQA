@@ -19,6 +19,7 @@
     "electron": "^1.6.10",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
+    "recursive-readdir": "^2.2.1",
     "ws": "^3.0.0"
   },
   "devDependencies": {
