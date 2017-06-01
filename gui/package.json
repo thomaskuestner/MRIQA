@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron main.js",
-    "dev": "npm run watch-js & npm run start",
+    "dev": "npm run watch-js & node index.js",
     "watch-js": "watchify public/js/main.js -t [ babelify --presets [ es2015 ] ] -o public/js/bundle.js",
     "test-serverside": "eslint *.js",
     "test-clientside": "eslint public/js/*.js --quiet && eslint public/js/**/*.js && eslint public/js/**/**/*.js",

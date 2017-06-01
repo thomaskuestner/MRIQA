@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 // Views
-import LogArea from './../views/logArea';
+import MainWindow from './../views/mainWindow';
 
 // Extra
 import RegionManager from './../regionManager';
@@ -20,8 +20,8 @@ var Router = Backbone.Router.extend({
         '': 'index'
     },
     index: function(){
-        this.logArea = new LogArea({connection: this.connection});
-        RegionManager.show(this.logArea);
+        this.mainWindow = new MainWindow({connection: this.connection});
+        RegionManager.show(this.mainWindow);
     }
 });
 

@@ -1,3 +1,4 @@
 all_tests:
   script:
    - find . -iname "*.py" | xargs pylint --reports=n
+   - npm --prefix ./gui/ run test

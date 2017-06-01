@@ -34,6 +34,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <li><a href="" id="component-area-view"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <i class="glyphicon glyphicon-th" aria-hidden="true"></i> Component-Area</a></li>
                                 <li><a href="" id="log-area-view"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i> Log-Area</a></li>
                             </ul>
                         </li>
@@ -44,9 +45,26 @@
     </script>
     <!-- NAVBAR -->
 
-    <!-- LOG-AREA -->    
+    <!-- MAIN-WINDOW -->
+    <script id="main-window-template" type="text/template">
+        <div id="main-area"></div>
+        <div class="footer" id="log-area"></div>
+    </script>
+    <!-- MAIN-WINDOW -->
+
+    <!-- MAIN-AREA -->
+    <script id="main-area-template" type="text/template">
+        <div class="row">
+            <div class="col-lg-2" id="component-area"></div>
+            <div class="col-lg-8"></div>
+            <div class="col-lg-2"></div>
+        </div>
+    </script>
+    <!-- MAIN-AREA -->
+
+    <!-- LOG-AREA -->
     <script id="log-area-template" type="text/template">
-        <div class="panel panel-default" id="log-area-panel">
+        <div class="panel panel-default footer" id="log-area-panel">
             <div class="panel-heading">
                 <span><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i> Log-Area</span>
             </div>
@@ -55,6 +73,18 @@
         </div>
     </script>
     <!-- LOG-AREA -->
+
+    <!-- COMPONENT-AREA -->
+    <script id="component-area-template" type="text/template">
+        <div class="panel panel-default" id="component-area-panel">
+            <div class="panel-heading">
+                <span><i class="glyphicon glyphicon-th" aria-hidden="true"></i> Component-Area</span>
+            </div>
+            <div class="panel-body" id="component-area-content">
+            </div>
+        </div>
+    </script>
+    <!-- COMPONENT-AREA -->
 
     <!-- TEMPLATES -->
 
