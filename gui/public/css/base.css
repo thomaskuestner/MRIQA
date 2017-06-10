@@ -23,8 +23,8 @@ html, body {
 }
 
 .container-fluid {
-    height: 100%;
-    margin-bottom: -142px;
+    height: calc(100% - 300px);
+    margin-bottom: -200px;
 }
 
 #main-region {
@@ -84,7 +84,7 @@ html, body {
 }
 
 #log-area {
-    height: 142px;
+    height: 200px;
 }
 
 #log-area > div {
