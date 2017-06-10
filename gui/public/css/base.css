@@ -83,8 +83,9 @@ html, body {
     height: 100%;
 }
 
-#log-area {
-    height: 200px;
+#log-area-content {
+    overflow-y: scroll;
+    height: 160px;
 }
 
 #log-area > div {

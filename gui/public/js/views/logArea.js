@@ -19,6 +19,8 @@ var LogArea = Backbone.View.extend({
         var data = JSON.parse(event.data.replace(/'/ig,'"').replace(/\\/ig,'\\\\'));
         if(data.component === 'LogServer'){
             this.$el.find('#log-area-content').append(`<p class="${data.data.log_level}">${data.data.log_message}</p>`);
+            var objDiv = document.getElementById('log-area-content');
+            objDiv.scrollTop = objDiv.scrollHeight;
         }
     },
     render: function() {
