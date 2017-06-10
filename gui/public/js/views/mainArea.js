@@ -4,6 +4,7 @@ import _ from 'underscore';
 
 // Views
 import ComponentArea from './../views/componentArea';
+import WorkArea from './../views/workArea';
 import SettingsArea from './../views/settingsArea';
 
 Backbone.$ = $;
@@ -19,6 +20,8 @@ var MainArea = Backbone.View.extend({
         this.$el.html(this.template);
         this.componentArea = new ComponentArea({connection: this.connection});
         this.$el.find('#component-area').html(this.componentArea.render().$el);
+        this.workArea = new WorkArea({connection: this.connection});
+        this.$el.find('#work-area').html(this.workArea.render().$el);
         this.settingsArea = new SettingsArea({connection: this.connection});
         this.$el.find('#settings-area').html(this.settingsArea.render().$el);
         return this;
