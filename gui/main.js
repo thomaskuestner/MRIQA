@@ -6,6 +6,21 @@ var childProcess = require('child_process');
 
 let win;
 
+var openFile = function() {
+    var files = dialog.showOpenDialog(win, {
+        properties: ['openFile'],
+        filters: [
+            { name: 'MRIQA XML-Files', extensions: ['xml'] },
+            { name: 'All Files', extensions: ['*']}
+        ]
+    });
+    if(!files) {
+        return;
+    }
+    var file = files[0];
+    return file;
+};
+
 function httpGet(url, portIn) {
     return new Promise(
         function (resolve, reject) {
@@ -45,7 +60,7 @@ function fGenerateApp() {
     // invoke child process (remote application)
     var invoked = false;
     var options = { stdio: [null, null, null, 'ipc'] };
-    var args = [ /* ... */ ];
+    var args = process.argv.slice(2);
     var nodeJsProcess = childProcess.fork('./index.js', args, options);
 
     // listen for errors as they may prevent the exit event from firing
@@ -61,7 +76,12 @@ function fGenerateApp() {
     nodeJsProcess.on('message', function(data, server) {
         if(data === 'openDialog'){
             var file = openFile();
-            nodeJsProcess.send(file);
+            if(file){
+                nodeJsProcess.send(file);
+            }
+            else{
+                nodeJsProcess.send(null);
+            }
         }
     });
 

@@ -10,7 +10,6 @@ var ComponentRow = Backbone.View.extend({
     initialize: function(options) {
     },
     render: function() {
-        console.log(this.model.toJSON());
         var template = this.template(this.model.toJSON());
         this.$el.html(template);
         return this;

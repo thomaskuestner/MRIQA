@@ -14,11 +14,34 @@ var NavBar = Backbone.View.extend({
     template: _.template($('#navbar-template').html()),
     initialize: function() {
         var self = this;
+        Backbone.ajax({
+            url: '/api/getProcessArgv',
+            success: function(res){
+                if(res.status === 'SUCCESS'){
+                    self.getFileContent(res.data[0]);
+                }
+            }
+        });
     },
     events:{
+        'click #open-file': 'requestOpenFileDialog',
         'click #log-area-view': 'toggleLogAreaView',
         'click #component-area-view': 'toggleComponentAreaView',
         'click #settings-area-view': 'toggleSettingsAreaView'
+    },
+    getFileContent: function(file){
+        Backbone.ajax({
+            type: 'POST',
+            url: '/api/getFileContent',
+            data: {
+                file
+            },
+            success: function(res){
+                if(res.status === 'SUCCESS'){
+                    $('#work-area-content').append(res.data);
+                }
+            }
+        });
     },
     toggleLogAreaView: function(event){
         event.preventDefault();
@@ -30,6 +53,17 @@ var NavBar = Backbone.View.extend({
         else{
             $('.container-fluid').attr('style', '');
         }
+    },
+    requestOpenFileDialog: function(event){
+        var self = this;
+        Backbone.ajax({
+            url: '/api/openFileDialog',
+            success: function(res){
+                if(res.status === 'SUCCESS'){
+                    self.getFileContent(res.data);
+                }
+            }
+        });
     },
     toggleComponentAreaView: function(event){
         event.preventDefault();
