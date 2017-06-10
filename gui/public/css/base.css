@@ -17,20 +17,3 @@ p.WARNING {
 p.ERROR {
     color: #d9534f;
 }
-
-html, body {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-}
-
-.footer, .push {
-    position: fixed;
-    bottom: 0;
-    width: 98%
-}
-
-#log-area-content{
-    overflow-y: scroll;
-    height: 142px; /* .push must be the same height as .footer */
-}

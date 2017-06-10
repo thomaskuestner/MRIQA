@@ -48,7 +48,7 @@
     <!-- MAIN-WINDOW -->
     <script id="main-window-template" type="text/template">
         <div id="main-area"></div>
-        <div class="footer" id="log-area"></div>
+        <div id="log-area"></div>
     </script>
     <!-- MAIN-WINDOW -->
 
@@ -57,14 +57,14 @@
         <div class="row">
             <div class="col-lg-2" id="component-area"></div>
             <div class="col-lg-8"></div>
-            <div class="col-lg-2"></div>
+            <div class="col-lg-2" id="settings-area"></div>
         </div>
     </script>
     <!-- MAIN-AREA -->
 
     <!-- LOG-AREA -->
     <script id="log-area-template" type="text/template">
-        <div class="panel panel-default footer" id="log-area-panel">
+        <div class="panel panel-default" id="log-area-panel">
             <div class="panel-heading">
                 <span><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i> Log-Area</span>
             </div>
@@ -103,6 +103,18 @@
         <p><%= name %></p>
     </script>
     <!-- COMPONENT-ROW -->
+
+    <!-- SETTINGS-AREA -->
+    <script id="settings-area-template" type="text/template">
+        <div class="panel panel-default" id="settings-area-panel">
+            <div class="panel-heading">
+                <span><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> Settings-Area</span>
+            </div>
+            <div class="panel-body" id="settings-area-content">
+            </div>
+        </div>
+    </script>
+    <!-- SETTINGS-AREA -->
 
     <!-- TEMPLATES -->
 
