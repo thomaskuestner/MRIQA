@@ -17,3 +17,80 @@ p.WARNING {
 p.ERROR {
     color: #d9534f;
 }
+
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+    margin-bottom: -142px;
+}
+
+#main-region {
+    height: 100%;
+}
+
+#main-region > div {
+    height: 100%;
+}
+
+#main-area {
+    height: 100%;
+}
+
+#main-area > div {
+    height: 100%;
+}
+
+#main-area > div > div.row {
+    height: 100%;
+}
+
+#component-area {
+    height: 100%;
+}
+
+#component-area > div {
+    height: 100%;
+}
+
+#component-area-panel {
+    height: 100%;
+}
+
+#settings-area {
+    height: 100%;
+}
+
+#settings-area > div {
+    height: 100%;
+}
+
+#settings-area-panel {
+    height: 100%;
+}
+
+#work-area {
+    height: 100%;
+}
+
+#work-area > div {
+    height: 100%;
+}
+
+#work-area-panel {
+    height: 100%;
+}
+
+#log-area {
+    height: 142px;
+}
+
+#log-area > div {
+    height: 100%;
+}
+
+#log-area-panel {
+    height: 100%;
+}
