@@ -17,6 +17,7 @@ connection.onopen = function () {
 
 // actice Pipeline
 var pipeline = new Pipeline();
+pipeline.set('connection', connection);
 
 // Add navigation bar
 var navBar = new NavBar({pipeline});

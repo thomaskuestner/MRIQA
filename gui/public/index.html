@@ -109,11 +109,25 @@
     <script id="work-area-template" type="text/template">
         <div class="panel panel-default" id="work-area-panel">
             <div class="panel-body" id="work-area-content">
-                <svg></svg>
             </div>
         </div>
     </script>
     <!-- WORK-AREA -->
+
+    <!-- PIPELINE-VIEW -->
+    <script id="pipeline-view-template" type="text/template">
+        <svg viewBox="0 0 <%= width %> <%= height %>" width="<%= width %>" height="<%= height %>" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute;">
+        </svg>
+    </script>
+    <!-- PIPELINE-VIEW -->
+
+    <!-- COMPONENT-VIEW -->
+    <script id="component-template" type="text/template">
+        <rect x="0" y="0" width="200" rx="2" ry="2" height="100" stroke="black" stroke-width="1" fill-opacity="0"></rect>
+        <text x="10" y="20">component: <%= component.name[0] %></text>
+        <text x="10" y="40">class: <%= component.class[0] %></text>
+    </script>
+    <!-- COMPONENT-VIEW -->
 
     <!-- TEMPLATES -->
 
