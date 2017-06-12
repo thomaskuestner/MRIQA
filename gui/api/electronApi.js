@@ -26,7 +26,6 @@ module.exports = function(app){
 
     // get file content
     app.post('/api/getFileContent', function(req, res){
-        console.log(fs.readFileSync(req.body.file).toString());
         res.json({
             status: 'SUCCESS',
             data: fs.readFileSync(req.body.file).toString()

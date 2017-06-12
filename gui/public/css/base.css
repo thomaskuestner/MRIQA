@@ -83,6 +83,10 @@ html, body {
     height: 100%;
 }
 
+#work-area-content {
+    padding: 0;
+}
+
 #log-area-content {
     overflow-y: scroll;
     height: 160px;
