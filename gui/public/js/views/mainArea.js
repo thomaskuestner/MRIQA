@@ -15,12 +15,13 @@ var MainArea = Backbone.View.extend({
     initialize: function(options) {
         var self = this;
         this.connection = options.connection;
+        this.pipeline = options.pipeline;
     },
     render: function() {
         this.$el.html(this.template);
         this.componentArea = new ComponentArea({connection: this.connection});
         this.$el.find('#component-area').html(this.componentArea.render().$el);
-        this.workArea = new WorkArea({connection: this.connection});
+        this.workArea = new WorkArea({connection: this.connection, pipeline: this.pipeline});
         this.$el.find('#work-area').html(this.workArea.render().$el);
         this.settingsArea = new SettingsArea({connection: this.connection});
         this.$el.find('#settings-area').html(this.settingsArea.render().$el);

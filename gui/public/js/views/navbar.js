@@ -12,13 +12,16 @@ Backbone.$ = $;
 // NavBar view
 var NavBar = Backbone.View.extend({
     template: _.template($('#navbar-template').html()),
-    initialize: function() {
+    initialize: function(options) {
+        this.pipeline = options.pipeline;
         var self = this;
         Backbone.ajax({
             url: '/api/getProcessArgv',
             success: function(res){
                 if(res.status === 'SUCCESS'){
-                    self.getFileContent(res.data[0]);
+                    if(res.data[0]){
+                        self.getFileContent(res.data[0]);
+                    }
                 }
             }
         });
@@ -30,6 +33,7 @@ var NavBar = Backbone.View.extend({
         'click #settings-area-view': 'toggleSettingsAreaView'
     },
     getFileContent: function(file){
+        var self = this;
         Backbone.ajax({
             type: 'POST',
             url: '/api/getFileContent',
@@ -38,7 +42,7 @@ var NavBar = Backbone.View.extend({
             },
             success: function(res){
                 if(res.status === 'SUCCESS'){
-                    $('#work-area-content').append(res.data);
+                    self.pipeline.set('fileContent', res.data);
                 }
             }
         });
