@@ -39,10 +39,13 @@ class BaseComponent(object):
         """
         send data to websocket
         """
-        websocket = create_connection('ws://localhost:%s' % \
-                BaseComponent.config['web_socket_port'])
-        websocket.send(package)
-        websocket.close()
+        try:
+            websocket = create_connection('ws://localhost:%s' % \
+                    BaseComponent.config['web_socket_port'])
+            websocket.send(package)
+            websocket.close()
+        except ConnectionRefusedError:
+            pass
 
     def send(self, data):
         """
