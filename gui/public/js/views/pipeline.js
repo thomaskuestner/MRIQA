@@ -40,14 +40,13 @@ var PipelineView = Backbone.View.extend({
         var height = $('#work-area-panel').outerHeight();
         this.$el.attr('width', width);
         this.$el.attr('height', height);
+        this.$el.attr('viewBox',`0 0 ${width} ${height}`);
         var self = this;
-        var pipeline = model.get('pipeline');
-        if(pipeline.component){
-            model.get('pipeline').component.forEach(function(component, index) {
-                var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, svg: self.svg});
-                self.$el.append(componentView.render().el);
-            }, this);
-        }
+        var componentGroup = model.get('componentGroup');
+        componentGroup.each(function(component, index) {
+            var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, svg: self.$el});
+            self.$el.append(componentView.render().el);
+        }, this);
     }
 });
 

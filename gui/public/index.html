@@ -123,11 +123,29 @@
 
     <!-- COMPONENT-VIEW -->
     <script id="component-template" type="text/template">
-        <rect x="0" y="0" width="200" rx="2" ry="2" height="100" stroke="black" stroke-width="1" fill-opacity="0"></rect>
-        <text x="10" y="20">component: <%= component.name[0] %></text>
-        <text x="10" y="40">class: <%= component.class[0] %></text>
+        <rect class="component" x="0" y="0" width="300" rx="2" ry="2" height="150" stroke="black" stroke-width="1" fill-opacity="0"></rect>
+        <text x="10" y="20" font-size="25">component: <%= component.name %></text>
+        <text x="10" y="50" font-size="25">class: <%= component.class %></text>
     </script>
     <!-- COMPONENT-VIEW -->
+
+    <!-- OBSERVER-VIEW -->
+    <script id="observer-template" type="text/template">
+        <g transform="translate(-50,115)">
+            <rect width="150" height="30" fill="#fc8d59" stroke="black" stroke-width="1" />
+            <text x="10" y="20" font-size="25"><%= observer %></text>
+        </g>
+    </script>
+    <!-- OBSERVER-VIEW -->
+
+    <!-- NOTIFIER-VIEW -->
+    <script id="notifier-template" type="text/template">
+        <g transform="translate(200,115)">
+            <rect width="150" height="30" fill="#91bfdb" stroke="black" stroke-width="1" />
+            <text x="10" y="20" font-size="25"><%= notifier %></text>
+        </g>
+    </script>
+    <!-- NOTIFIER-VIEW -->
 
     <!-- TEMPLATES -->
 
