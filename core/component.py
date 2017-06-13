@@ -43,7 +43,7 @@ class Component(BaseComponent):
         """
         has to be implemented in components which can be at the beginning of a pipeline
         """
-        self.log_line('start-Method is not defined!', LogLevel.ERROR)
+        self.send({'status': 'pending'})
 
     class InputObserver(Observer):
         """

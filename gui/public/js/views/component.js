@@ -31,7 +31,20 @@ var ComponentView = Backbone.View.extend({
         this.listenTo(this.messageGroup, this.component.class[0], this.componentEvent);
     },
     componentEvent: function(message){
-        console.log(message);
+        var data = message.get('data');
+        if(data.status){
+            switch (data.status) {
+            case 'pending':
+                this.$el.find('rect').attr('stroke', 'green');
+                this.$el.find('rect').attr('stroke-width', 3);
+                break;
+            case 'stopped':
+                this.$el.find('rect').attr('stroke', 'black');
+                this.$el.find('rect').attr('stroke-width', 1);
+            default:
+                break;
+            }
+        }
     },
     render: function() {
         this.$el.attr('transform',`translate(${this.index * 250},0)`);

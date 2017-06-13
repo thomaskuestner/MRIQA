@@ -1,9 +1,8 @@
 """
 Component
 """
-import asyncio
 import json
-import websockets
+from websocket import create_connection
 from core.observer import Observable
 
 class BaseComponent(object):
@@ -36,16 +35,14 @@ class BaseComponent(object):
                 print(key)
 
     @staticmethod
-    async def ws_send(package):
+    def ws_send(package):
         """
         send data to websocket
         """
-        try:
-            async with websockets.connect('ws://localhost:%s' % \
-                BaseComponent.config['web_socket_port']) as websocket:
-                await websocket.send(str(package))
-        except ConnectionRefusedError:
-            pass
+        websocket = create_connection('ws://localhost:%s' % \
+                BaseComponent.config['web_socket_port'])
+        websocket.send(package)
+        websocket.close()
 
     def send(self, data):
         """
@@ -54,7 +51,7 @@ class BaseComponent(object):
         package = dict()
         package['component'] = self.__class__.__name__
         package['data'] = data
-        asyncio.get_event_loop().run_until_complete(BaseComponent.ws_send(package))
+        BaseComponent.ws_send(str(package))
 
     class OutputNotifier(Observable):
         """
@@ -67,5 +64,6 @@ class BaseComponent(object):
             """
             notify observers
             """
+            self.outer.send({'status': 'stopped'})
             self.set_changed()
             Observable.notify_observers(self, arg)

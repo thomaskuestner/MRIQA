@@ -48,3 +48,4 @@ class JpegOutput(Component):
             self.outer.log_line('save file')
             package['data'].save(self.outer.file_path)
             self.outer.log_line('saved file', LogLevel.SUCCESS)
+            self.outer.send({'status': 'stopped'})
