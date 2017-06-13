@@ -12,8 +12,8 @@ Backbone.$ = $;
 // Router
 var Router = Backbone.Router.extend({
     constructor: function(data){
-        this.connection = data.connection;
         this.pipeline = data.pipeline;
+        this.messageGroup = data.messageGroup;
         Backbone.Router.prototype.constructor.call(this);
     },
     // all routes
@@ -21,7 +21,7 @@ var Router = Backbone.Router.extend({
         '': 'index'
     },
     index: function(){
-        this.mainWindow = new MainWindow({connection: this.connection, pipeline: this.pipeline});
+        this.mainWindow = new MainWindow({pipeline: this.pipeline, messageGroup: this.messageGroup});
         RegionManager.show(this.mainWindow);
     }
 });

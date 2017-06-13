@@ -28,7 +28,7 @@ var PipelineView = Backbone.View.extend({
         }
     },
     initialize: function(options) {
-        this.connection = options.connection;
+        this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
         this.pipeline.on('change:fileContent', this.fileContentChanged, this);
     },
@@ -44,7 +44,7 @@ var PipelineView = Backbone.View.extend({
         var pipeline = model.get('pipeline');
         if(pipeline.component){
             model.get('pipeline').component.forEach(function(component, index) {
-                var componentView = new ComponentView({connection: model.get('connection'), component, index, svg: self.svg});
+                var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, svg: self.svg});
                 self.$el.append(componentView.render().el);
             }, this);
         }

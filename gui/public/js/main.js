@@ -2,6 +2,9 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import Router from './routes/router.js';
 
+// Collection
+import MessageCollection from './collections/messageCollection';
+
 // Models
 import Pipeline from './models/pipelineModel';
 
@@ -15,13 +18,16 @@ connection.onopen = function () {
     connection.send('GUI');
 };
 
-// actice Pipeline
+// active Pipeline
 var pipeline = new Pipeline();
 pipeline.set('connection', connection);
+
+// websocket message collection
+var messageGroup = new MessageCollection([], {connection});
 
 // Add navigation bar
 var navBar = new NavBar({pipeline});
 $('#navbar-region').html(navBar.render().el);
 
-var router = new Router({connection, pipeline});
+var router = new Router({pipeline, messageGroup});
 Backbone.history.start();

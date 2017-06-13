@@ -27,6 +27,11 @@ var ComponentView = Backbone.View.extend({
     initialize: function(options) {
         this.index = options.index;
         this.component = options.component;
+        this.messageGroup = options.messageGroup;
+        this.listenTo(this.messageGroup, this.component.class[0], this.componentEvent);
+    },
+    componentEvent: function(message){
+        console.log(message);
     },
     render: function() {
         this.$el.attr('transform',`translate(${this.index * 250},0)`);

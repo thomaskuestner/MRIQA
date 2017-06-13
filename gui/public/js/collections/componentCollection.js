@@ -1,6 +1,9 @@
 import Backbone from 'backbone';
-import Component from './../models/componentModel';
 import $ from 'jquery';
+
+// Models
+import Component from './../models/componentModel';
+
 Backbone.$ = $;
 
 // Collection for components
