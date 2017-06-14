@@ -33,8 +33,8 @@ class Pipeline(object):
             for root, _, files in walk('components'):
                 for file in files:
                     if search('.py$', file) and component.xpath('name')[0].text in file:
-                        root_name = root.replace('/', '.').replace('\\', '.')
-                        class_path = root_name + '.' + file.replace('.py', '')
+                        class_path = root.replace('/', '.').replace('\\', '.') \
+                            + '.' + file.replace('.py', '')
 
             component_class = getattr(import_module(class_path), component.xpath('class')[0].text)
             # instantiate class
@@ -47,7 +47,7 @@ class Pipeline(object):
 
         # add additional components to component
         for component in components:
-            if len(component.additional_components) > 0:
+            if component.additional_components:
                 for additional_component in component.additional_components:
                     for b_comp in components:
                         if b_comp.component_id == additional_component['additional_component_id']:
@@ -67,14 +67,14 @@ class Pipeline(object):
 
         # read id value
         component_id = component.xpath('id')
-        if len(component_id) > 0:
+        if component_id:
             options['component_id'] = component.xpath('id')[0].text
         else:
             options['component_id'] = None
 
         # read autoglue value
         options['auto_glue'] = component.xpath('autoglue')
-        if len(options['auto_glue']) > 0:
+        if options['auto_glue']:
             options['auto_glue'] = component.xpath('autoglue')[0].text
             if options['auto_glue'] == 'true':
                 options['auto_glue'] = True
@@ -89,7 +89,7 @@ class Pipeline(object):
             property_value = component_property.xpath('value')[0]
             property_value_type = component_property.xpath('value/@type')
             # typecast components
-            if len(property_value_type) > 0:
+            if property_value_type:
                 property_type = locate(property_value_type[0])
                 property_value = property_type(property_value.text)
             else:
@@ -101,7 +101,7 @@ class Pipeline(object):
         for additional_component in component.xpath('additional_component'):
             component_id = additional_component.xpath('id')[0].text
             # by convention notifiers has to end with _notifier
-            if len(additional_component.xpath('notifier')) > 0:
+            if additional_component.xpath('notifier'):
                 notifier = additional_component.xpath('notifier')[0].text + "_notifier"
             else:
                 notifier = "output" + "_notifier"
