@@ -31,13 +31,13 @@ class LogServer(BaseComponent):
         """
         def __init__(self, outer):
             self.outer = outer
-        def update(self, observable, args):
+        def update(self, observable, package):
             log_message = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " " + \
-                       args[1] + ": " + \
-                       args[0]
-            log_line = args[2].value + log_message + '\033[0m'
-            if args[2] == LogLevel.ERROR:
+                       package[1] + ": " + \
+                       package[0]
+            log_line = package[2].value + log_message + '\033[0m'
+            if package[2] == LogLevel.ERROR:
                 print(log_line, file=sys.stderr)
             else:
                 print(log_line)
-            self.outer.send({'log_message': log_message, 'log_level': args[2].name})
+            self.outer.send({'log_message': log_message, 'log_level': package[2].name})

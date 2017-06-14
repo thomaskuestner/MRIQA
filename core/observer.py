@@ -8,7 +8,7 @@ class Observer(object):
     """
     Base Class for all Observers
     """
-    def update(self, observable, arg):
+    def update(self, observable, package):
         """
         Called when the observed object is
         modified. You call an Observable object's
