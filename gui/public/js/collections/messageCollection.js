@@ -20,7 +20,7 @@ var MessageCollection = Backbone.Collection.extend({
         var data = JSON.parse(event.data.replace(/'/ig,'"').replace(/\\/ig,'\\\\'));
         var message = new Message(data);
         this.add(message);
-        this.trigger(message.get('component'), message);
+        this.trigger(message.get('id'), message);
     },
 });
 

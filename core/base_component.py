@@ -16,6 +16,7 @@ class BaseComponent(object):
             BaseComponent.config = json.loads(file.read())
 
         self.output_notifier = BaseComponent.OutputNotifier(self)
+        self.component_id = None
 
     def get_description(self):
         """
@@ -53,6 +54,10 @@ class BaseComponent(object):
         """
         package = dict()
         package['component'] = self.__class__.__name__
+        if self.component_id is None:
+            package['id'] = 'undefined'
+        else:
+            package['id'] = self.component_id
         package['data'] = data
         BaseComponent.ws_send(str(package))
 

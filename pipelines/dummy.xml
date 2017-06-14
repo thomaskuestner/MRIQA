@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <pipeline>
     <component>
+        <id>jpeg_input</id>
         <name>jpeg_input</name>
         <class>JpegInput</class>
         <property>
@@ -14,6 +15,7 @@
         <class>GrayScale</class>
     </component>
     <component>
+        <id>rotate</id>
         <name>rotate</name>
         <class>Rotate</class>
         <property>
@@ -47,6 +49,7 @@
         </property>
     </component>
     <component>
+        <id>jpeg_output</id>
         <name>jpeg_output</name>
         <class>JpegOutput</class>
         <property>
@@ -55,6 +58,7 @@
         </property>
     </component>
     <component>
+        <id>jpeg_output_2</id>
         <name>jpeg_output</name>
         <class>JpegOutput</class>
         <autoglue>false</autoglue>

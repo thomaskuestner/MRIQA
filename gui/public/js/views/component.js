@@ -33,7 +33,7 @@ var ComponentView = Backbone.View.extend({
         this.component = options.component;
         this.messageGroup = options.messageGroup;
         this.svg = options.svg;
-        this.listenTo(this.messageGroup, this.component.get('class'), this.componentEvent);
+        this.listenTo(this.messageGroup, this.component.get('id'), this.componentEvent);
     },
     componentEvent: function(message){
         var data = message.get('data');
