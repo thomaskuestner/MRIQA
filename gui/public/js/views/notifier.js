@@ -27,10 +27,12 @@ var NotifierView = Backbone.View.extend({
     initialize: function(options) {
         this.notifier = options.notifier;
         this.index = options.index;
+        this.component = options.component;
     },
     render: function() {
+        var next_component_available = typeof this.component.get('next_components') !== 'undefined';
         this.$el.attr('transform',`translate(0,${this.index * -35})`);
-        this.$el.html(this.template({notifier: this.notifier}));
+        this.$el.html(this.template({notifier: this.notifier, next_component_available}));
         return this;
     }
 });

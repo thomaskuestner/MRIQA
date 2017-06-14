@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<pipeline>
+    <component>
+        <name>jpeg_input</name>
+        <class>JpegInput</class>
+        <property>
+            <name>file_path</name>
+            <value>tmp/IMG_5946_b.JPG</value>
+        </property>
+    </component>
+    <component>
+        <id>gray_scale</id>
+        <name>gray_scale</name>
+        <class>GrayScale</class>
+    </component>
+    <component>
+        <name>rotate</name>
+        <class>Rotate</class>
+        <property>
+            <name>angle</name>
+            <value type="float">45</value>
+        </property>
+    </component>
+    <component>
+        <name>jpeg_output</name>
+        <class>JpegOutput</class>
+        <property>
+            <name>file_path</name>
+            <value>tmp/test.png</value>
+        </property>
+    </component>
+    <component>
+        <name>jpeg_output</name>
+        <class>JpegOutput</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>file_path</name>
+            <value>tmp/test1.png</value>
+        </property>
+        <additional_component>
+            <id>gray_scale</id>
+        </additional_component>
+    </component>
+</pipeline>

@@ -41,12 +41,25 @@ var PipelineView = Backbone.View.extend({
         this.$el.attr('width', width);
         this.$el.attr('height', height);
         this.$el.attr('viewBox',`0 0 ${width} ${height}`);
-        var self = this;
-        var componentGroup = model.get('componentGroup');
-        componentGroup.each(function(component, index) {
+        var component = model.get('componentGroup').at(0);
+        this.recursiveComponent(component, 0);
+        /*componentGroup.each(function(component, index) {
+            console.log(component.get('next_components'));
             var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, svg: self.$el});
             self.$el.append(componentView.render().el);
-        }, this);
+        }, this);*/
+    },
+    recursiveComponent: function(component, index, row){
+        var self = this;
+        var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, row, svg: self.$el});
+        self.$el.append(componentView.render().el);
+        var next_components = component.get('next_components');
+        if(next_components){
+            ++index;
+            next_components.forEach(function(next_component, row) {
+                this.recursiveComponent(next_component, index, row);
+            }, this);
+        }
     }
 });
 

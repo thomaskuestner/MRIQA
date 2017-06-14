@@ -3,6 +3,7 @@
 *.qmlc
 *.log
 bundle.js
+package-lock.json
 
 # folder
 gui/node_modules/

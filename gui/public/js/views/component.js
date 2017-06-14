@@ -59,12 +59,24 @@ var ComponentView = Backbone.View.extend({
                 component_y = 200;
             }
         }
-        this.svg.attr('viewBox',`-100 0 ${this.index * gap + 500} ${this.svg.attr('height')}`);
+        var viewBoxRegex = new RegExp(/(-?\d*\.?\d+)/g);
+        var viewBox = this.svg.attr('viewBox');
+        var viewBoxMatch = viewBox.match(viewBoxRegex);
+        var width = parseFloat(viewBoxMatch[2]);
+        if(width < this.index * gap + 500){
+            width = this.index * gap + 500;
+        }
+        var height = parseFloat(viewBoxMatch[3]);
+        if(height < parseFloat(this.svg.attr('height'))){
+            height = parseFloat(this.svg.attr('height'));
+        }
+
+        this.svg.attr('viewBox',`-100 0 ${width} ${height}`);
         this.$el.attr('transform',`translate(${this.index * gap},${component_y})`);
         this.$el.html(this.template({component: this.component.toJSON()}));
 
         this.component.get('notifier').forEach(function(notifier, index) {
-            var notifierView = new NotifierView({notifier, index});
+            var notifierView = new NotifierView({notifier, index, component: this.component});
             this.$el.append(notifierView.render().el);
         }, this);
 
