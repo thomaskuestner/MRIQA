@@ -30,13 +30,17 @@ var PathView = Backbone.View.extend({
     },
     render: function() {
         var path;
+        var offset;
         if(this.fromRow === this.toRow){
-            path = 'M 150,10 L 200,10';
+            offset = 10;
+            path = `M 150,${offset} L 200,${offset}`;
         }
         else{
-            path = `M 150,20 L 175,20 L 175,${200  * (this.toRow - this.fromRow) + 15} L 200,${200  * (this.toRow - this.fromRow) + 15}`;
+            offset = 20;
+            path = `M 150,${offset} L 175,${offset} L 175,${200  * (this.toRow - this.fromRow) + 15} L 200,${200  * (this.toRow - this.fromRow) + 15}`;
         }
-        this.$el.html(this.template({path}));
+        var arrow = `M 150,${offset} L 160,${offset - 5} L 160,${offset + 5} Z`;
+        this.$el.html(this.template({path, arrow}));
         return this;
     }
 });
