@@ -20,12 +20,21 @@
         <class>Rotate</class>
         <property>
             <name>angle</name>
-            <value type="float">45</value>
+            <value type="float">25</value>
         </property>
         <additional_component>
             <id>parameter_condition</id>
             <notifier>condition</notifier>
         </additional_component>
+    </component>
+    <component>
+        <id>rotate_2</id>
+        <name>rotate</name>
+        <class>Rotate</class>
+        <property>
+            <name>angle</name>
+            <value type="float">45</value>
+        </property>
     </component>
     <component>
         <id>parameter_condition</id>

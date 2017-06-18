@@ -46,8 +46,9 @@ var PathView = Backbone.View.extend({
         }
         else{
             var distance = this.fromColumn - this.toColumn;
-            path = `M 575,-35 L 575,-125 L ${-225 - 450 * (distance - 1)},-125 L ${-225 - 450 * (distance - 1)},0`;
-            var arrow = `M ${-225 - 450 * (distance - 1)},0 L ${-220 - 450 * (distance - 1)},-10 L ${-230 - 450 * (distance - 1)},-10 Z`;
+            var start = 575 + 450 * (distance - 1);
+            path = `M ${start},-35 L ${start},-125 L -225 ,-125 L -225,0`;
+            var arrow = 'M -225,0 L -220,-10 L -230,-10 Z';
         }
         this.$el.html(this.template({path, arrow}));
         return this;
