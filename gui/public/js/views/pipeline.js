@@ -4,6 +4,7 @@ import _ from 'underscore';
 
 // Views
 import ComponentView from './../views/component';
+import PathView from './../views/path';
 
 Backbone.$ = $;
 
@@ -31,6 +32,7 @@ var PipelineView = Backbone.View.extend({
         this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
         this.pipeline.on('change:fileContent', this.fileContentChanged, this);
+        this.maxRow = 0;
     },
     render:function() {
         return this;
@@ -42,24 +44,28 @@ var PipelineView = Backbone.View.extend({
         this.$el.attr('height', height);
         this.$el.attr('viewBox',`0 0 ${width} ${height}`);
         var component = model.get('componentGroup').at(0);
-        this.recursiveComponent(component, 0);
-        /*componentGroup.each(function(component, index) {
-            console.log(component.get('next_components'));
-            var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, svg: self.$el});
-            self.$el.append(componentView.render().el);
-        }, this);*/
+        this.recursiveComponent(component, 0, 0);
     },
-    recursiveComponent: function(component, index, row){
-        var self = this;
-        var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, row, svg: self.$el});
-        self.$el.append(componentView.render().el);
+    recursiveComponent: function(component, index, parentRow){
+        var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, row: parentRow, svg: this.$el});
+        this.$el.append(componentView.render().el);
         var next_components = component.get('next_components');
         if(next_components){
             ++index;
             next_components.forEach(function(next_component, row) {
-                this.recursiveComponent(next_component, index, row);
+                var absoluteRow = row + parentRow;
+                if(parentRow === 0 && row > 0){
+                    ++this.maxRow;
+                    absoluteRow = this.maxRow;
+                }
+                this.recursiveComponent(next_component, index, absoluteRow);
+                this.drawPath(componentView, parentRow, absoluteRow);
             }, this);
         }
+    },
+    drawPath: function(componentView, fromRow, toRow){
+        var pathView = new PathView({fromRow, toRow});
+        componentView.$el.append(pathView.render().el);
     }
 });
 

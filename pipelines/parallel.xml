@@ -24,6 +24,15 @@
         </property>
     </component>
     <component>
+        <id>rotate_2</id>
+        <name>rotate</name>
+        <class>Rotate</class>
+        <property>
+            <name>angle</name>
+            <value type="float">45</value>
+        </property>
+    </component>
+    <component>
         <id>jpeg_output</id>
         <name>jpeg_output</name>
         <class>JpegOutput</class>
@@ -31,6 +40,45 @@
             <name>file_path</name>
             <value>tmp/test.png</value>
         </property>
+    </component>
+    <component>
+        <id>rotate_3</id>
+        <name>rotate</name>
+        <class>Rotate</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>angle</name>
+            <value type="float">90</value>
+        </property>
+        <additional_component>
+            <id>gray_scale</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>rotate_4</id>
+        <name>rotate</name>
+        <class>Rotate</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>angle</name>
+            <value type="float">90</value>
+        </property>
+        <additional_component>
+            <id>rotate_3</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>jpeg_output_4</id>
+        <name>jpeg_output</name>
+        <class>JpegOutput</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>file_path</name>
+            <value>tmp/test3.png</value>
+        </property>
+        <additional_component>
+            <id>rotate_4</id>
+        </additional_component>
     </component>
     <component>
         <id>jpeg_output_2</id>
@@ -42,7 +90,20 @@
             <value>tmp/test1.png</value>
         </property>
         <additional_component>
-            <id>gray_scale</id>
+            <id>rotate_3</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>jpeg_output_3</id>
+        <name>jpeg_output</name>
+        <class>JpegOutput</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>file_path</name>
+            <value>tmp/test2.png</value>
+        </property>
+        <additional_component>
+            <id>rotate</id>
         </additional_component>
     </component>
 </pipeline>

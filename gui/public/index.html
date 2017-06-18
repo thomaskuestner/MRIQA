@@ -143,12 +143,17 @@
         <g transform="translate(200,115)">
             <rect width="150" height="30" fill="#91bfdb" stroke="black" stroke-width="1" />
             <text x="10" y="20" font-size="25"><%= notifier %></text>
-            <% if(next_component_available){%>
-                <path d="M 150,15 L 200,15" stroke="black" stroke-width="1" fill-opacity="0"/>
-            <% } %>
         </g>
     </script>
     <!-- NOTIFIER-VIEW -->
+
+    <!-- PATH-VIEW -->
+    <script id="path-template" type="text/template">
+        <g transform="translate(200,115)">
+            <path d="<%= path %>" stroke="black" stroke-width="1" fill-opacity="0"/>
+        </g>
+    </script>
+    <!-- PATH-VIEW -->
 
     <!-- TEMPLATES -->
 

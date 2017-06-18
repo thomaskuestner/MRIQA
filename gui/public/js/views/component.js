@@ -12,6 +12,7 @@ Backbone.$ = $;
 var ComponentView = Backbone.View.extend({
     template: _.template($('#component-template').html()),
     tagName: 'g',
+    className: 'component',
     nameSpace: 'http://www.w3.org/2000/svg',
     _ensureElement: function() {
         if (!this.el) {
@@ -30,6 +31,7 @@ var ComponentView = Backbone.View.extend({
     },
     initialize: function(options) {
         this.index = options.index;
+        this.row = options.row;
         this.component = options.component;
         this.messageGroup = options.messageGroup;
         this.svg = options.svg;
@@ -72,7 +74,7 @@ var ComponentView = Backbone.View.extend({
         }
 
         this.svg.attr('viewBox',`-100 0 ${width} ${height}`);
-        this.$el.attr('transform',`translate(${this.index * gap},${component_y})`);
+        this.$el.attr('transform',`translate(${this.index * gap},${component_y * this.row})`);
         this.$el.html(this.template({component: this.component.toJSON()}));
 
         this.component.get('notifier').forEach(function(notifier, index) {
