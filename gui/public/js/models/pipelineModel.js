@@ -29,7 +29,8 @@ var Pipeline = Backbone.Model.extend({
                     name: componentContent.name[0],
                     class: componentContent.class[0],
                     notifier: ['output'],
-                    observer: ['input']
+                    observer: ['input'],
+                    index
                 });
                 if(componentContent.id){
                     component.set('id', componentContent.id[0]);
@@ -42,18 +43,12 @@ var Pipeline = Backbone.Model.extend({
                 }
                 if(componentContent.additional_component){
                     component.set('additional_component', componentContent.additional_component);
-                    componentContent.additional_component.forEach(function(additional_component) {
-                        if(additional_component.notifier){
-                            var notifier = component.get('notifier');
-                            notifier.push(additional_component.notifier[0]);
-                            component.set('notifier', notifier);
-                        }
-                    }, this);
                 }
                 componentGroup.add(component);
             }, this);
             componentGroup.each(function(component, index){
                 var next_component = componentGroup.at(++index);
+                // add next component
                 if(next_component){
                     if(next_component && next_component.get('autoglue') === 'false'){
                         var additional_component = next_component.get('additional_component');
@@ -75,6 +70,19 @@ var Pipeline = Backbone.Model.extend({
                         next_components.push(next_component);
                         component.set('next_components', next_components);
                     }
+                }
+
+                // add additional notifiers to component
+                var additional_components = component.get('additional_component');
+                if(additional_components){
+                    additional_components.forEach(function(additional_component) {
+                        var component = componentGroup.findWhere({id: additional_component.id[0]});
+                        var notifier  = component.get('notifier');
+                        if(additional_component.notifier){
+                            notifier.push(additional_component.notifier[0]);
+                            component.set('notifier', notifier);
+                        }
+                    }, this);
                 }
             });
             self.set('componentGroup', componentGroup);

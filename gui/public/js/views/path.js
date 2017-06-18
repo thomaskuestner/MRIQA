@@ -27,19 +27,28 @@ var PathView = Backbone.View.extend({
     initialize: function(options) {
         this.fromRow = options.fromRow;
         this.toRow = options.toRow;
+        this.fromColumn = options.fromColumn;
+        this.toColumn = options.toColumn;
     },
     render: function() {
         var path;
         var offset;
-        if(this.fromRow === this.toRow){
-            offset = 10;
-            path = `M 150,${offset} L 200,${offset}`;
+        if(typeof this.fromRow !== 'undefined' || typeof this.toRow !== 'undefined'){
+            if(this.fromRow === this.toRow){
+                offset = 10;
+                path = `M 150,${offset} L 200,${offset}`;
+            }
+            else{
+                offset = 20;
+                path = `M 150,${offset} L 175,${offset} L 175,${200  * (this.toRow - this.fromRow) + 15} L 200,${200  * (this.toRow - this.fromRow) + 15}`;
+            }
+            var arrow = `M 150,${offset} L 160,${offset - 5} L 160,${offset + 5} Z`;
         }
         else{
-            offset = 20;
-            path = `M 150,${offset} L 175,${offset} L 175,${200  * (this.toRow - this.fromRow) + 15} L 200,${200  * (this.toRow - this.fromRow) + 15}`;
+            var distance = this.fromColumn - this.toColumn;
+            path = `M 575,-35 L 575,-125 L ${-225 - 450 * (distance - 1)},-125 L ${-225 - 450 * (distance - 1)},0`;
+            var arrow = `M ${-225 - 450 * (distance - 1)},0 L ${-220 - 450 * (distance - 1)},-10 L ${-230 - 450 * (distance - 1)},-10 Z`;
         }
-        var arrow = `M 150,${offset} L 160,${offset - 5} L 160,${offset + 5} Z`;
         this.$el.html(this.template({path, arrow}));
         return this;
     }

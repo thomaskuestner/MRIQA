@@ -43,7 +43,8 @@ var PipelineView = Backbone.View.extend({
         this.$el.attr('width', width);
         this.$el.attr('height', height);
         this.$el.attr('viewBox',`0 0 ${width} ${height}`);
-        var component = model.get('componentGroup').at(0);
+        this.componentGroup = model.get('componentGroup');
+        var component = this.componentGroup.at(0);
         this.recursiveComponent(component, 0, 0);
     },
     recursiveComponent: function(component, index, parentRow){
@@ -60,6 +61,14 @@ var PipelineView = Backbone.View.extend({
                 }
                 this.recursiveComponent(next_component, index, absoluteRow);
                 this.drawPath(componentView, parentRow, absoluteRow);
+                // draw Feedback paths
+                var additional_components = component.get('additional_component');
+                if(additional_components){
+                    additional_components.forEach(function(additional_component) {
+                        var pathView = new PathView({fromColumn: this.componentGroup.findWhere({id: additional_component.id[0]}).get('index'), toColumn: component.get('index')});
+                        componentView.$el.append(pathView.render().el);
+                    }, this);
+                }
             }, this);
         }
     },
