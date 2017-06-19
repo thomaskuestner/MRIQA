@@ -39,6 +39,7 @@ var ComponentView = Backbone.View.extend({
         this.row = options.row;
         this.component = options.component;
         this.messageGroup = options.messageGroup;
+        this.clickComponentEvent = options.clickComponentEvent;
         this.svg = options.svg;
         this.listenTo(this.messageGroup, this.component.get('id'), this.componentEvent);
     },
@@ -94,13 +95,13 @@ var ComponentView = Backbone.View.extend({
         return this;
     },
     clickEvent: function(){
-        console.log('click');
+        this.clickComponentEvent(this.component);
     },
     mouseOverEvent: function(){
-        console.log('mouseOver');
+        this.$el.find('rect').attr('stroke-width', 3);
     },
     mouseOutEvent: function(){
-        console.log('mouseOut');
+        this.$el.find('rect').attr('stroke-width', 1);
     }
 });
 

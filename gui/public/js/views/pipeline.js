@@ -3,8 +3,8 @@ import $ from 'jquery';
 import _ from 'underscore';
 
 // Views
-import ComponentView from './../views/component';
-import PathView from './../views/path';
+import ComponentView from './component';
+import PathView from './path';
 
 Backbone.$ = $;
 
@@ -31,6 +31,7 @@ var PipelineView = Backbone.View.extend({
     initialize: function(options) {
         this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
+        this.clickComponentEvent = options.clickComponentEvent;
         this.pipeline.on('change:fileContent', this.fileContentChanged, this);
         this.maxRow = 0;
     },
@@ -48,7 +49,7 @@ var PipelineView = Backbone.View.extend({
         this.recursiveComponent(component, 0, 0);
     },
     recursiveComponent: function(component, index, parentRow){
-        var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, row: parentRow, svg: this.$el});
+        var componentView = new ComponentView({messageGroup: this.messageGroup, component, index, row: parentRow, svg: this.$el, clickComponentEvent: this.clickComponentEvent});
         this.$el.append(componentView.render().el);
         var next_components = component.get('next_components');
         if(next_components){
@@ -65,7 +66,7 @@ var PipelineView = Backbone.View.extend({
                 var additional_components = component.get('additional_component');
                 if(additional_components){
                     additional_components.forEach(function(additional_component) {
-                        var pathView = new PathView({fromColumn: this.componentGroup.findWhere({id: additional_component.id[0]}).get('index'), toColumn: component.get('index')});
+                        var pathView = new PathView({fromColumn: this.componentGroup.findWhere({id: additional_component.id}).get('index'), toColumn: component.get('index')});
                         componentView.$el.append(pathView.render().el);
                     }, this);
                 }

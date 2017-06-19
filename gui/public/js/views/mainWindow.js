@@ -3,8 +3,8 @@ import $ from 'jquery';
 import _ from 'underscore';
 
 // Views
-import MainArea from './../views/mainArea';
-import LogArea from './../views/logArea';
+import MainArea from './mainArea';
+import LogArea from './logArea';
 
 Backbone.$ = $;
 

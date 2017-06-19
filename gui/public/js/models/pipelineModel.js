@@ -36,13 +36,42 @@ var Pipeline = Backbone.Model.extend({
                     component.set('id', componentContent.id[0]);
                 }
                 if(componentContent.property){
-                    component.set('property', componentContent.property);
+                    var properties = new Array();
+                    componentContent.property.forEach((prop) => {
+                        var property = {
+                            name: prop.name[0]
+                        };
+                        if(typeof prop.value[0] !== 'object'){
+                            property.value = prop.value[0];
+                        }
+                        else{
+                            property.value = prop.value[0]._;
+                        }
+                        properties.push(property);
+                    }, this);
+                    component.set('property', properties);
                 }
                 if(componentContent.autoglue){
                     component.set('autoglue', componentContent.autoglue[0]);
                 }
+                else{
+                    component.set('autoglue', 'true');
+                }
                 if(componentContent.additional_component){
-                    component.set('additional_component', componentContent.additional_component);
+                    var additional_components = new Array();
+                    componentContent.additional_component.forEach((element) => {
+                        var additional_component = {
+                            id: element.id[0]
+                        };
+                        if(typeof element.notifier === 'undefined'){
+                            additional_component.notifier = 'output';
+                        }
+                        else{
+                            additional_component.notifier = element.notifier;
+                        }
+                        additional_components.push(additional_component);
+                    }, this);
+                    component.set('additional_component', additional_components);
                 }
                 componentGroup.add(component);
             }, this);
@@ -53,7 +82,7 @@ var Pipeline = Backbone.Model.extend({
                     if(next_component && next_component.get('autoglue') === 'false'){
                         var additional_component = next_component.get('additional_component');
                         if(additional_component){
-                            var additional_component = componentGroup.findWhere({id: additional_component[0].id[0]});
+                            var additional_component = componentGroup.findWhere({id: additional_component[0].id});
                             var next_components = additional_component.get('next_components');
                             if(typeof next_components === 'undefined'){
                                 next_components = new Array();
@@ -76,10 +105,10 @@ var Pipeline = Backbone.Model.extend({
                 var additional_components = component.get('additional_component');
                 if(additional_components){
                     additional_components.forEach((additional_component) => {
-                        var component = componentGroup.findWhere({id: additional_component.id[0]});
+                        var component = componentGroup.findWhere({id: additional_component.id});
                         var notifier  = component.get('notifier');
-                        if(additional_component.notifier){
-                            notifier.push(additional_component.notifier[0]);
+                        if(additional_component.notifier !== 'output'){
+                            notifier.push(additional_component.notifier);
                             component.set('notifier', notifier);
                         }
                     }, this);

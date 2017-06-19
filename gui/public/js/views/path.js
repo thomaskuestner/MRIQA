@@ -43,14 +43,17 @@ var PathView = Backbone.View.extend({
                 path = `M 150,${offset} L 175,${offset} L 175,${200  * (this.toRow - this.fromRow) + 15} L 200,${200  * (this.toRow - this.fromRow) + 15}`;
             }
             var arrow = `M 150,${offset} L 160,${offset - 5} L 160,${offset + 5} Z`;
+            this.$el.html(this.template({path, arrow}));
         }
         else{
             var distance = this.fromColumn - this.toColumn;
-            var start = 575 + 450 * (distance - 1);
-            path = `M ${start},-35 L ${start},-125 L -225 ,-125 L -225,0`;
-            var arrow = `M ${start},-35 L ${start - 5},-45 L ${start + 5},-45 Z`;
+            if(distance > 0){
+                var start = 575 + 450 * (distance - 1);
+                path = `M ${start},-35 L ${start},-125 L -225 ,-125 L -225,0`;
+                var arrow = `M ${start},-35 L ${start - 5},-45 L ${start + 5},-45 Z`;
+                this.$el.html(this.template({path, arrow}));
+            }
         }
-        this.$el.html(this.template({path, arrow}));
         return this;
     }
 });

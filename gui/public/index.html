@@ -45,8 +45,7 @@
     <script id="main-area-template" type="text/template">
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="component-area"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="work-area"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="settings-area"></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" id="work-area"></div>
         </div>
     </script>
     <!-- MAIN-AREA -->
@@ -105,12 +104,58 @@
     </script>
     <!-- SETTINGS-AREA -->
 
+    <!-- SETTINGS-VIEW -->
+    <script id="settings-template" type="text/template">
+        <table class="table table-striped">
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td><%= id %></td>
+            </tr>
+            <tr>
+                <td>autoglue</td>
+                <td><%= autoglue %></td>
+            </tr>
+        </table>
+        <table class="table table-striped">
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <% if(typeof property !== 'undefined'){ property.forEach((prop) => { %>
+            <tr>
+                <td><%= prop.name %></td>
+                <td><%= prop.value %></td>
+            </tr>
+            <% }) }%>
+        </table>
+        <table class="table table-striped">
+            <tr>
+                <th>Additional Component</th>
+                <th>Notifier</th>
+            </tr>
+            <% if(typeof additional_component !== 'undefined'){ additional_component.forEach((component) => { %>
+            <tr>
+                <td><%= component.id %></td>
+                <td><%= component.notifier %></td>
+            </tr>
+            <% }) }%>
+        </table>
+    </script>
+    <!-- SETTINGS-VIEW -->
+
     <!-- WORK-AREA -->
     <script id="work-area-template" type="text/template">
-        <div class="panel panel-default" id="work-area-panel">
-            <div class="panel-body" id="work-area-content">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="height:100%">
+            <div class="panel panel-default" id="work-area-panel">
+                <div class="panel-body" id="work-area-content">
+                </div>
             </div>
         </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="settings-area"></div>
     </script>
     <!-- WORK-AREA -->
 

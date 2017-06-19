@@ -99,3 +99,7 @@ html, body {
 #log-area-panel {
     height: 100%;
 }
+
+#settings-area-content {
+    padding: 0;
+}
