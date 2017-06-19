@@ -37,7 +37,7 @@ var ComponentArea = Backbone.View.extend({
         this.componentGroupCollectionRes.forEach(function(componentGroupRes) {
             var componentGroup = new ComponentCollection();
             componentGroup.name = componentGroupRes.name;
-            componentGroupRes.components.forEach(function(componentRes){
+            componentGroupRes.components.forEach((componentRes) => {
                 var component = new Component(componentRes);
                 componentGroup.add(component);
             }, this);

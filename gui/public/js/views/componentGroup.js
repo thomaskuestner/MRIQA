@@ -24,7 +24,7 @@ var ComponentGroupView = Backbone.View.extend({
     renderComponentRows: function(){
         var self = this;
         self.$el.find('#component-group-content').empty();
-        this.collection.each(function(component){
+        this.collection.each((component) => {
             var componentRow = new ComponentRow({model: component});
             self.$el.find('#component-group-content').append(componentRow.render().el);
         });

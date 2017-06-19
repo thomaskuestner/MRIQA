@@ -30,8 +30,8 @@ var wss = new WebSocket.Server({ port: app.config.web_socket_port });
 
 var ws_client_gui = null;
 
-wss.on('connection', function(ws) {
-    ws.on('message', function(message) {
+wss.on('connection', (ws) => {
+    ws.on('message', (message) => {
         if(message === 'GUI'){
             ws_client_gui = ws;
         }

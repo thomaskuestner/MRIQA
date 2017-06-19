@@ -23,7 +23,7 @@ var openFile = function() {
 
 function httpGet(url, portIn) {
     return new Promise(
-        function (resolve, reject) {
+        (resolve, reject) => {
             const request = new XMLHttpRequest();
             request.onload = function () {
                 if (this.status === 200) {
@@ -43,15 +43,15 @@ function httpGet(url, portIn) {
         });
 }
 function timeout(ms, promise) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         promise.then(resolve);
-        setTimeout(function () {
+        setTimeout(() => {
             reject(new Error('Timeout after '+ms+' ms'));
         }, ms);
     });
 }
 function delay(ms) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         setTimeout(resolve, ms);
     });
 }
@@ -64,7 +64,7 @@ function fGenerateApp() {
     var nodeJsProcess = childProcess.fork('./index.js', args, options);
 
     // listen for errors as they may prevent the exit event from firing
-    nodeJsProcess.on('error', function (err) {
+    nodeJsProcess.on('error', (err) => {
         if(invoked){
             return;
         }
@@ -73,7 +73,7 @@ function fGenerateApp() {
             throw err;
         }
     });
-    nodeJsProcess.on('message', function(data, server) {
+    nodeJsProcess.on('message', (data, server) => {
         if(data === 'openDialog'){
             var file = openFile();
             if(file){
@@ -85,7 +85,7 @@ function fGenerateApp() {
         }
     });
 
-    nodeJsProcess.stdout.on('data',function(data){
+    nodeJsProcess.stdout.on('data',(data) => {
         console.log(data.toString());
     });
 
@@ -102,7 +102,7 @@ function createWindow (process) {
     // Open the DevTools.
     //win.webContents.openDevTools()
 
-    delay(1000).then(function () { // nasty workaround -> promise request throws timeout
+    delay(1000).then(() => { // nasty workaround -> promise request throws timeout
         win.loadURL('http://localhost:3000/');
     });
 

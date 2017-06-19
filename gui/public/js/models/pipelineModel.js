@@ -24,7 +24,7 @@ var Pipeline = Backbone.Model.extend({
         var componentGroup = new ComponentCollection();
         parser.parseString(model.get('fileContent'), function(error, jsonContent){
             self.set('pipeline', jsonContent.pipeline);
-            jsonContent.pipeline.component.forEach(function(componentContent, index) {
+            jsonContent.pipeline.component.forEach((componentContent, index) => {
                 var component = new Component({
                     name: componentContent.name[0],
                     class: componentContent.class[0],
@@ -75,7 +75,7 @@ var Pipeline = Backbone.Model.extend({
                 // add additional notifiers to component
                 var additional_components = component.get('additional_component');
                 if(additional_components){
-                    additional_components.forEach(function(additional_component) {
+                    additional_components.forEach((additional_component) => {
                         var component = componentGroup.findWhere({id: additional_component.id[0]});
                         var notifier  = component.get('notifier');
                         if(additional_component.notifier){

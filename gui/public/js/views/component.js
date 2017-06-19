@@ -29,6 +29,11 @@ var ComponentView = Backbone.View.extend({
             this.setElement(_.result(this, 'el'), false);
         }
     },
+    events: {
+        'click': 'clickEvent',
+        'mouseover': 'mouseOverEvent',
+        'mouseout': 'mouseOutEvent'
+    },
     initialize: function(options) {
         this.index = options.index;
         this.row = options.row;
@@ -87,6 +92,15 @@ var ComponentView = Backbone.View.extend({
             this.$el.append(observerView.render().el);
         }, this);
         return this;
+    },
+    clickEvent: function(){
+        console.log('click');
+    },
+    mouseOverEvent: function(){
+        console.log('mouseOver');
+    },
+    mouseOutEvent: function(){
+        console.log('mouseOut');
     }
 });
 
