@@ -149,10 +149,8 @@
 
     <!-- WORK-AREA -->
     <script id="work-area-template" type="text/template">
-        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="height:100%">
-            <div class="panel panel-default" id="work-area-panel">
-                <div class="panel-body" id="work-area-content">
-                </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" id="work-area-panel">
+            <div class="panel-body" id="work-area-content">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="settings-area"></div>
@@ -200,6 +198,31 @@
         </g>
     </script>
     <!-- PATH-VIEW -->
+
+    <!-- TAB-CONTROLLER -->
+    <script id="tab-controller-template" type="text/template">
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default tab" data-tab-id="pipeline">pipeline</button>
+            <button type="button" class="btn btn-default tab" data-tab-id="table_1">table_1</button>
+            <button type="button" class="btn btn-default tab" data-tab-id="table_2">table_2</button>
+        </div>
+        <div class="panel panel-default work-content" data-tab-id="pipeline">
+            <div class="panel-body">
+                <p>pipeline</p>
+            </div>
+        </div>
+        <div class="panel panel-default work-content hidden" data-tab-id="table_1">
+            <div class="panel-body">
+                <p>table_1</p>
+            </div>
+        </div>
+        <div class="panel panel-default work-content hidden" data-tab-id="table_2">
+            <div class="panel-body">
+                <p>table_2</p>
+            </div>
+        </div>
+    </script>
+    <!-- TAB-CONTROLLER -->
 
     <!-- TEMPLATES -->
 

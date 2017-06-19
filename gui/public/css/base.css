@@ -90,7 +90,12 @@ html, body {
 }
 
 #work-area-content {
+    height: 100%;
     padding: 0;
+}
+
+#work-area-content > div {
+    height: 100%;
 }
 
 #log-area-content {
@@ -108,4 +113,12 @@ html, body {
 
 #settings-area-content {
     padding: 0;
+}
+
+.work-content {
+    height: calc(100% - 34px);
+}
+
+.work-content > div{
+    height: 100%
 }
