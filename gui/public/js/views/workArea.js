@@ -21,11 +21,14 @@ var WorkArea = Backbone.View.extend({
         this.$el.html(this.template);
         this.settingsArea = new SettingsArea();
         this.$el.find('#settings-area').html(this.settingsArea.render().$el);
-        this.pipelineView = new PipelineView({messageGroup: this.messageGroup, pipeline: this.pipeline, clickComponentEvent: this.settingsArea.clickComponentEvent});
+        this.pipelineView = new PipelineView({
+            id: 'pipeline',
+            messageGroup: this.messageGroup,
+            pipeline: this.pipeline,
+            clickComponentEvent: this.settingsArea.clickComponentEvent
+        });
         this.tabController = new TabController({tabs: [this.pipelineView]});
         this.$el.find('#work-area-content').html(this.tabController.render().$el);
-        /*this.pipelineView = new PipelineView({messageGroup: this.messageGroup, pipeline: this.pipeline, clickComponentEvent: this.settingsArea.clickComponentEvent});
-        this.$el.find('#work-area-content').html(this.pipelineView.render().$el);*/
         return this;
     }
 });

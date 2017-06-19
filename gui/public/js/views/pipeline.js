@@ -39,8 +39,8 @@ var PipelineView = Backbone.View.extend({
         return this;
     },
     fileContentChanged: function(model){
-        var width = $('#work-area-panel').outerWidth();
-        var height = $('#work-area-panel').outerHeight();
+        var width = $('.work-content').outerWidth();
+        var height = $('.work-content').outerHeight();
         this.$el.attr('width', width);
         this.$el.attr('height', height);
         this.$el.attr('viewBox',`0 0 ${width} ${height}`);

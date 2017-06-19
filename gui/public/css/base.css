@@ -119,6 +119,18 @@ html, body {
     height: calc(100% - 34px);
 }
 
+.tab {
+    height: 100%;
+}
+
 .work-content > div{
     height: 100%
+}
+
+.tab > div {
+    padding: 0;
+}
+
+.full-height {
+    height: calc(100% - 34px);
 }

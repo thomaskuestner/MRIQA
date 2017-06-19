@@ -201,28 +201,24 @@
 
     <!-- TAB-CONTROLLER -->
     <script id="tab-controller-template" type="text/template">
-        <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default tab" data-tab-id="pipeline">pipeline</button>
-            <button type="button" class="btn btn-default tab" data-tab-id="table_1">table_1</button>
-            <button type="button" class="btn btn-default tab" data-tab-id="table_2">table_2</button>
-        </div>
-        <div class="panel panel-default work-content" data-tab-id="pipeline">
+        <div class="btn-group" id="tab-buttons" role="group"></div>
+    </script>
+    <!-- TAB-CONTROLLER -->
+
+    <!-- TAB-BUTTON -->
+    <script id="tab-button-template" type="text/template">
+        <button type="button" class="btn btn-default tab-btn" data-tab-id="pipeline"><%= id %></button>
+    </script>
+    <!-- TAB-BUTTON -->
+
+    <!-- TAB-VIEW -->
+    <script id="tab-view-template" type="text/template">
+        <div class="panel panel-default work-content tab" data-tab-id="<%= id %>">
             <div class="panel-body">
-                <p>pipeline</p>
-            </div>
-        </div>
-        <div class="panel panel-default work-content hidden" data-tab-id="table_1">
-            <div class="panel-body">
-                <p>table_1</p>
-            </div>
-        </div>
-        <div class="panel panel-default work-content hidden" data-tab-id="table_2">
-            <div class="panel-body">
-                <p>table_2</p>
             </div>
         </div>
     </script>
-    <!-- TAB-CONTROLLER -->
+    <!-- TAB-VIEW -->
 
     <!-- TEMPLATES -->
 
