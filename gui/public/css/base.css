@@ -59,6 +59,12 @@ html, body {
     height: 100%;
 }
 
+.area-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100% - 41px);
+}
+
 #settings-area {
     height: 100%;
 }
