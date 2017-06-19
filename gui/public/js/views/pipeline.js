@@ -65,8 +65,6 @@ var PipelineView = Backbone.View.extend({
                 var additional_components = component.get('additional_component');
                 if(additional_components){
                     additional_components.forEach(function(additional_component) {
-                        console.log(this.componentGroup.findWhere({id: additional_component.id[0]}).get('index'));
-                        console.log(component.get('index'));
                         var pathView = new PathView({fromColumn: this.componentGroup.findWhere({id: additional_component.id[0]}).get('index'), toColumn: component.get('index')});
                         componentView.$el.append(pathView.render().el);
                     }, this);
