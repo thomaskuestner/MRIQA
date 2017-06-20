@@ -2,6 +2,12 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
 
+// Models
+import TabModel from './../models/tabModel';
+
+// Collection
+import TabCollection from './../collections/tabCollection';
+
 // Views
 import PipelineView from './pipeline';
 import SettingsArea from './settingsArea';
@@ -16,6 +22,7 @@ var WorkArea = Backbone.View.extend({
         var self = this;
         this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
+        this.tabGroup = new TabCollection();
     },
     render: function() {
         this.$el.html(this.template);
@@ -27,10 +34,15 @@ var WorkArea = Backbone.View.extend({
             pipeline: this.pipeline,
             clickComponentEvent: this.settingsArea.clickComponentEvent
         });
+        var tabModel = new TabModel({
+            id: 'pipeline',
+            view: this.pipelineView
+        });
+        this.tabGroup.add(tabModel);
         this.tabController = new TabController({
             messageGroup: this.messageGroup,
             pipeline: this.pipeline,
-            tabs: [this.pipelineView]
+            tabGroup: this.tabGroup
         });
         this.$el.find('#work-area-content').html(this.tabController.render().$el);
         return this;

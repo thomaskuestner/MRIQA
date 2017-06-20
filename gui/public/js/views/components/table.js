@@ -55,6 +55,7 @@ var Table = Backbone.View.extend({
             for (var key in message.get('data')){
                 if(this.parameterList.indexOf(key) > -1 || this.parameterList.length === 0){
                     if(key !== 'status'){
+                        this.tab.set('notificationCounter', parseInt(this.tab.get('notificationCounter')) + 1);
                         var tableRow = new TableRow({key, value: message.get('data')[key]});
                         switch (this.type) {
                         case 'append':

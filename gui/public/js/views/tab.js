@@ -9,12 +9,12 @@ var Tab = Backbone.View.extend({
     template: _.template($('#tab-view-template').html()),
     className: 'full-height hidden',
     initialize: function(options) {
-        this.tab = options.tab;
+        this.tabModel = options.tabModel;
     },
     render: function() {
-        this.$el.html(this.template({id: this.tab.id}));
-        if(typeof this.tab.render !== 'undefined'){
-            this.$el.find(`.tab[data-tab-id="${this.tab.id}"] > .panel-body`).html(this.tab.render().el);
+        this.$el.html(this.template({id: this.tabModel.get('id')}));
+        if(typeof this.tabModel.get('view').render !== 'undefined'){
+            this.$el.find(`.tab[data-tab-id="${this.tabModel.get('id')}"] > .panel-body`).html(this.tabModel.get('view').render().el);
         }
         return this;
     }

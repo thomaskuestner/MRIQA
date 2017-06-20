@@ -8,10 +8,15 @@ Backbone.$ = $;
 var TabButton = Backbone.View.extend({
     template: _.template($('#tab-button-template').html()),
     initialize: function(options) {
-        this.tab = options.tab;
+        this.tabModel = options.tabModel;
+        this.listenTo(this.tabModel, 'change:notificationCounter', this.updateBadge, this);
     },
     render: function() {
-        this.$el.html(this.template({id: this.tab.id}));
+        this.$el.html(this.template(this.tabModel.toJSON()));
+        return this;
+    },
+    updateBadge: function(){
+        $(`.tab-btn[data-tab-id="${this.tabModel.get('id')}"] > span`).text(this.tabModel.get('notificationCounter'));
         return this;
     }
 });
