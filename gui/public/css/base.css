@@ -128,6 +128,7 @@ html, body {
 
 .tab > div {
     padding: 0;
+    overflow-y: scroll;
 }
 
 .full-height {

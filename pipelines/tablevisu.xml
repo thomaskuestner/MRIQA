@@ -20,7 +20,7 @@
         <class>Rotate</class>
         <property>
             <name>angle</name>
-            <value type="float">45</value>
+            <value type="float">10</value>
         </property>
         <additional_component>
             <id>parameter_condition</id>
@@ -62,6 +62,62 @@
         <name>table</name>
         <class>Table</class>
         <autoglue>false</autoglue>
+        <additional_component>
+            <id>rotate</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>table_visu_append</id>
+        <name>table</name>
+        <class>Table</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>type</name>
+            <value>append</value>
+        </property>
+        <additional_component>
+            <id>rotate</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>table_visu_update</id>
+        <name>table</name>
+        <class>Table</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>type</name>
+            <value>update</value>
+        </property>
+        <additional_component>
+            <id>rotate</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>table_visu_angle</id>
+        <name>table</name>
+        <class>Table</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>parameter_list</name>
+            <value>angle</value>
+        </property>
+        <additional_component>
+            <id>rotate</id>
+        </additional_component>
+    </component>
+    <component>
+        <id>table_visu_angle_update</id>
+        <name>table</name>
+        <class>Table</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>type</name>
+            <value>update</value>
+        </property>
+        <property>
+            <name>parameter_list</name>
+            <value>angle,status</value>
+        </property>
         <additional_component>
             <id>rotate</id>
         </additional_component>

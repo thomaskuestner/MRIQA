@@ -60,7 +60,7 @@ class Observable(Synchronization):
         # Updating is not required to be synchronized:
         for observer in local_array:
             process = Process(target=observer.update, args=(self, arg))
-            observer.outer.send({'status': 'pending'})
+            observer.outer.send({'status': 'starting'})
             process.start()
 
     def delete_observers(self):

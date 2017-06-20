@@ -27,7 +27,11 @@ var WorkArea = Backbone.View.extend({
             pipeline: this.pipeline,
             clickComponentEvent: this.settingsArea.clickComponentEvent
         });
-        this.tabController = new TabController({tabs: [this.pipelineView]});
+        this.tabController = new TabController({
+            messageGroup: this.messageGroup,
+            pipeline: this.pipeline,
+            tabs: [this.pipelineView]
+        });
         this.$el.find('#work-area-content').html(this.tabController.render().$el);
         return this;
     }

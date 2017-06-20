@@ -47,7 +47,7 @@ var ComponentView = Backbone.View.extend({
         var data = message.get('data');
         if(data.status){
             switch (data.status) {
-            case 'pending':
+            case 'starting':
                 this.$el.find('rect.component').attr('stroke', 'green');
                 this.$el.find('rect.component').attr('stroke-width', 3);
                 break;

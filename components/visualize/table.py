@@ -23,6 +23,7 @@ class Table(Component):
         """
         def update(self, observable, package):
             self.outer.log_line('visualize table')
+            package['status'] = 'sending'
             package['data'] = str(package['data'])
             self.outer.send(package)
             self.outer.output_notifier.notify_observers(package)

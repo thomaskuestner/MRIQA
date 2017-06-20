@@ -43,7 +43,7 @@ class Component(BaseComponent):
         """
         has to be implemented in components which can be at the beginning of a pipeline
         """
-        self.send({'status': 'pending'})
+        self.send({'status': 'starting'})
 
     class InputObserver(Observer):
         """

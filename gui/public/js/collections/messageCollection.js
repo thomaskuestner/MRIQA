@@ -24,6 +24,7 @@ var MessageCollection = Backbone.Collection.extend({
             this.trigger(message.get('component'), message);
         }
         else{
+            this.trigger(message.get('component'), message);
             this.trigger(message.get('id'), message);
         }
     },
