@@ -75,11 +75,11 @@ var ComponentView = Backbone.View.extend({
             width = this.index * gap + 500;
         }
         var height = parseFloat(viewBoxMatch[3]);
-        if(height < parseFloat(this.svg.attr('height'))){
-            height = parseFloat(this.svg.attr('height'));
+        if(height < (this.row + 1) * 225){
+            height = (this.row + 1) * 225;
         }
 
-        this.svg.attr('viewBox',`-100 0 ${width} ${height}`);
+        this.svg.attr('viewBox',`-100 -100 ${width} ${height}`);
         this.$el.attr('transform',`translate(${this.index * gap},${component_y * this.row})`);
         this.$el.html(this.template({component: this.component.toJSON()}));
 
