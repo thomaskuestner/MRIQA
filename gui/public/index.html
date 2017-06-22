@@ -235,10 +235,18 @@
     </script>
     <!-- TABLE-VIEW -->
 
-    <!-- TABLE-VIEW -->
+    <!-- TABLE-ROW -->
     <script id="table-row-template" type="text/template">
         <td><%= key %></td>
         <td><%= String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') %></td>
+    </script>
+    <!-- TABLE-ROW -->
+
+    <!-- CHART-VIEW -->
+    <script id="chart-view-template" type="text/template">
+        <div class="chart-container" style="position: relative; height:100%; width:100%">
+            <canvas id="chart"></canvas>
+        </div>
     </script>
     <!-- TABLE-VIEW -->
 

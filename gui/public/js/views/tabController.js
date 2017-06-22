@@ -9,6 +9,7 @@ import TabModel from './../models/tabModel';
 import TabButton from './tabButton';
 import Tab from './tab';
 import Table from './components/table';
+import Chart from './components/chart';
 
 Backbone.$ = $;
 
@@ -19,7 +20,8 @@ var TabController = Backbone.View.extend({
         this.tabGroup = options.tabGroup;
         this.pipeline = options.pipeline;
         this.messageGroup = options.messageGroup;
-        this.listenTo(this.messageGroup, 'Table', this.tableComponentEvent);
+        this.listenTo(this.messageGroup, 'Table', this.componentEvent);
+        this.listenTo(this.messageGroup, 'Line', this.componentEvent);
     },
     events: {
         'click .tab-btn': 'clickTabEvent'
@@ -45,22 +47,35 @@ var TabController = Backbone.View.extend({
         this.$el.find('.tab').parent().addClass('hidden');
         this.$el.find(`.tab[data-tab-id="${$(event.currentTarget).data('tab-id')}"]`).parent().removeClass('hidden');
     },
-    tableComponentEvent: function(message){
+    componentEvent: function(message){
         if(message.get('data').status === 'starting'){
             var tabExists = false;
             var tab = this.tabGroup.filter((tab) => {
                 return tab.id === message.get('id');
             });
             if(tab.length === 0){
+                var componentName = message.get('component');
                 var component = this.pipeline.get('componentGroup').findWhere({id: message.get('id')});
-                var table = new Table({
-                    id: message.get('id'),
-                    component,
-                    messageGroup: this.messageGroup
-                });
+                var view;
+                switch (componentName) {
+                case 'Table':
+                    view = new Table({
+                        id: message.get('id'),
+                        component,
+                        messageGroup: this.messageGroup
+                    });
+                    break;
+                case 'Line':
+                    view = new Chart({
+                        id: message.get('id'),
+                        component,
+                        messageGroup: this.messageGroup
+                    });
+                    break;
+                }
                 var tabModel = new TabModel({
                     id: message.get('id'),
-                    view: table
+                    view
                 });
                 this.tabGroup.add(tabModel);
                 this.renderTab(tabModel);
