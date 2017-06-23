@@ -66,6 +66,7 @@ var NavBar = Backbone.View.extend({
             url: '/api/openFileDialog',
             success: function(res){
                 if(res.status === 'SUCCESS'){
+                    self.pipeline.set('path', res.data);
                     self.getFileContent(res.data);
                 }
             }

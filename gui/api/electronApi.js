@@ -6,6 +6,9 @@ module.exports = function(app){
     // route for open file dialog and responses with path
     app.get('/api/openFileDialog', (req, res) => {
         response = res;
+        process.send('openDialog', () => {
+        });
+
     });
 
     process.on('message', (data) => {
