@@ -3,9 +3,6 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Chart from 'chart.js';
 
-// Models
-import TableRow from './../../models/tableRowModel';
-
 // Collections
 import TableRowCollection from './../../collections/tableRowCollection';
 

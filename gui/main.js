@@ -1,6 +1,4 @@
 const {app,BrowserWindow} = require('electron');
-const url = require('url');
-const path = require('path');
 const dialog = require('electron').dialog;
 var childProcess = require('child_process');
 
@@ -21,75 +19,10 @@ var openFile = function() {
     return file;
 };
 
-function httpGet(url, portIn) {
-    return new Promise(
-        (resolve, reject) => {
-            const request = new XMLHttpRequest();
-            request.onload = function () {
-                if (this.status === 200) {
-                    // Success
-                    resolve(this.response);
-                } else {
-                    // Something went wrong (404 etc.)
-                    reject(new Error(this.statusText));
-                }
-            };
-            request.onerror = function () {
-                reject(new Error(
-                    'HttpRequest Error: '+this.statusText));
-            };
-            request.open('GET', url+ ':' +portIn);
-            request.send();
-        });
-}
-function timeout(ms, promise) {
-    return new Promise((resolve, reject) => {
-        promise.then(resolve);
-        setTimeout(() => {
-            reject(new Error('Timeout after '+ms+' ms'));
-        }, ms);
-    });
-}
 function delay(ms) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
-}
-
-function fGenerateApp() {
-    // invoke child process (remote application)
-    var invoked = false;
-    var options = { stdio: [null, null, null, 'ipc'] };
-    var args = process.argv.slice(2);
-    var nodeJsProcess = childProcess.fork('./index.js', args, options);
-
-    // listen for errors as they may prevent the exit event from firing
-    nodeJsProcess.on('error', (err) => {
-        if(invoked){
-            return;
-        }
-        invoked = true;
-        if(err){
-            throw err;
-        }
-    });
-    nodeJsProcess.on('message', (data, server) => {
-        if(data === 'openDialog'){
-            var file = openFile();
-            if(file){
-                nodeJsProcess.send(file);
-            }
-            else{
-                nodeJsProcess.send(null);
-            }
-        }
-    });
-
-    nodeJsProcess.stdout.on('data',(data) => {
-        console.log(data.toString());
-    });
-
-    createWindow(nodeJsProcess);
 }
 
 function createWindow (process) {
@@ -114,6 +47,42 @@ function createWindow (process) {
         // when you should delete the corresponding element.
         win = null;
     });
+}
+
+function fGenerateApp() {
+    // invoke child process (remote application)
+    var invoked = false;
+    var options = { stdio: [null, null, null, 'ipc'] };
+    var args = process.argv.slice(2);
+    var nodeJsProcess = childProcess.fork('./index.js', args, options);
+
+    // listen for errors as they may prevent the exit event from firing
+    nodeJsProcess.on('error', (err) => {
+        if(invoked){
+            return;
+        }
+        invoked = true;
+        if(err){
+            throw err;
+        }
+    });
+    nodeJsProcess.on('message', (data) => {
+        if(data === 'openDialog'){
+            var file = openFile();
+            if(file){
+                nodeJsProcess.send(file);
+            }
+            else{
+                nodeJsProcess.send(null);
+            }
+        }
+    });
+
+    nodeJsProcess.stdout.on('data',(data) => {
+        console.log(data.toString());
+    });
+
+    createWindow(nodeJsProcess);
 }
 
 // This method will be called when Electron has finished

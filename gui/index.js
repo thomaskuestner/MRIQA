@@ -20,6 +20,9 @@ app.server = http.createServer(app);
 require('./api/componentApi')(app);
 
 // load Electron API
+require('./api/pipelineApi')(app);
+
+// load Electron API
 require('./api/electronApi')(app);
 
 // access to public folder

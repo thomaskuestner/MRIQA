@@ -10,7 +10,7 @@ import ComponentRow from './componentRow';
 // ComponentGroup View
 var ComponentGroupView = Backbone.View.extend({
     template: _.template($('#component-group-template').html()),
-    initialize: function(options) {
+    initialize: function() {
     },
     render: function() {
         if(typeof this.collection.name === 'undefined'){

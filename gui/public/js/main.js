@@ -29,5 +29,5 @@ var messageGroup = new MessageCollection([], {connection});
 var navBar = new NavBar({pipeline});
 $('#navbar-region').html(navBar.render().el);
 
-var router = new Router({pipeline, messageGroup});
+new Router({pipeline, messageGroup});
 Backbone.history.start();

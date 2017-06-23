@@ -10,7 +10,7 @@ Backbone.$ = $;
 // Settings-Area view
 var SettingsArea = Backbone.View.extend({
     template: _.template($('#settings-area-template').html()),
-    initialize: function(options) {
+    initialize: function() {
     },
     render: function() {
         this.$el.html(this.template);

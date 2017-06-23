@@ -12,7 +12,6 @@ Backbone.$ = $;
 var MainWindow = Backbone.View.extend({
     template: _.template($('#main-window-template').html()),
     initialize: function(options) {
-        var self = this;
         this.pipeline = options.pipeline;
         this.messageGroup = options.messageGroup;
     },

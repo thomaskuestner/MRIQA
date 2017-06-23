@@ -4,13 +4,11 @@ var fs = require('fs');
 module.exports = function(app){
     var response;
     // route for open file dialog and responses with path
-    app.get('/api/openFileDialog', function(req, res){
+    app.get('/api/openFileDialog', (req, res) => {
         response = res;
-        process.send('openDialog', function(fileNames){
-        });
     });
 
-    process.on('message', function(data) {
+    process.on('message', (data) => {
         if(data){
             response.json({
                 status: 'SUCCESS',
@@ -25,7 +23,7 @@ module.exports = function(app){
     });
 
     // get file content
-    app.post('/api/getFileContent', function(req, res){
+    app.post('/api/getFileContent', (req, res) => {
         res.json({
             status: 'SUCCESS',
             data: fs.readFileSync(req.body.file).toString()
@@ -33,7 +31,7 @@ module.exports = function(app){
     });
 
     // get process arguments
-    app.get('/api/getProcessArgv', function(req, res){
+    app.get('/api/getProcessArgv', (req, res) => {
         res.json({
             status: 'SUCCESS',
             data: process.argv.slice(2)

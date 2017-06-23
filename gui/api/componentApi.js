@@ -1,17 +1,16 @@
-var fs = require( 'fs' );
 var recursive = require('recursive-readdir');
 var pythonParser = require('../modules/pythonparser');
 
 module.exports = function(app){
     // get all components
-    app.get('/api/components', function(req, res){
+    app.get('/api/components', (req, res) => {
         var componentGroups = new Array();
-        recursive('../components/', function(error, files){
+        recursive('../components/', (error, files) => {
             if(error){
                 process.exit(1);
             }
 
-            files.forEach(function(file, index){
+            files.forEach((file) => {
                 var pythonFile = new RegExp(/.py$/);
                 var group = {};
                 if(pythonFile.test(file)){
@@ -31,7 +30,7 @@ module.exports = function(app){
                     var addNewGroup = true;
                     var foundGroup;
                     if(componentGroups.length > 0){
-                        componentGroups.forEach(function(componentGroup){
+                        componentGroups.forEach((componentGroup) => {
                             if(componentGroup.name === group['name']){
                                 addNewGroup = false;
                                 foundGroup = componentGroup;

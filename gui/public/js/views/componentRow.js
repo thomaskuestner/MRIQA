@@ -7,7 +7,7 @@ Backbone.$ = $;
 // ComponentGroup View
 var ComponentRow = Backbone.View.extend({
     template: _.template($('#component-row-template').html()),
-    initialize: function(options) {
+    initialize: function() {
     },
     render: function() {
         var template = this.template(this.model.toJSON());

@@ -20,6 +20,7 @@ var NavBar = Backbone.View.extend({
             success: function(res){
                 if(res.status === 'SUCCESS'){
                     if(res.data[0]){
+                        self.pipeline.set('path', res.data[0]);
                         self.getFileContent(res.data[0]);
                     }
                 }
@@ -30,7 +31,8 @@ var NavBar = Backbone.View.extend({
         'click #open-file': 'requestOpenFileDialog',
         'click #log-area-view': 'toggleLogAreaView',
         'click #component-area-view': 'toggleComponentAreaView',
-        'click #settings-area-view': 'toggleSettingsAreaView'
+        'click #settings-area-view': 'toggleSettingsAreaView',
+        'click #start-pipeline': 'requestStartPipeline'
     },
     getFileContent: function(file){
         var self = this;
@@ -58,7 +60,7 @@ var NavBar = Backbone.View.extend({
             $('.container-fluid').attr('style', '');
         }
     },
-    requestOpenFileDialog: function(event){
+    requestOpenFileDialog: function(){
         var self = this;
         Backbone.ajax({
             url: '/api/openFileDialog',
@@ -66,6 +68,15 @@ var NavBar = Backbone.View.extend({
                 if(res.status === 'SUCCESS'){
                     self.getFileContent(res.data);
                 }
+            }
+        });
+    },
+    requestStartPipeline: function(){
+        Backbone.ajax({
+            type: 'POST',
+            url: '/api/startPipeline',
+            data: {
+                path: this.pipeline.get('path').replace('../', '')
             }
         });
     },

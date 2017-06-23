@@ -16,7 +16,7 @@ import ComponentGroupView from './componentGroup';
 // Component-Area view
 var ComponentArea = Backbone.View.extend({
     template: _.template($('#component-area-template').html()),
-    initialize: function(options) {
+    initialize: function() {
         var self = this;
         Backbone.ajax({
             url: '/api/components',

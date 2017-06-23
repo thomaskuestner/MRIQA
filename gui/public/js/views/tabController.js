@@ -49,7 +49,6 @@ var TabController = Backbone.View.extend({
     },
     componentEvent: function(message){
         if(message.get('data').status === 'starting'){
-            var tabExists = false;
             var tab = this.tabGroup.filter((tab) => {
                 return tab.id === message.get('id');
             });

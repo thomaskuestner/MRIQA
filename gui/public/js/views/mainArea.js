@@ -12,7 +12,6 @@ Backbone.$ = $;
 var MainArea = Backbone.View.extend({
     template: _.template($('#main-area-template').html()),
     initialize: function(options) {
-        var self = this;
         this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
     },

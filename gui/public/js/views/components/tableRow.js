@@ -8,7 +8,7 @@ Backbone.$ = $;
 var TableRow = Backbone.View.extend({
     template: _.template($('#table-row-template').html()),
     tagName: 'tr',
-    initialize: function(options) {
+    initialize: function() {
         this.model.on('change:value', this.render, this);
     },
     render: function() {

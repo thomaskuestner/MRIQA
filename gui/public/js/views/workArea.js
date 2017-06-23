@@ -19,7 +19,6 @@ Backbone.$ = $;
 var WorkArea = Backbone.View.extend({
     template: _.template($('#work-area-template').html()),
     initialize: function(options) {
-        var self = this;
         this.messageGroup = options.messageGroup;
         this.pipeline = options.pipeline;
         this.tabGroup = new TabCollection();

@@ -8,7 +8,6 @@ Backbone.$ = $;
 var LogArea = Backbone.View.extend({
     template: _.template($('#log-area-template').html()),
     initialize: function(options) {
-        var self = this;
         this.messageGroup = options.messageGroup;
         this.listenTo(this.messageGroup, 'LogServer', this.componentEvent);
     },
