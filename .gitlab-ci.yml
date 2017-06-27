@@ -1,5 +1,5 @@
 all_tests:
   script:
-   - find . -iname "*.py" | xargs pylint --reports=n
+   - find . -iname "*.py" -not -path "./gui/*" | xargs pylint --reports=n
    - npm --prefix ./gui install ./gui
    - npm --prefix ./gui run test
