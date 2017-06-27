@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "dev": "npm run watch-js & node index.js",
+    "dev-server": "npm run watch-js & nodemon index.js",
     "watch-js": "watchify public/js/main.js -t [ babelify --presets [ es2015 ] ] -o public/js/bundle.js",
     "test-serverside": "eslint *.js && eslint api/*.js",
     "test-clientside": "eslint public/js/*.js --quiet && eslint public/js/**/*.js && eslint public/js/**/**/*.js",
@@ -33,6 +34,7 @@
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
+    "nodemon": "^1.11.0",
     "watchify": "^3.9.0"
   }
 }

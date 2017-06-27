@@ -21,6 +21,7 @@
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 <li><a class="btn" id="open-file"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open File</a></li>
+                <li><a class="btn" id="save-pipeline"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> View <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -114,11 +115,11 @@
             </tr>
             <tr>
                 <td>id</td>
-                <td><%= id %></td>
+                <td contenteditable='true' data-setting='id'><%= id %></td>
             </tr>
             <tr>
                 <td>autoglue</td>
-                <td><%= autoglue %></td>
+                <td contenteditable='true' data-setting='autoglue'><%= autoglue %></td>
             </tr>
         </table>
         <table class="table table-striped">
@@ -129,7 +130,7 @@
             <% if(typeof property !== 'undefined'){ property.forEach((prop) => { %>
             <tr>
                 <td><%= prop.name %></td>
-                <td><%= prop.value %></td>
+                <td contenteditable='true' data-setting='<%= prop.name %>'><%= prop.value %></td>
             </tr>
             <% }) }%>
         </table>
@@ -141,7 +142,7 @@
             <% if(typeof additional_component !== 'undefined'){ additional_component.forEach((component) => { %>
             <tr>
                 <td><%= component.id %></td>
-                <td><%= component.notifier %></td>
+                <td contenteditable='true' data-setting='<%= prop.name %>'><%= component.id %></td>
             </tr>
             <% }) }%>
         </table>

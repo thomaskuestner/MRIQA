@@ -31,16 +31,16 @@ app.server.listen(app.config.web_interface_port);
 
 var wss = new WebSocket.Server({ port: app.config.web_socket_port });
 
-var ws_client_gui = null;
+app.ws_client_gui = null;
 
 wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         if(message === 'GUI'){
-            ws_client_gui = ws;
+            app.ws_client_gui = ws;
         }
         else{
-            if(ws_client_gui !== null){
-                ws_client_gui.send(message);
+            if(app.ws_client_gui !== null){
+                app.ws_client_gui.send(message);
             }
         }
     });

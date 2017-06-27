@@ -114,8 +114,13 @@ var Pipeline = Backbone.Model.extend({
                     }, this);
                 }
             });
+            self.listenTo(componentGroup, 'change', self.changeEvent);
             self.set('componentGroup', componentGroup);
         });
+    },
+    changeEvent: function(model){
+        // generate new file content
+        console.log(model);
     }
 });
 

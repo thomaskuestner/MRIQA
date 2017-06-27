@@ -32,7 +32,8 @@ var NavBar = Backbone.View.extend({
         'click #log-area-view': 'toggleLogAreaView',
         'click #component-area-view': 'toggleComponentAreaView',
         'click #settings-area-view': 'toggleSettingsAreaView',
-        'click #start-pipeline': 'requestStartPipeline'
+        'click #start-pipeline': 'requestStartPipeline',
+        'click #save-pipeline': 'requestSavePipeline'
     },
     getFileContent: function(file){
         var self = this;
@@ -78,6 +79,16 @@ var NavBar = Backbone.View.extend({
             url: '/api/startPipeline',
             data: {
                 path: this.pipeline.get('path').replace('../', '')
+            }
+        });
+    },
+    requestSavePipeline: function(){
+        Backbone.ajax({
+            type: 'POST',
+            url: '/api/savePipeline',
+            data: {
+                path: this.pipeline.get('path'),
+                content: this.pipeline.get('fileContent')
             }
         });
     },
