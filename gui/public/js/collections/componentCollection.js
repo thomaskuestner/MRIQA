@@ -11,6 +11,7 @@ var ComponentCollection = Backbone.Collection.extend({
     model: Component,
     initialize: function(){
         this.fileContent = '';
+        this.listenTo(this, 'remove', this.removeComponentEvent, this);
     },
     generateFileContent: function(){
         this.combineComponentContent(this, 0);
@@ -23,6 +24,16 @@ var ComponentCollection = Backbone.Collection.extend({
             ++index;
             this.combineComponentContent(collection, index);
         }
+    },
+    removeComponentEvent: function(deletedComponent){
+        this.each((component) => {
+            var next_components = component.get('next_components');
+            if(next_components){
+                component.set('next_components', next_components.filter((next_component) => {
+                    return next_component.get('id') !== deletedComponent.get('id');
+                }));
+            }
+        });
     }
 });
 

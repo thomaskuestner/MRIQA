@@ -45,6 +45,7 @@ var PipelineView = Backbone.View.extend({
         this.$el.attr('height', height);
         this.$el.attr('viewBox', `0 0 ${width} ${height}`);
         this.componentGroup = model.get('componentGroup');
+        this.listenTo(this.componentGroup, 'remove', this.removeComponentEvent, this);
         var component = this.componentGroup.at(0);
         this.recursiveComponent(component, 0, 0);
     },
@@ -74,6 +75,12 @@ var PipelineView = Backbone.View.extend({
                 }
             }, this);
         }
+    },
+    removeComponentEvent: function(component){
+        $('svg#pipeline').empty();
+        this.maxRow = 0;
+        var component = this.componentGroup.at(0);
+        this.recursiveComponent(component, 0, 0);
     },
     drawPath: function(componentView, fromRow, toRow){
         var pathView = new PathView({fromRow, toRow});

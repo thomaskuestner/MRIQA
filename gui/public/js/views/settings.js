@@ -11,7 +11,8 @@ var SettingsView = Backbone.View.extend({
         this.component = options.component;
     },
     events: {
-        'input': 'inputEvent'
+        'input': 'inputEvent',
+        'click #delete-button': 'deleteButtonEvent'
     },
     render: function() {
         this.$el.html(this.template(this.component.toJSON()));
@@ -40,6 +41,9 @@ var SettingsView = Backbone.View.extend({
             this.component.set($(event.target).data('setting'), $(event.target).text());
             break;
         }
+    },
+    deleteButtonEvent: function(){
+        this.component.collection.remove(this.component);
     }
 });
 
