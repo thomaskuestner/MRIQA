@@ -98,14 +98,18 @@ var NavBar = Backbone.View.extend({
         this.setWorkAreaWidth();
     },
     setWorkAreaWidth: function(){
-        if($('#component-area').hasClass('hidden') && $('#settings-area').hasClass('hidden')){
+        if($('#component-area').hasClass('hidden')){
             $('#work-area').attr('class', 'col-lg-12 col-md-12 col-sm-12 col-xs-12');
         }
-        else if($('#component-area').hasClass('hidden') || $('#settings-area').hasClass('hidden')){
+        else{
             $('#work-area').attr('class', 'col-lg-10 col-md-10 col-sm-10 col-xs-10');
         }
+        if($('#settings-area').hasClass('hidden')){
+            console.log('areawidth');
+            $('#work-area-panel').attr('class', 'col-lg-12 col-md-12 col-sm-12 col-xs-12');
+        }
         else{
-            $('#work-area').attr('class', 'col-lg-8 col-md-8 col-sm-8 col-xs-8');
+            $('#work-area-panel').attr('class', 'col-lg-9 col-md-9 col-sm-9 col-xs-9');
         }
     },
     render: function() {
