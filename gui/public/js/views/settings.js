@@ -18,7 +18,20 @@ var SettingsView = Backbone.View.extend({
         return this;
     },
     inputEvent: function(event){
-        this.component.set($(event.target).data('setting'), $(event.target).text());
+        var type = $(event.target).data('type');
+        switch (type) {
+        case 'property':
+            var properties = this.component.get('property');
+            var property = properties.filter((prop) => {
+                return prop.name === $(event.target).data('setting');
+            })[0];
+            property.value._ = $(event.target).text();
+            this.component.set('property', properties);
+            break;
+        default:
+            this.component.set($(event.target).data('setting'), $(event.target).text());
+            break;
+        }
     }
 });
 
