@@ -17,7 +17,7 @@ var MessageCollection = Backbone.Collection.extend({
         };
     },
     onMessageEvent: function(event){
-        var data = JSON.parse(event.data.replace(/'/ig,'"').replace(/\\/ig,'\\\\'));
+        var data = JSON.parse(event.data.replace(/'/ig, '"').replace(/\\/ig, '\\\\'));
         var message = new Message(data);
         this.add(message);
         if(message.get('id') === 'undefined'){

@@ -43,7 +43,7 @@ var PipelineView = Backbone.View.extend({
         var height = $('#work-area-content').outerHeight() - 52;
         this.$el.attr('width', width);
         this.$el.attr('height', height);
-        this.$el.attr('viewBox',`0 0 ${width} ${height}`);
+        this.$el.attr('viewBox', `0 0 ${width} ${height}`);
         this.componentGroup = model.get('componentGroup');
         var component = this.componentGroup.at(0);
         this.recursiveComponent(component, 0, 0);

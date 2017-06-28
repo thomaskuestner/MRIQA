@@ -1,4 +1,4 @@
-const {app,BrowserWindow} = require('electron');
+const {app, BrowserWindow} = require('electron');
 const dialog = require('electron').dialog;
 var childProcess = require('child_process');
 
@@ -78,7 +78,7 @@ function fGenerateApp() {
         }
     });
 
-    nodeJsProcess.stdout.on('data',(data) => {
+    nodeJsProcess.stdout.on('data', (data) => {
         console.log(data.toString());
     });
 

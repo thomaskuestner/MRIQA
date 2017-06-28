@@ -29,7 +29,7 @@ var ObserverView = Backbone.View.extend({
         this.index = options.index;
     },
     render: function() {
-        this.$el.attr('transform',`translate(0,${this.index * -35})`);
+        this.$el.attr('transform', `translate(0,${this.index * -35})`);
         this.$el.html(this.template({observer: this.observer}));
         return this;
     }

@@ -79,8 +79,8 @@ var ComponentView = Backbone.View.extend({
             height = (this.row + 1) * 225;
         }
 
-        this.svg.attr('viewBox',`-100 -100 ${width} ${height}`);
-        this.$el.attr('transform',`translate(${this.index * gap},${component_y * this.row})`);
+        this.svg.attr('viewBox', `-100 -100 ${width} ${height}`);
+        this.$el.attr('transform', `translate(${this.index * gap},${component_y * this.row})`);
         this.$el.html(this.template({component: this.component.toJSON()}));
 
         this.component.get('notifier').forEach(function(notifier, index) {
