@@ -8,8 +8,8 @@ import TableRowCollection from './../../collections/tableRowCollection';
 
 Backbone.$ = $;
 
-// Table view
-var Table = Backbone.View.extend({
+// Chart view
+var ChartView = Backbone.View.extend({
     template: _.template($('#chart-view-template').html()),
     className: 'full-height',
     initialize: function(options) {
@@ -26,7 +26,7 @@ var Table = Backbone.View.extend({
                 return property['name'] === 'parameter_list';
             });
             if(parameterListProperty.length > 0){
-                var parameters = parameterListProperty[0]['value'].split(',');
+                var parameters = parameterListProperty[0]['value']._.split(',');
                 parameters.forEach((parameter) => {
                     this.parameterList.push({
                         index: 0,
@@ -88,4 +88,4 @@ var Table = Backbone.View.extend({
     }
 });
 
-module.exports = Table;
+module.exports = ChartView;

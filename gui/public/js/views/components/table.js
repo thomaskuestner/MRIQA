@@ -38,7 +38,7 @@ var Table = Backbone.View.extend({
                 return property['name'] === 'parameter_list';
             });
             if(parameterListProperty.length > 0){
-                this.parameterList = parameterListProperty[0]['value'].split(',');
+                this.parameterList = parameterListProperty[0]['value']._.split(',');
             }
         }
     },
@@ -57,12 +57,16 @@ var Table = Backbone.View.extend({
                     if(key !== 'status'){
                         this.tab.set('notificationCounter', parseInt(this.tab.get('notificationCounter')) + 1);
                         var tableRow = new TableRow({key, value: message.get('data')[key]});
-                        switch (this.type) {
+                        var type;
+                        if(typeof this.type !== 'undefined'){
+                            type = this.type._;
+                        }
+                        switch (type) {
                         case 'append':
                             this.tableRowGroup.add(tableRow);
                             break;
                         case 'update':
-                            var updateRow = this.tableRowGroup.findWhere({key});
+                            var updateRow = this.tableRowGroup.findWhere({key})
                             if(typeof updateRow === 'undefined'){
                                 updateRow = tableRow;
                                 this.tableRowGroup.add(updateRow);
