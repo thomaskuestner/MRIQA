@@ -83,14 +83,7 @@ var NavBar = Backbone.View.extend({
         });
     },
     requestSavePipeline: function(){
-        Backbone.ajax({
-            type: 'POST',
-            url: '/api/savePipeline',
-            data: {
-                path: this.pipeline.get('path'),
-                content: this.pipeline.get('fileContent')
-            }
-        });
+        this.pipeline.save();
     },
     toggleComponentAreaView: function(event){
         event.preventDefault();

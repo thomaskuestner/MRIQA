@@ -41,11 +41,17 @@ var Pipeline = Backbone.Model.extend({
                         var property = {
                             name: prop.name[0]
                         };
+                        property.value = {};
+                        // this structure with _ and $ is necessary for parsing from and to xml
                         if(typeof prop.value[0] !== 'object'){
-                            property.value = prop.value[0];
+                            property.value._ = prop.value[0];
+                            property.value.$ = {
+                                type: 'str'
+                            };
                         }
                         else{
-                            property.value = prop.value[0]._;
+                            property.value._ = prop.value[0]._;
+                            property.value.$ = prop.value[0].$;
                         }
                         properties.push(property);
                     }, this);
@@ -114,13 +120,25 @@ var Pipeline = Backbone.Model.extend({
                     }, this);
                 }
             });
-            self.listenTo(componentGroup, 'change', self.changeEvent);
             self.set('componentGroup', componentGroup);
         });
     },
-    changeEvent: function(model){
-        // generate new file content
-        console.log(model);
+    save: function(){
+        var pipeline = {
+            pipeline: 'CONTENT'
+        };
+        var builder = new xml2js.Builder({
+            rootName: 'pipeline',
+        });
+        var xml = builder.buildObject(pipeline);
+        Backbone.ajax({
+            type: 'POST',
+            url: '/api/savePipeline',
+            data: {
+                path: this.get('path'),
+                content: xml.replace('<pipeline>CONTENT</pipeline>', this.get('componentGroup').generateFileContent())
+            }
+        });
     }
 });
 

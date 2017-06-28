@@ -130,7 +130,7 @@
             <% if(typeof property !== 'undefined'){ property.forEach((prop) => { %>
             <tr>
                 <td><%= prop.name %></td>
-                <td contenteditable='true' data-setting='<%= prop.name %>'><%= prop.value %></td>
+                <td contenteditable='true' data-setting='<%= prop.name %>'><%= prop.value._ %></td>
             </tr>
             <% }) }%>
         </table>
@@ -142,7 +142,7 @@
             <% if(typeof additional_component !== 'undefined'){ additional_component.forEach((component) => { %>
             <tr>
                 <td><%= component.id %></td>
-                <td contenteditable='true' data-setting='<%= prop.name %>'><%= component.id %></td>
+                <td contenteditable='true' data-setting='<%= component.id %>'><%= component.id %></td>
             </tr>
             <% }) }%>
         </table>

@@ -1,73 +1,80 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <pipeline>
-    <component>
-        <id>jpeg_input</id>
-        <name>jpeg_input</name>
-        <class>JpegInput</class>
-        <property>
-            <name>file_path</name>
-            <value>tmp/IMG_5946_b.JPG</value>
-        </property>
-    </component>
-    <component>
-        <id>gray_scale</id>
-        <name>gray_scale</name>
-        <class>GrayScale</class>
-    </component>
-    <component>
-        <id>rotate</id>
-        <name>rotate</name>
-        <class>Rotate</class>
-        <property>
-            <name>angle</name>
-            <value type="float">45</value>
-        </property>
-        <additional_component>
-            <id>parameter_condition</id>
-            <notifier>condition</notifier>
-        </additional_component>
-    </component>
-    <component>
+  <component>
+    <id>jpeg_input</id>
+    <name>jpeg_input</name>
+    <class>JpegInput</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>file_path</name>
+        <value type="str">tmp/IMG_5946_b.JPG</value>
+    </property>
+</component>
+<component>
+    <id>gray_scale</id>
+    <name>gray_scale</name>
+    <class>GrayScale</class>
+    <autoglue>true</autoglue>
+</component>
+<component>
+    <id>rotate</id>
+    <name>rotate</name>
+    <class>Rotate</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>angle</name>
+        <value type="float">45</value>
+    </property>
+    <additional_component>
         <id>parameter_condition</id>
-        <name>condition</name>
-        <class>Condition</class>
-        <property>
-            <name>type</name>
-            <value>parameter</value>
-        </property>
-        <property>
-            <name>name</name>
-            <value>angle</value>
-        </property>
-        <property>
-            <name>operator</name>
-            <value>ge</value>
-        </property>
-        <property>
-            <name>value</name>
-            <value type="int">180</value>
-        </property>
-    </component>
-    <component>
-        <id>jpeg_output</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
-        <property>
-            <name>file_path</name>
-            <value>tmp/test.png</value>
-        </property>
-    </component>
-    <component>
-        <id>jpeg_output_2</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
-        <autoglue>false</autoglue>
-        <property>
-            <name>file_path</name>
-            <value>tmp/test1.png</value>
-        </property>
-        <additional_component>
-            <id>gray_scale</id>
-        </additional_component>
-    </component>
+        <notifier>condition</notifier>
+    </additional_component>
+</component>
+<component>
+    <id>parameter_condition</id>
+    <name>condition</name>
+    <class>Condition</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>type</name>
+        <value type="str">parameter</value>
+    </property>
+    <property>
+        <name>name</name>
+        <value type="str">angle</value>
+    </property>
+    <property>
+        <name>operator</name>
+        <value type="str">ge</value>
+    </property>
+    <property>
+        <name>value</name>
+        <value type="int">180</value>
+    </property>
+</component>
+<component>
+    <id>jpeg_output</id>
+    <name>jpeg_output</name>
+    <class>JpegOutput</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>file_path</name>
+        <value type="str">tmp/test.png</value>
+    </property>
+</component>
+<component>
+    <id>jpeg_output_2</id>
+    <name>jpeg_output</name>
+    <class>JpegOutput</class>
+    <autoglue>false</autoglue>
+    <property>
+        <name>file_path</name>
+        <value type="str">tmp/test1.png</value>
+    </property>
+    <additional_component>
+        <id>gray_scale</id>
+        <notifier>output</notifier>
+    </additional_component>
+</component>
+
 </pipeline>
