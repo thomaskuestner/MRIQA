@@ -66,7 +66,7 @@ var Table = Backbone.View.extend({
                             this.tableRowGroup.add(tableRow);
                             break;
                         case 'update':
-                            var updateRow = this.tableRowGroup.findWhere({key})
+                            var updateRow = this.tableRowGroup.findWhere({key});
                             if(typeof updateRow === 'undefined'){
                                 updateRow = tableRow;
                                 this.tableRowGroup.add(updateRow);
