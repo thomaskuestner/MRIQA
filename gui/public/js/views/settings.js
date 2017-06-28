@@ -28,6 +28,14 @@ var SettingsView = Backbone.View.extend({
             property.value._ = $(event.target).text();
             this.component.set('property', properties);
             break;
+        case 'additional_component':
+            var additional_components = this.component.get('additional_component');
+            var additional_component = additional_components.filter((component) => {
+                return component.id === $(event.target).data('setting');
+            })[0];
+            additional_component.notifier[0] = $(event.target).text();
+            this.component.set('additional_component', additional_components);
+            break;
         default:
             this.component.set($(event.target).data('setting'), $(event.target).text());
             break;

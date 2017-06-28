@@ -142,7 +142,7 @@
             <% if(typeof additional_component !== 'undefined'){ additional_component.forEach((component) => { %>
             <tr>
                 <td><%= component.id %></td>
-                <td contenteditable='true' data-setting='<%= component.id %>'><%= component.notifier %></td>
+                <td contenteditable='true' data-type='additional_component' data-setting='<%= component.id %>'><%= component.notifier %></td>
             </tr>
             <% }) }%>
         </table>
