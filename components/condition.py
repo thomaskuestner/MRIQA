@@ -1,5 +1,52 @@
 """
 Condition
+
+GUI-DESCRIPTION
+{
+    "description": "Condition helps to create a feedback loop",
+    "url": "https://github.com/thomaskuestner/MRIQA/wiki/Components#condition",
+    "settings":
+        [
+            {
+                "counter": {
+                    "property": [
+                        {
+                            "name": "type",
+                            "value": "counter"
+                        },
+                        {
+                            "name": "value",
+                            "value": 1,
+                            "type": "int"
+                        }
+                    ]
+                }
+            },
+            {
+                "parameter": {
+                    "property": [
+                        {
+                            "name": "type",
+                            "value": "parameter"
+                        },
+                        {
+                            "name": "name",
+                            "value": "angle"
+                        },
+                        {
+                            "name": "operator",
+                            "value": "eq"
+                        },
+                        {
+                            "name": "value",
+                            "value": 0,
+                            "type": "int"
+                        }
+                    ]
+                }
+            }
+        ]
+}
 """
 from core.observer import Observable
 from core.component import Component

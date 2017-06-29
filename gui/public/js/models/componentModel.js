@@ -6,6 +6,9 @@ Backbone.$ = $;
 
 // Model for a component
 var Component = Backbone.Model.extend({
+    defaults:{
+        autoglue: 'true'
+    },
     getContent: function(){
         var builder = new xml2js.Builder({
             rootName: 'component',

@@ -17,7 +17,7 @@ var ComponentRow = Backbone.View.extend({
         var template = this.template(this.model.toJSON());
         this.$el.html(template);
         this.model.get('classes').forEach((componentClass) => {
-            var componentClass = new ComponentClass({componentClass});
+            var componentClass = new ComponentClass({model: this.model, componentClass});
             self.$el.find('.component-content').append(componentClass.render().el);
         });
         return this;
