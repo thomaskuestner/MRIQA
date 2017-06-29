@@ -39,6 +39,9 @@ var PipelineView = Backbone.View.extend({
         return this;
     },
     fileContentChanged: function(model){
+        $('svg#pipeline').empty();
+        $('#settings-area-content').empty();
+        this.maxRow = 0;
         var width = $('#work-area-content').outerWidth() - 15;
         var height = $('#work-area-content').outerHeight() - 52;
         this.$el.attr('width', width);

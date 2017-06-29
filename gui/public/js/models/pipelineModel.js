@@ -131,14 +131,16 @@ var Pipeline = Backbone.Model.extend({
             rootName: 'pipeline',
         });
         var xml = builder.buildObject(pipeline);
+        var content = xml.replace('<pipeline>CONTENT</pipeline>', this.get('componentGroup').generateFileContent());
         Backbone.ajax({
             type: 'POST',
             url: '/api/savePipeline',
             data: {
                 path: this.get('path'),
-                content: xml.replace('<pipeline>CONTENT</pipeline>', this.get('componentGroup').generateFileContent())
+                content
             }
         });
+        this.set('fileContent', content);
     }
 });
 
