@@ -113,8 +113,8 @@ var Pipeline = Backbone.Model.extend({
                     additional_components.forEach((additional_component) => {
                         var component = componentGroup.findWhere({id: additional_component.id});
                         var notifier  = component.get('notifier');
-                        if(additional_component.notifier !== 'output'){
-                            notifier.push(additional_component.notifier);
+                        if(additional_component.notifier[0] !== 'output'){
+                            notifier.push(additional_component.notifier[0]);
                             component.set('notifier', notifier);
                         }
                     }, this);
