@@ -90,9 +90,24 @@
 
     <!-- COMPONENT-ROW -->
     <script id="component-row-template" type="text/template">
-        <p><%= name %></p>
+        <div class="panel panel-default component-row" draggable="true">
+            <div class="panel-heading">
+                <span><%= name %></span>
+            </div>
+            <div class="panel-body component-content">
+            </div>
+        </div>
     </script>
     <!-- COMPONENT-ROW -->
+
+    <!-- COMPONENT-CLASS -->
+    <script id="component-class-template" type="text/template">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><%= name %></button>
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></button>
+    </div>
+    </script>
+    <!-- COMPONENT-CLASS -->
 
     <!-- SETTINGS-AREA -->
     <script id="settings-area-template" type="text/template">

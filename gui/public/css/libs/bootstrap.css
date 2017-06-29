@@ -7127,7 +7127,7 @@ button.list-group-item-danger.active:focus
 }
 .panel
 {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 
     border: 1px solid transparent;
     border-radius: 1px;
@@ -7137,7 +7137,7 @@ button.list-group-item-danger.active:focus
 }
 .panel-body
 {
-    padding: 15px;
+    padding: 5px;
 }
 .panel-heading
 {
@@ -7225,8 +7225,8 @@ button.list-group-item-danger.active:focus
 .panel > .table-responsive > .table caption,
 .panel > .panel-collapse > .table caption
 {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child
