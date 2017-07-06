@@ -24,12 +24,6 @@ class JpegInput(Component):
     def file_path(self, value):
         self.__file_path = value
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        return "Read file from a specified file path"
-
     @staticmethod
     def get_parameters():
         """

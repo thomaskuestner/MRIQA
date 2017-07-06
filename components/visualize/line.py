@@ -11,12 +11,6 @@ class Line(Component):
         super(Line, self).__init__(options)
         self.input_observer = Line.InputObserver(self)
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        return "Visualize data in a line chart"
-
     class InputObserver(Component.InputObserver):
         """
         Class for observers

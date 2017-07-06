@@ -24,12 +24,6 @@ class Rotate(Component):
     def angle(self, value):
         self.__angle = value
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        return "Rotate an image"
-
     @staticmethod
     def get_parameters():
         """

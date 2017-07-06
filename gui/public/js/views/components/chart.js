@@ -21,6 +21,17 @@ var ChartView = Backbone.View.extend({
         this.listenTo(this.tableRowGroup, 'add', this.renderRow);
         this.listenTo(this.messageGroup, this.id, this.componentEvent);
         if(this.component.get('property')){
+            // get type
+            var typeProperty = this.component.get('property').filter((property) => {
+                return property['name'] === 'type';
+            });
+            if(typeProperty.length > 0){
+                this.type = typeProperty[0].value._;
+            }
+            else{
+                this.type = 'append';
+            }
+
             // get parameter_list
             var parameterListProperty = this.component.get('property').filter((property) => {
                 return property['name'] === 'parameter_list';
@@ -49,20 +60,20 @@ var ChartView = Backbone.View.extend({
         return this;
     },
     componentEvent: function(message){
+        var self = this;
         if(message.get('data').status === 'sending'){
             for (var key in message.get('data')){
                 var parameter = this.parameterList.filter((parameter) => {
                     return parameter.parameter === key;
                 })[0];
                 if(typeof parameter !== 'undefined' || this.parameterList.length === 0){
+                    if(this.type === 'update'){
+                        this.chart.data.datasets.data = [];
+                        this.chart.data.labels = [];
+                        parameter.index = 0;
+                    }
                     if(key !== 'status'){
                         this.tab.set('notificationCounter', parseInt(this.tab.get('notificationCounter')) + 1);
-                        var label = this.chart.data.labels.filter((label) => {
-                            return label === parameter.index;
-                        });
-                        if(label.length === 0){
-                            this.chart.data.labels.push(parameter.index);
-                        }
                         var dataset = this.chart.data.datasets.filter((dataset) => {
                             return dataset.label === key;
                         });
@@ -78,9 +89,29 @@ var ChartView = Backbone.View.extend({
                             dataset = dataset[0];
                         }
 
-                        dataset.data.push(message.get('data')[key]);
+                        if(typeof message.get('data')[key] === 'string'){
+                            var dataArray = message.get('data')[key].slice(1).slice(0, -1).split('\\n');
+                            if(dataArray.length > 0){
+                                dataArray.forEach((data) => {
+                                    self.chart.data.labels.push(parameter.index);
+                                    dataset.data.push(Number(data.slice(2).slice(0, -1)));
+                                    parameter.index++;
+                                }, this);
+                            }
+                            else{
+                            }
+                        }
+                        else{
+                            var label = this.chart.data.labels.filter((label) => {
+                                return label === parameter.index;
+                            });
+                            if(label.length === 0){
+                                this.chart.data.labels.push(parameter.index);
+                            }
+                            dataset.data.push(message.get('data')[key]);
+                            parameter.index++;
+                        }
                         this.chart.update();
-                        parameter.index++;
                     }
                 }
             }

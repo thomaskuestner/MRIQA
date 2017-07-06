@@ -18,12 +18,6 @@ class BaseComponent(object):
         self.output_notifier = BaseComponent.OutputNotifier(self)
         self.component_id = None
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        pass
-
     @staticmethod
     def get_parameters():
         """

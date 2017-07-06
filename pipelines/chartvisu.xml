@@ -70,4 +70,31 @@
             <id>rotate</id>
         </additional_component>
     </component>
+    <component>
+        <id>histogram</id>
+        <name>histogram</name>
+        <class>Histogram</class>
+        <autoglue>false</autoglue>
+        <additional_component>
+            <id>gray_scale</id>
+            <notifier>output</notifier>
+        </additional_component>
+    </component>
+    <component>
+        <id>histo_visu</id>
+        <name>line</name>
+        <class>Line</class>
+        <autoglue>false</autoglue>
+        <property>
+            <name>parameter_list</name>
+            <value>histogram</value>
+        </property>
+        <property>
+            <name>type</name>
+            <value>update</value>
+        </property>
+        <additional_component>
+            <id>histogram</id>
+        </additional_component>
+    </component>
 </pipeline>

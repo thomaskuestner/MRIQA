@@ -22,12 +22,6 @@ class Component(BaseComponent):
         if 'gui' in options:
             self.log_notifier.add_observer(options['gui'].log_observer)
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        self.log_line('Missing description!', LogLevel.WARNING)
-
     @staticmethod
     def get_parameters():
         """

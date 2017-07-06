@@ -11,12 +11,6 @@ class Table(Component):
         super(Table, self).__init__(options)
         self.input_observer = Table.InputObserver(self)
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        return "Visualize data in a table"
-
     class InputObserver(Component.InputObserver):
         """
         Class for observers

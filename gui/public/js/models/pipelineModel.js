@@ -157,7 +157,6 @@ var Pipeline = Backbone.Model.extend({
         }
         else{
             this.next_components[0].set('next_components', new Array(component));
-            console.log(this);
         }
     }
 });

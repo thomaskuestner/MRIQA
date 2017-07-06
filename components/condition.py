@@ -62,12 +62,6 @@ class Condition(Component):
         self.round = 0
         self.type = self.properties['type']
 
-    def get_description(self):
-        """
-        return an description of the component
-        """
-        return "Condition"
-
     class InputObserver(Component.InputObserver):
         """
         Class for observers
