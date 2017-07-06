@@ -10,7 +10,8 @@ import ComponentRow from './componentRow';
 // ComponentGroup View
 var ComponentGroupView = Backbone.View.extend({
     template: _.template($('#component-group-template').html()),
-    initialize: function() {
+    initialize: function(options) {
+        this.pipeline = options.pipeline;
     },
     render: function() {
         if(typeof this.collection.name === 'undefined'){
@@ -25,7 +26,7 @@ var ComponentGroupView = Backbone.View.extend({
         var self = this;
         self.$el.find('#component-group-content').empty();
         this.collection.each((component) => {
-            var componentRow = new ComponentRow({model: component});
+            var componentRow = new ComponentRow({model: component, pipeline: self.pipeline});
             self.$el.find('#component-group-content').append(componentRow.render().el);
         });
     },

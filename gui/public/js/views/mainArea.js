@@ -17,7 +17,7 @@ var MainArea = Backbone.View.extend({
     },
     render: function() {
         this.$el.html(this.template);
-        this.componentArea = new ComponentArea();
+        this.componentArea = new ComponentArea({pipeline: this.pipeline});
         this.$el.find('#component-area').html(this.componentArea.render().$el);
         this.workArea = new WorkArea({messageGroup: this.messageGroup, pipeline: this.pipeline});
         this.$el.find('#work-area').html(this.workArea.render().$el);

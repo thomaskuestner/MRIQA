@@ -10,6 +10,7 @@ var ComponentClass = Backbone.View.extend({
     template: _.template($('#component-class-template').html()),
     initialize: function(options) {
         this.componentClass = options.componentClass;
+        this.pipeline = options.pipeline;
         this.model.set('class', this.componentClass.name);
         if(typeof this.componentClass.description === 'undefined'){
             this.componentClass.description = {
@@ -28,6 +29,7 @@ var ComponentClass = Backbone.View.extend({
     },
     addButtonEvent: function(){
         this.model.set('id', dockerNames.getRandomName());
+        this.pipeline.addComponent(this.model);
     },
     openDocButtonEvent: function(){
         var url;

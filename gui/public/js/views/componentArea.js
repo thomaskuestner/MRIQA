@@ -16,7 +16,8 @@ import ComponentGroupView from './componentGroup';
 // Component-Area view
 var ComponentArea = Backbone.View.extend({
     template: _.template($('#component-area-template').html()),
-    initialize: function() {
+    initialize: function(options) {
+        this.pipeline = options.pipeline;
         var self = this;
         Backbone.ajax({
             url: '/api/components',
@@ -33,6 +34,7 @@ var ComponentArea = Backbone.View.extend({
         return this;
     },
     renderComponentGroups: function(){
+        var self = this;
         this.componentGroupCollection = new Array();
         this.componentGroupCollectionRes.forEach(function(componentGroupRes) {
             var componentGroup = new ComponentCollection();
@@ -44,7 +46,7 @@ var ComponentArea = Backbone.View.extend({
             this.componentGroupCollection.push(componentGroup);
         }, this);
         this.componentGroupCollection.forEach(function(componentGroup){
-            var componentGroupView = new ComponentGroupView({collection: componentGroup});
+            var componentGroupView = new ComponentGroupView({collection: componentGroup, pipeline: self.pipeline});
             this.$el.find('#component-area-content').append(componentGroupView.render().el);
         }, this);
     }

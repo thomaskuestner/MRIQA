@@ -141,6 +141,24 @@ var Pipeline = Backbone.Model.extend({
             }
         });
         this.set('fileContent', content);
+    },
+    addComponent: function(component){
+        var components = this.get('pipeline');
+        components.component.push(component);
+        var componentGroup = this.get('componentGroup');
+        componentGroup.add(component);
+        var next_components = componentGroup.at(0).get('next_components');
+        this.addToLastNextComponent(next_components, component);
+    },
+    addToLastNextComponent: function(next_components, component){
+        if(next_components){
+            this.next_components = next_components;
+            this.addToLastNextComponent(next_components[0].get('next_components'), component);
+        }
+        else{
+            this.next_components[0].set('next_components', new Array(component));
+            console.log(this);
+        }
     }
 });
 
