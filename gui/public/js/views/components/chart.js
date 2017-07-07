@@ -67,11 +67,6 @@ var ChartView = Backbone.View.extend({
                     return parameter.parameter === key;
                 })[0];
                 if(typeof parameter !== 'undefined' || this.parameterList.length === 0){
-                    if(this.type === 'update'){
-                        this.chart.data.datasets.data = [];
-                        this.chart.data.labels = [];
-                        parameter.index = 0;
-                    }
                     if(key !== 'status'){
                         this.tab.set('notificationCounter', parseInt(this.tab.get('notificationCounter')) + 1);
                         var dataset = this.chart.data.datasets.filter((dataset) => {
@@ -86,7 +81,15 @@ var ChartView = Backbone.View.extend({
                             this.chart.data.datasets.push(dataset);
                         }
                         else{
-                            dataset = dataset[0];
+                            if(this.type === 'update'){
+                                dataset.data = [];
+                                this.chart.data.datasets.data = [];
+                                this.chart.data.labels = [];
+                                parameter.index = 0;
+                            }
+                            else{
+                                dataset = dataset[0];
+                            }
                         }
 
                         if(typeof message.get('data')[key] === 'string'){
@@ -112,6 +115,7 @@ var ChartView = Backbone.View.extend({
                             parameter.index++;
                         }
                         this.chart.update();
+                        console.log(dataset.data);
                     }
                 }
             }
