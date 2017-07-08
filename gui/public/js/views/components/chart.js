@@ -115,7 +115,6 @@ var ChartView = Backbone.View.extend({
                             parameter.index++;
                         }
                         this.chart.update();
-                        console.log(dataset.data);
                     }
                 }
             }

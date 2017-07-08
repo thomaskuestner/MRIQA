@@ -16,7 +16,7 @@ var TabButton = Backbone.View.extend({
         return this;
     },
     updateBadge: function(){
-        $(`.tab-btn[data-tab-id="${this.tabModel.get('id')}"] > span`).text(this.tabModel.get('notificationCounter'));
+        $(`.tab-btn[data-tab-id="${this.tabModel.get('id')}"] > span.notificationCounter`).text(this.tabModel.get('notificationCounter'));
         return this;
     }
 });

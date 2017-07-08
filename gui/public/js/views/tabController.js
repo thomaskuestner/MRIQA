@@ -41,11 +41,26 @@ var TabController = Backbone.View.extend({
         var tab = new Tab({tabModel});
         this.$el.append(tab.render().el);
     },
+    removeTab: function(tabModel){
+        this.tabGroup.remove(tabModel);
+        this.$el.find(`.tab[data-tab-id="${tabModel.get('id')}"]`).parent().remove();
+        this.$el.find(`.tab-btn[data-tab-id="${tabModel.get('id')}"]`).remove();
+    },
     clickTabEvent: function(event){
-        var tab = this.tabGroup.findWhere({id: $(event.currentTarget).data('tab-id')});
-        tab.set('notificationCounter', 0);
-        this.$el.find('.tab').parent().addClass('hidden');
-        this.$el.find(`.tab[data-tab-id="${$(event.currentTarget).data('tab-id')}"]`).parent().removeClass('hidden');
+        // get remove icon element with mouse position because tab-button fires click event
+        if(event.pageX - $(event.currentTarget).find('.remove').offset().left > 0
+            && event.pageX - $(event.currentTarget).find('.remove').offset().left <= this.$el.find('.remove').outerWidth()
+            && event.pageY - $(event.currentTarget).find('.remove').offset().top > 0
+            && event.pageY - $(event.currentTarget).find('.remove').offset().top <= this.$el.find('.remove').outerHeight()){
+            var tab = this.tabGroup.findWhere({id: $(event.currentTarget).data('tab-id')});
+            this.removeTab(tab);
+        }
+        else{
+            var tab = this.tabGroup.findWhere({id: $(event.currentTarget).data('tab-id')});
+            tab.set('notificationCounter', 0);
+            this.$el.find('.tab').parent().addClass('hidden');
+            this.$el.find(`.tab[data-tab-id="${$(event.currentTarget).data('tab-id')}"]`).parent().removeClass('hidden');
+        }
     },
     componentEvent: function(message){
         if(message.get('data').status === 'starting'){
