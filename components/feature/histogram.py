@@ -2,7 +2,6 @@
 Histogram
 """
 from cv2 import calcHist
-import numpy
 from core.component import Component
 
 class Histogram(Component):
@@ -20,5 +19,5 @@ class Histogram(Component):
         def update(self, observable, package):
             self.outer.log_line('histogram')
             package['histogram'] = \
-                str(calcHist(numpy.array(package['data']).T, [0], None, [256], [0, 256]))
+                str(calcHist(package['data'].T, [0], None, [256], [0, 256]))
             self.outer.output_notifier.notify_observers(package)

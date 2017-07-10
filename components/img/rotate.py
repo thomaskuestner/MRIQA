@@ -1,6 +1,7 @@
 """
 Rotate
 """
+import cv2
 from core.component import Component
 
 class Rotate(Component):
@@ -38,9 +39,11 @@ class Rotate(Component):
         Class for observers
         """
         def update(self, observable, package):
-            self.outer.log_line('rotate image')
+            # self.outer.log_line('rotate image')
             if ('angle' in package) is False:
                 package['angle'] = 0
             package['angle'] = package['angle'] + self.outer.angle
-            package['data'] = package['data'].rotate(self.outer.angle)
+            rows, cols = package['data'].shape
+            affine_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), self.outer.angle, 1)
+            package['data'] = cv2.warpAffine(package['data'].T, affine_matrix, (cols, rows))
             self.outer.output_notifier.notify_observers(package)

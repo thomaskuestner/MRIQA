@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <pipeline>
     <component>
-        <id>jpeg_input</id>
-        <name>jpeg_input</name>
-        <class>JpegInput</class>
+        <id>img_input</id>
+        <name>img_input</name>
+        <class>ImgInput</class>
         <property>
             <name>file_path</name>
             <value>tmp/IMG_5946_b.JPG</value>
@@ -33,9 +33,9 @@
         </property>
     </component>
     <component>
-        <id>jpeg_output</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
+        <id>img_output</id>
+        <name>img_output</name>
+        <class>ImgOutput</class>
         <property>
             <name>file_path</name>
             <value>tmp/test.png</value>
@@ -68,9 +68,9 @@
         </additional_component>
     </component>
     <component>
-        <id>jpeg_output_4</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
+        <id>img_output_4</id>
+        <name>img_output</name>
+        <class>ImgOutput</class>
         <autoglue>false</autoglue>
         <property>
             <name>file_path</name>
@@ -81,9 +81,9 @@
         </additional_component>
     </component>
     <component>
-        <id>jpeg_output_2</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
+        <id>img_output_2</id>
+        <name>img_output</name>
+        <class>ImgOutput</class>
         <autoglue>false</autoglue>
         <property>
             <name>file_path</name>
@@ -94,9 +94,9 @@
         </additional_component>
     </component>
     <component>
-        <id>jpeg_output_3</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
+        <id>img_output_3</id>
+        <name>img_output</name>
+        <class>ImgOutput</class>
         <autoglue>false</autoglue>
         <property>
             <name>file_path</name>

@@ -1,6 +1,7 @@
 """
 Gray scale
 """
+import cv2
 from core.component import Component
 
 class GrayScale(Component):
@@ -17,5 +18,5 @@ class GrayScale(Component):
         """
         def update(self, observable, package):
             self.outer.log_line('grayscale image')
-            package['data'] = package['data'].convert('LA')
+            package['data'] = cv2.cvtColor(package['data'], cv2.COLOR_BGR2GRAY)
             self.outer.output_notifier.notify_observers(package)

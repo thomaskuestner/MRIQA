@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <pipeline>
   <component>
-    <id>jpeg_input</id>
-    <name>jpeg_input</name>
-    <class>JpegInput</class>
+    <id>img_input</id>
+    <name>img_input</name>
+    <class>ImgInput</class>
     <autoglue>true</autoglue>
     <property>
         <name>file_path</name>
@@ -53,9 +53,9 @@
     </property>
 </component>
 <component>
-    <id>jpeg_output</id>
-    <name>jpeg_output</name>
-    <class>JpegOutput</class>
+    <id>img_output</id>
+    <name>img_output</name>
+    <class>ImgOutput</class>
     <autoglue>true</autoglue>
     <property>
         <name>file_path</name>
@@ -63,9 +63,9 @@
     </property>
 </component>
 <component>
-    <id>jpeg_output_2</id>
-    <name>jpeg_output</name>
-    <class>JpegOutput</class>
+    <id>img_output_2</id>
+    <name>img_output</name>
+    <class>ImgOutput</class>
     <autoglue>false</autoglue>
     <property>
         <name>file_path</name>

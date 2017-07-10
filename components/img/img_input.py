@@ -1,15 +1,15 @@
 """
-Jpeg Input
+Image Input
 """
-from PIL import Image
+import cv2
 from core.component import Component
 
-class JpegInput(Component):
+class ImgInput(Component):
     """
-    Class for Jpeg Input
+    Class for Image Input
     """
     def __init__(self, options):
-        super(JpegInput, self).__init__(options)
+        super(ImgInput, self).__init__(options)
         self.__file_path = ""
         self.file_path = self.properties['file_path']
 
@@ -29,7 +29,7 @@ class JpegInput(Component):
         """
         return all parameters of the component
         """
-        for key, value in JpegInput.__dict__.items():
+        for key, value in ImgInput.__dict__.items():
             if isinstance(value, property):
                 print(key)
 
@@ -37,7 +37,7 @@ class JpegInput(Component):
         """
         open a file and sends notifier
         """
-        super(JpegInput, self).start()
-        self.package['data'] = Image.open(self.file_path)
+        super(ImgInput, self).start()
+        self.package['data'] = cv2.imread(self.file_path)
         self.log_line('open file')
         self.output_notifier.notify_observers(self.package)

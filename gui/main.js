@@ -32,9 +32,6 @@ function createWindow (process) {
     // Disable menu bar
     win.setMenu(null);
 
-    // Open the DevTools.
-    //win.webContents.openDevTools()
-
     delay(1000).then(() => { // nasty workaround -> promise request throws timeout
         win.loadURL('http://localhost:3000/');
     });

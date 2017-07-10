@@ -16,6 +16,7 @@
         "prefer-arrow-callback": ["error"],
         "no-use-before-define": ["error"],
         "no-unused-vars": ["error"],
-        "comma-spacing": ["error"]
+        "comma-spacing": ["error"],
+        "spaced-comment": ["error"]
     }
 }

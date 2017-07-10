@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <pipeline>
     <component>
-        <id>jpeg_input</id>
-        <name>jpeg_input</name>
-        <class>JpegInput</class>
+        <id>img_input</id>
+        <name>img_input</name>
+        <class>ImgInput</class>
         <property>
             <name>file_path</name>
             <value>tmp/IMG_5946_b.JPG</value>
@@ -49,9 +49,9 @@
         </property>
     </component>
     <component>
-        <id>jpeg_output</id>
-        <name>jpeg_output</name>
-        <class>JpegOutput</class>
+        <id>img_output</id>
+        <name>img_output</name>
+        <class>ImgOutput</class>
         <property>
             <name>file_path</name>
             <value>tmp/test.png</value>

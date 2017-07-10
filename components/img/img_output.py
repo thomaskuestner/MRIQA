@@ -1,16 +1,17 @@
 """
-Jpeg Output
+Image Output
 """
+import cv2
 from core.component import Component
 from components.log_server import LogLevel
 
-class JpegOutput(Component):
+class ImgOutput(Component):
     """
-    Class for JpegOutput
+    Class for ImgOutput
     """
     def __init__(self, options):
-        super(JpegOutput, self).__init__(options)
-        self.input_observer = JpegOutput.InputObserver(self)
+        super(ImgOutput, self).__init__(options)
+        self.input_observer = ImgOutput.InputObserver(self)
         self.__file_path = ""
         self.file_path = self.properties['file_path']
 
@@ -30,7 +31,7 @@ class JpegOutput(Component):
         """
         return all parameters of the component
         """
-        for key, value in JpegOutput.__dict__.items():
+        for key, value in ImgOutput.__dict__.items():
             if isinstance(value, property):
                 print(key)
 
@@ -40,6 +41,6 @@ class JpegOutput(Component):
         """
         def update(self, observable, package):
             self.outer.log_line('save file')
-            package['data'].save(self.outer.file_path)
+            cv2.imwrite(self.outer.file_path, package['data'])
             self.outer.log_line('saved file', LogLevel.SUCCESS)
             self.outer.send({'status': 'stopped'})
