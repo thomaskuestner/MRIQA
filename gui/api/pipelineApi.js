@@ -11,6 +11,7 @@ module.exports = function(app){
 
         python.stderr.on('data', (data) => {
             console.log(`stderr: ${data}`);
+            app.sendLog(data, 'ERROR');
         });
 
         python.on('close', (code) => {
@@ -32,17 +33,7 @@ module.exports = function(app){
                 });
             }
             else{
-                var date = new Date();
-                var message = {
-                    component: 'LogServer',
-                    data: {
-                        log_level: 'SUCCESS',
-                        log_message: `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDay()).slice(-2)} ${('0' + date.getUTCHours()).slice(-2)}:${('0' + date.getUTCMinutes()).slice(-2)}:${('0' + date.getUTCSeconds()).slice(-2)} Pipeline saved`
-                    }
-                };
-                if(app.ws_client_gui !== null){
-                    app.ws_client_gui.send(JSON.stringify(message));
-                }
+                app.sendLog('Pipeline saved', 'SUCCESS');
                 res.json({
                     status: 'SUCCESS',
                     data: 'Pipeline saved'

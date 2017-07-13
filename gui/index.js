@@ -19,11 +19,14 @@ app.server = http.createServer(app);
 // Load Component-API
 require('./api/componentApi')(app);
 
-// load Electron API
+// load Pipeline API
 require('./api/pipelineApi')(app);
 
 // load Electron API
 require('./api/electronApi')(app);
+
+// load LogServer API
+require('./api/logServerApi')(app);
 
 // access to public folder
 app.use(express.static('public'));
