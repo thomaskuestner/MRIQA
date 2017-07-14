@@ -40,7 +40,7 @@ var ChartView = Backbone.View.extend({
                 var parameters = parameterListProperty[0]['value']._.split(',');
                 parameters.forEach((parameter) => {
                     this.parameterList.push({
-                        index: 0,
+                        index: [0],
                         parameter
                     });
                 }, this);
@@ -72,47 +72,67 @@ var ChartView = Backbone.View.extend({
                         var dataset = this.chart.data.datasets.filter((dataset) => {
                             return dataset.label === key;
                         });
-                        if(dataset.length === 0){
-                            dataset = {
-                                label: key,
-                                lineTension: 0,
-                                data: new Array()
-                            };
-                            this.chart.data.datasets.push(dataset);
-                        }
-                        else{
+                        if(typeof message.get('data')[key] === 'object'){
                             if(this.type === 'update'){
-                                dataset.data = [];
-                                this.chart.data.datasets.data = [];
-                                this.chart.data.labels = [];
-                                parameter.index = 0;
+                                this.chart.data.datasets = [];
+                                dataset.data = new Array();
                             }
-                            else{
-                                dataset = dataset[0];
-                            }
-                        }
-
-                        if(typeof message.get('data')[key] === 'string'){
-                            var dataArray = message.get('data')[key].slice(1).slice(0, -1).split('\\n');
-                            if(dataArray.length > 0){
-                                dataArray.forEach((data) => {
-                                    self.chart.data.labels.push(parameter.index);
-                                    dataset.data.push(Number(data.slice(2).slice(0, -1)));
-                                    parameter.index++;
-                                }, this);
-                            }
-                            else{
+                            for(var channel in message.get('data')[key]){
+                                if(this.type === 'update'){
+                                    parameter.index[channel] = 0;
+                                }
+                                dataset = {
+                                    label: `${key}_${channel}`,
+                                    lineTension: 0,
+                                    data: new Array()
+                                };
+                                this.chart.data.datasets.push(dataset);
+                                var dataArray = message.get('data')[key][channel].slice(1).slice(0, -1).split('\\n');
+                                if(dataArray.length > 0){
+                                    if(parameter.index.length <= channel){
+                                        parameter.index.push(0);
+                                    }
+                                    dataArray.forEach((data) => {
+                                        var label = self.chart.data.labels.filter((label) => {
+                                            return label === parameter.index[channel];
+                                        });
+                                        if(label.length <= 0){
+                                            self.chart.data.labels.push(parameter.index[channel]);
+                                        }
+                                        dataset.data.push(Number(data.slice(2).slice(0, -1)));
+                                        parameter.index[channel]++;
+                                    }, this);
+                                }
                             }
                         }
                         else{
+                            if(dataset.length === 0){
+                                dataset = {
+                                    label: `${key}`,
+                                    lineTension: 0,
+                                    data: new Array()
+                                };
+
+                                this.chart.data.datasets.push(dataset);
+                            }
+                            else{
+                                if(this.type === 'update'){
+                                    dataset.data = [];
+                                    this.chart.data.datasets.data = [];
+                                    this.chart.data.labels = [];
+                                }
+                                else{
+                                    dataset = dataset[0];
+                                }
+                            }
                             var label = this.chart.data.labels.filter((label) => {
-                                return label === parameter.index;
+                                return label === parameter.index[0];
                             });
                             if(label.length === 0){
-                                this.chart.data.labels.push(parameter.index);
+                                this.chart.data.labels.push(parameter.index[0]);
                             }
                             dataset.data.push(message.get('data')[key]);
-                            parameter.index++;
+                            parameter.index[0]++;
                         }
                         this.chart.update();
                     }

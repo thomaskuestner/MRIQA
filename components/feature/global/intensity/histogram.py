@@ -18,6 +18,14 @@ class Histogram(Component):
         """
         def update(self, observable, package):
             self.outer.log_line('histogram')
-            package['histogram'] = \
-                str(calcHist(package['data'].T, [0], None, [256], [0, 256]))
+            if len(package['data'].shape) > 2:
+                _, _, z_index = package['data'].shape
+            else:
+                z_index = 1
+            package['histogram'] = dict()
+            image_slice = 0
+            while image_slice < z_index:
+                package['histogram'][str(image_slice)] = \
+                    str(calcHist(package['data'].T, [image_slice], None, [256], [0, 256]))
+                image_slice = image_slice + 1
             self.outer.output_notifier.notify_observers(package)

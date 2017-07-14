@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pipeline>
+  <component>
+    <id>img_input</id>
+    <name>img_input</name>
+    <class>ImgInput</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>file_path</name>
+        <value type="str">tmp/IMG_5946_b.JPG</value>
+    </property>
+</component>
+<component>
+    <id>gray_scale</id>
+    <name>gray_scale</name>
+    <class>GrayScale</class>
+    <autoglue>true</autoglue>
+</component>
+<component>
+    <id>histogram</id>
+    <name>histogram</name>
+    <class>Histogram</class>
+    <autoglue>true</autoglue>
+</component>
+<component>
+    <id>histo_visu</id>
+    <name>line</name>
+    <class>Line</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>parameter_list</name>
+        <value type="str">histogram</value>
+    </property>
+    <property>
+        <name>type</name>
+        <value type="str">update</value>
+    </property>
+</component>
+<component>
+    <id>dft</id>
+    <name>dft</name>
+    <class>Dft</class>
+    <autoglue>false</autoglue>
+    <additional_component>
+        <id>gray_scale</id>
+        <notifier>output</notifier>
+    </additional_component>
+</component>
+<component>
+    <id>img_visu</id>
+    <name>img_visu</name>
+    <class>Image</class>
+    <autoglue>false</autoglue>
+    <property>
+        <name>parameter_list</name>
+        <value type="str">Dft</value>
+    </property>
+    <additional_component>
+        <id>dft</id>
+        <notifier>output</notifier>
+    </additional_component>
+</component>
+
+</pipeline>

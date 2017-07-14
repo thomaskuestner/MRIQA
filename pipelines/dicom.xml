@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pipeline>
+  <component>
+    <id>dicom_input</id>
+    <name>dicom_input</name>
+    <class>DicomInput</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>folder_path</name>
+        <value type="str">tmp/t1_tse_tra_Kopf_0002</value>
+    </property>
+</component>
+<component>
+    <id>histogram</id>
+    <name>histogram</name>
+    <class>Histogram</class>
+    <autoglue>true</autoglue>
+</component>
+<component>
+    <id>histo_visu</id>
+    <name>line</name>
+    <class>Line</class>
+    <autoglue>true</autoglue>
+    <property>
+        <name>parameter_list</name>
+        <value type="str">histogram</value>
+    </property>
+    <property>
+        <name>type</name>
+        <value type="str">update</value>
+    </property>
+</component>
+</pipeline>
